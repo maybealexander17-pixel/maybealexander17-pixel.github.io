@@ -1,0 +1,104 @@
+  "text": "When Marta, who owns the Corner Bakery on Maple Street, announced the shop might close, the block reacted within hours. Maple Street is a [[tight-knit]] place: people lend tools, water each other's plants, and notice a strange car by morning. Some neighbors were [[wary]] of the landlord's opening offer — a one-year lease at nearly double the rent — and a few had [[an inkling]] that he already had a buyer. The local blog [[fanned the flames]] with a post about “greedy developers,” and by evening people were talking about a rent strike. Marta begged them not to [[blow the dispute out of proportion]]. “He is not a villain,” she said. “We just don't [[see eye to eye]] on the numbers.” A petition with two hundred signatures [[ruffled a few feathers]] at city hall, but the morning crowd — retirees, students, off-duty nurses — was hardly a [[conducive]] audience for staying calm: they had saved the hardware store in 2019, and they wanted a fight. Marta, who has [[a knack for]] keeping a room friendly, hosted meetings in the back room for two weeks. She heard everyone out, even the retired lawyer who [[grasped at straws]] to find a loophole in the lease, and the teenagers who [[ribbed]] her about her “corporate lawyer voice.” A city planner friend [[shed light on]] a zoning rule that allows a café on the ground floor, and a crowdfunding page pulled eleven thousand dollars [[out of thin air]]. The final two months were [[all-consuming]] — Marta called them “a second job I did not apply for” — and the campaign ran [[at the expense of]] her sleep. In the end the landlord signed a five-year lease. The new wooden sign, carved by a neighbor, [[does justice to]] the place, and on Sunday mornings the whole block [[basks in]] the smell of cardamom buns. The shop sits two doors [[off the map]] of every tourist guide, which suits everyone just fine. Marta says the fight gave the street [[closure]]: “We [[held firm to]] the plan, and the plan held.”",
+  "marks": [
+   19,
+   10,
+   14,
+   11,
+   4,
+   17,
+   15,
+   2,
+   0,
+   1,
+   18,
+   5,
+   13,
+   16,
+   12,
+   6,
+   8,
+   9,
+   7,
+   3
+  ]
+ },
+ "ccq": [
+  {
+   "i": 0,
+   "q": "Two colleagues learn a new software. One picks it up in an hour, as if it were obvious. What do you say?",
+   "a": "She has a knack for it.",
+   "b": "She is wary of it.",
+   "right": 0
+  },
+  {
+   "i": 1,
+   "q": "The lawyer has one weak, unlikely theory left and clings to it. That is…",
+   "a": "grasping at straws",
+   "b": "seeing eye to eye",
+   "right": 0
+  },
+  {
+   "i": 2,
+   "q": "Which room is conducive to studying?",
+   "a": "quiet, well lit, phone in another room",
+   "b": "loud music and constant interruptions",
+   "right": 0
+  },
+  {
+   "i": 3,
+   "q": "The committee voted against him twice, but he still won't abandon the idea. He…",
+   "a": "holds firm to it",
+   "b": "fans the flames",
+   "right": 0
+  },
+  {
+   "i": 4,
+   "q": "Your coffee order is wrong and you call it “a betrayal that ruins my week.” You are…",
+   "a": "blowing it out of proportion",
+   "b": "doing it justice",
+   "right": 0
+  },
+  {
+   "i": 5,
+   "q": "New documents explained what actually happened at the meeting. They…",
+   "a": "shed light on it",
+   "b": "ruffle feathers",
+   "right": 0
+  },
+  {
+   "i": 6,
+   "q": "The photo captured the view perfectly — color, scale, everything. The photo…",
+   "a": "does the view justice",
+   "b": "blows the view out of proportion",
+   "right": 0
+  },
+  {
+   "i": 7,
+   "q": "After the trial ended, the family finally felt the matter was behind them. They got…",
+   "a": "closure",
+   "b": "an inkling",
+   "right": 0
+  },
+  {
+   "i": 8,
+   "q": "The actor stood on stage, smiling, letting the applause roll over him. He…",
+   "a": "basked in it",
+   "b": "was wary of it",
+   "right": 0
+  },
+  {
+   "i": 9,
+   "q": "Which place is off the map?",
+   "a": "a village with one road in and no cell service",
+   "b": "a suburb fifteen minutes from downtown",
+   "right": 0
+  },
+  {
+   "i": 10,
+   "q": "A stranger offers you a “free” phone on the street. A sensible person feels…",
+   "a": "wary",
+   "b": "tight-knit",
+   "right": 0
+  },
+  {
+   "i": 11,

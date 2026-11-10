@@ -1,0 +1,188 @@
+   "q": "Two coworkers are arguing. Which reply fans the flames?",
+   "a": "“And nobody liked your presentation either.”",
+   "b": "“Okay, let's both calm down and look at the facts.”",
+   "right": 0
+  },
+  {
+   "i": 12,
+   "q": "He passed the exam, but he slept four hours a night for a month to do it. He passed…",
+   "a": "at the expense of his health",
+   "b": "out of thin air",
+   "right": 0
+  },
+  {
+   "i": 13,
+   "q": "Nobody could say where the money came from — it simply appeared. It appeared…",
+   "a": "out of thin air",
+   "b": "from her savings account",
+   "right": 0
+  },
+  {
+   "i": 14,
+   "q": "Before the announcement, did the employees know what was coming?",
+   "a": "No — not the slightest inkling of it",
+   "b": "Yes — they saw eye to eye on it",
+   "right": 0
+  },
+  {
+   "i": 15,
+   "q": "The new dress code annoyed several people but caused no real conflict. It…",
+   "a": "ruffled a few feathers",
+   "b": "held firm",
+   "right": 0
+  },
+  {
+   "i": 16,
+   "q": "Which hobby is all-consuming?",
+   "a": "one that fills every free evening and most thoughts",
+   "b": "one she touches once a month",
+   "right": 0
+  },
+  {
+   "i": 17,
+   "q": "After an hour they still disagreed about the budget. So they…",
+   "a": "don't see eye to eye on it",
+   "b": "bask in it",
+   "right": 0
+  },
+  {
+   "i": 18,
+   "q": "His friends kept joking about his new haircut at the party — he laughed along. They…",
+   "a": "ribbed him about it",
+   "b": "fanned the flames",
+   "right": 0
+  },
+  {
+   "i": 19,
+   "q": "Which group is tight-knit?",
+   "a": "neighbors who share tools, keys and Sunday dinners",
+   "b": "coworkers who nod in the hallway and nothing more",
+   "right": 0
+  }
+ ],
+ "forks": [
+  {
+   "i": 4,
+   "opts": [
+    "the truth",
+    "a minor incident",
+    "a setback",
+    "the risks"
+   ],
+   "odd": 0,
+   "why": "You can blow a setback, an incident or risks out of proportion. “Blow the truth” is a different verb — it means to reveal a secret.",
+   "stem": "blow ___ out of proportion"
+  },
+  {
+   "i": 11,
+   "opts": [
+    "controversy",
+    "panic",
+    "a candle",
+    "a rivalry"
+   ],
+   "odd": 2,
+   "why": "“Fan the flames of” is figurative: conflict, anger, publicity. You fan a fire, not a candle.",
+   "stem": "fan the flames of ___"
+  },
+  {
+   "i": 0,
+   "opts": [
+    "fixing bikes",
+    "storytelling",
+    "being tall",
+    "explaining things"
+   ],
+   "odd": 2,
+   "why": "A knack is an acquired skill, not a physical trait.",
+   "stem": "a knack for ___"
+  },
+  {
+   "i": 17,
+   "opts": [
+    "at the movie",
+    "about the plan",
+    "on the budget",
+    "with my brother"
+   ],
+   "odd": 0,
+   "why": "You see eye to eye on or about a topic, and with a person — not at an event.",
+   "stem": "see eye to eye ___"
+  },
+  {
+   "i": 8,
+   "opts": [
+    "her sudden fame",
+    "the applause",
+    "the warm glow",
+    "the deadline"
+   ],
+   "odd": 3,
+   "why": "You bask in pleasant things — attention, warmth, praise. A deadline is something you dread.",
+   "stem": "bask in ___"
+  },
+  {
+   "i": 19,
+   "opts": [
+    "family",
+    "schedule",
+    "community",
+    "circle of friends"
+   ],
+   "odd": 1,
+   "why": "Tight-knit describes bonded people. “Tight schedule” is a different sense of tight.",
+   "stem": "tight-knit ___"
+  },
+  {
+   "i": 2,
+   "opts": [
+    "to creativity",
+    "of quick results",
+    "to open discussion",
+    "to learning"
+   ],
+   "odd": 1,
+   "why": "Conducive is always followed by to.",
+   "stem": "conducive ___"
+  },
+  {
+   "i": 6,
+   "opts": [
+    "for the team",
+    "to the view",
+    "to her talent",
+    "to a great meal"
+   ],
+   "odd": 0,
+   "why": "The pattern is do justice TO something.",
+   "stem": "do justice ___"
+  },
+  {
+   "i": 15,
+   "opts": [
+    "a few feathers",
+    "some feathers",
+    "feathers",
+    "some heads"
+   ],
+   "odd": 3,
+   "why": "The idiom lives on feathers. “Ruffle heads” is not an idiom.",
+   "stem": "ruffle ___"
+  },
+  {
+   "i": 5,
+   "opts": [
+    "on the case",
+    "in the details",
+    "on the cause",
+    "on the problem"
+   ],
+   "odd": 1,
+   "why": "Light is shed ON something.",
+   "stem": "shed light ___"
+  }
+ ],
+ "build": [
+  {
+   "i": 2,
+   "tiles": [

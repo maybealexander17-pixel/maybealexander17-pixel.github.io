@@ -1,1 +1,1553 @@
 <!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>We're Stuck in Questions — Vocabulary Trail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   LEXICAL TRAIL · skin: FRONT PAGE (cream newsprint, ink
+   outlines, highlighter yellow, editor red, teal accents)
+   ========================================================= */
+:root{
+  --bg:#F7F1E3; --bg2:#EFE7D2; --card:#FFFFFF; --ink:#221F1A; --mute:#6E6759; --line:#2B2526;
+  --soft:#FBF7EC; --red:#C0392B; --red-d:#96281B; --yellow:#FFE95C; --teal:#0E7C7B;
+  --gray:#ECE7DA; --ok:#2F8A3A; --ok-soft:#E3F4DE; --bad:#C23B2E; --bad-soft:#FBE4E1;
+  --hl:#FFF0A3;
+  --display:'Playfair Display',Georgia,'Times New Roman',serif;
+  --body:'Nunito Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --hand:'Patrick Hand','Comic Sans MS','Segoe Print',cursive;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--body);overflow-x:hidden}
+button{font-family:inherit}
+[hidden]{display:none!important}
+.wrap{max-width:900px;margin:0 auto;padding:10px 14px 60px;position:relative;z-index:1}
+
+/* drifting decorative badges */
+.drift{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.drift span{position:absolute;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--red);color:#fff;
+  border:2.5px solid var(--line);font:20px/1 var(--hand);border-radius:52% 48% 50% 50%/48% 52% 49% 51%;opacity:.18;animation:float 15s ease-in-out infinite alternate}
+.drift span.alt{background:var(--yellow);color:var(--ink)}
+@keyframes float{to{transform:translate(16px,-28px) rotate(13deg)}}
+
+/* header */
+.hero{position:relative;text-align:left;padding:24px 4px 10px}
+.hero h1{font:700 clamp(34px,8vw,58px)/1 var(--display);margin:0;letter-spacing:-.01em}
+.hero h1 span{display:block}
+.hero h1 span:nth-child(2){padding-left:.6em}
+.hero h1 span:nth-child(3){padding-left:1.2em}
+.hero .sub{display:inline-block;margin:14px 0 0;background:var(--yellow);border:2px solid var(--line);border-radius:999px;padding:7px 18px;font:400 18px/1.2 var(--hand)}
+.hero .by{margin:10px 0 0;color:var(--mute);font-size:14.5px;max-width:520px}
+.total{position:absolute;right:6px;top:20px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.total .tb{width:74px;height:74px;font-size:30px}
+.total small{font:15px var(--hand);color:var(--red-d);text-align:center;max-width:110px;line-height:1.1}
+.badge{display:inline-flex;align-items:center;justify-content:center;background:var(--red);color:#fff;border:2.5px solid var(--line);
+  font:700 15px/1 var(--body);border-radius:50%;min-width:34px;height:34px;padding:0 4px;box-shadow:2px 2px 0 var(--line)}
+.tb{width:34px;height:34px}
+
+/* stage rail */
+.navrail{position:sticky;top:0;z-index:5;background:linear-gradient(var(--bg) 78%,transparent);padding:8px 0 14px}
+#nav{display:flex;gap:8px;overflow-x:auto;overflow-y:hidden;padding:18px 2px 8px;scrollbar-width:thin}
+#nav button{position:relative;flex:0 0 auto;border:2px solid var(--line);background:var(--card);border-radius:999px;
+  padding:8px 14px;font:700 14.5px/1 var(--body);cursor:pointer;box-shadow:2px 2px 0 var(--line)}
+#nav button.on{background:var(--ink);color:#fff}
+#nav button.done{background:var(--ok-soft)}
+#nav button .tb{position:absolute;top:-15px;right:-11px;width:30px;height:30px;font-size:12.5px;line-height:26px;min-width:30px;border-width:2px;padding:0;box-shadow:1.5px 1.5px 0 var(--line)}
+#nav button.on .tb{box-shadow:1.5px 1.5px 0 rgba(0,0,0,.4)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:2px solid var(--line);padding-top:10px}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+
+/* generic bits */
+.btn{border:2px solid var(--line);background:var(--yellow);border-radius:12px;padding:12px 20px;font:800 16px/1 var(--body);
+  cursor:pointer;box-shadow:3px 3px 0 var(--line);transition:transform .12s,box-shadow .12s}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.btn.ghost{background:var(--card)}
+.btn.sm{padding:9px 14px;font-size:14px;border-radius:10px;box-shadow:2px 2px 0 var(--line)}
+.btn.teal{background:var(--teal);color:#fff}
+.btn:disabled{opacity:.45;cursor:default}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:16px;margin:12px 0;box-shadow:4px 4px 0 rgba(43,37,38,.16)}
+.mute{color:var(--mute)}
+.small{font-size:13.5px}
+.hand{font-family:var(--hand)}
+.fb{margin-top:10px;font-size:15px}
+.fb.show{padding:10px 12px;border-radius:10px;background:var(--soft);border:1.5px dashed var(--mute)}
+.okc{color:var(--ok);font-weight:800}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.prog{height:10px;background:var(--gray);border:2px solid var(--line);border-radius:99px;overflow:hidden;margin:4px 0 6px}
+.prog i{display:block;height:100%;width:0;background:repeating-linear-gradient(-45deg,var(--yellow) 0 8px,var(--teal) 8px 16px);transition:width .35s}
+.prog.green i{background:repeating-linear-gradient(-45deg,var(--ok-soft) 0 8px,var(--ok) 8px 16px)}
+.chip{display:inline-block;border:2px solid var(--line);border-radius:999px;padding:6px 13px;background:var(--card);
+  font:700 14.5px/1.2 var(--body);cursor:pointer;box-shadow:2px 2px 0 var(--line);transition:transform .12s}
+.chip:active{transform:translate(1px,1px)}
+.chip.sel{background:var(--yellow);transform:translate(2px,2px);box-shadow:0 0 0 var(--line)}
+.chip.off{opacity:.4;text-decoration:line-through;pointer-events:none}
+.chip.dash{border-style:dashed;background:var(--soft)}
+input[type=text],textarea{width:100%;border:2px solid var(--line);border-radius:12px;padding:11px 13px;font:16px/1.4 var(--body);background:#fff}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus,button:focus-visible{outline:3px solid var(--teal);outline-offset:1px}
+mark{background:var(--hl);border-radius:4px;padding:0 3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.shake{animation:shake .4s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(5px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.pop{animation:pop .3s}
+@keyframes pop{40%{transform:scale(1.06)}}
+.stage{animation:rise .45s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.shead{display:flex;gap:14px;align-items:flex-start;margin:10px 0 4px}
+.shead h2{font:700 clamp(24px,5vw,32px)/1.1 var(--display);margin:0}
+.shead p{margin:5px 0 0;color:var(--mute);font-size:15px;max-width:560px}
+.rain{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.rain i{position:absolute;top:-30px;font-style:normal;animation:fall linear both}
+@keyframes fall{to{transform:translateY(112vh) rotate(340deg)}}
+.toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:12px;
+  padding:11px 16px;font:600 14px/1.35 var(--body);z-index:60;box-shadow:4px 4px 0 rgba(0,0,0,.25);max-width:92vw}
+.toast button{background:var(--yellow);color:var(--ink);border:2px solid #fff;border-radius:8px;padding:4px 10px;font:800 13px var(--body);margin-left:10px;cursor:pointer}
+.stamp{display:inline-block;font:700 13px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--red);
+  border:2.5px solid var(--red);border-radius:8px;padding:3px 9px;transform:rotate(-3deg)}
+
+/* stage-specific */
+.fcard{position:relative;display:block;width:100%;min-height:150px;border:2px solid var(--line);border-radius:16px;background:var(--card);
+  box-shadow:4px 4px 0 rgba(43,37,38,.16);cursor:pointer;perspective:600px;text-align:left;padding:0;transform-style:preserve-3d;transition:transform .35s}
+.fcard .face{display:flex;flex-direction:column;gap:6px;padding:14px 16px;backface-visibility:hidden}
+.fcard .front .c{font:700 20px/1.15 var(--display)}
+.fcard .front .p{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.fcard .front .hint{margin-top:auto;font:14px var(--hand);color:var(--mute)}
+.fcard .back{position:absolute;inset:0;background:var(--hl);border-radius:14px;transform:rotateY(180deg)}
+.fcard .back .m{font-size:14.5px;line-height:1.4}
+.fcard .back .ru{color:var(--red-d);font-weight:800;font-size:14px}
+.fcard .back .col{font-size:14px}
+.fcard .back .nt{font:14px var(--hand);color:var(--mute)}
+.fcard.flip{transform:rotateY(180deg)}
+#art span.t{cursor:pointer;padding:0 1px;border-radius:3px}
+#art span.t.f{background:linear-gradient(180deg,transparent 8%,var(--hl) 8%,var(--hl) 92%,transparent 92%);border-bottom-color:transparent}
+.ru{direction:ltr}
+.detail{min-height:64px}
+@media (max-width:480px){
+  .shead p{font-size:14px}
+  .hero h1{font-size:clamp(30px,10vw,40px)}
+}
+</style>
+</head>
+<body>
+<div class="drift" id="drift" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="total"><span class="badge tb" id="total">–</span><small id="totlab">badges left</small></div>
+    <h1><span>We're Stuck</span><span>in Questions:</span><span>the Trail</span></h1>
+    <div class="sub">20 phrases · 8 stages</div>
+    <p class="by">Vocabulary from Albert Samaha's article in <i>New York</i> magazine. Clear every badge to finish. Start at the cards, end by saying it yourself.</p>
+  </header>
+  <div class="navrail">
+    <nav id="nav" aria-label="Stages"></nav>
+    <div class="bar">
+      <button class="btn ghost sm" id="prev" type="button">← Back</button>
+      <button class="btn ghost sm" id="mute" type="button" style="min-width:44px;min-height:44px">🔊</button>
+      <button class="btn ghost sm" id="next" type="button">Next stage →</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <footer style="margin-top:26px;color:var(--mute);font-size:13px" class="hand">Your progress saves on this device. · @maybealexander1</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script id="data" type="application/json">
+{
+ "items": [
+  {
+   "c": "have a knack for",
+   "pos": "verb phrase",
+   "ru": "иметь дар к, быть искусным в",
+   "m": "a natural skill for doing something well, almost without trying",
+   "n": "for + -ing or a noun; warmer and more idiomatic than 'be good at'",
+   "col": "a knack for fixing things"
+  },
+  {
+   "c": "grasp at straws",
+   "pos": "verb phrase",
+   "ru": "хвататься за соломинку",
+   "m": "try weak, unlikely ideas because nothing better is left",
+   "n": "suggests desperation; often in the -ing form",
+   "col": "a lawyer grasping at straws"
+  },
+  {
+   "c": "conducive to",
+   "pos": "adjective phrase",
+   "ru": "способствующий, благоприятный для",
+   "m": "helping something happen; creating good conditions for it",
+   "n": "always 'to' + noun or -ing — never 'for'",
+   "col": "an atmosphere conducive to study"
+  },
+  {
+   "c": "hold firm to something",
+   "pos": "verb phrase",
+   "ru": "твёрдо держаться чего-то",
+   "m": "keep believing in or sticking to something despite pressure",
+   "n": "stronger than 'keep'; the object follows 'to'",
+   "col": "hold firm to a decision"
+  },
+  {
+   "c": "blow something out of proportion",
+   "pos": "verb phrase",
+   "ru": "раздувать до невероятных размеров",
+   "m": "make something seem far more serious than it really is",
+   "n": "the object goes in the middle: blow it out of proportion",
+   "col": "blow a setback out of proportion"
+  },
+  {
+   "c": "shed light on",
+   "pos": "verb phrase",
+   "ru": "проливать свет на",
+   "m": "make something clearer or easier to understand",
+   "n": "shed–shed–shed; light ON, not 'to'",
+   "col": "documents that shed light on the case"
+  },
+  {
+   "c": "do justice to",
+   "pos": "verb phrase",
+   "ru": "делать честь; в полной мере передавать",
+   "m": "show or represent something as good as it really is",
+   "n": "'do yourself justice' = perform as well as you can",
+   "col": "a photo that does justice to the view"
+  },
+  {
+   "c": "closure",
+   "pos": "noun",
+   "ru": "завершение, чувство завершённости",
+   "m": "the feeling that a difficult event is finally over",
+   "n": "very common in American news and psychology talk",
+   "col": "a sense of closure"
+  },
+  {
+   "c": "bask in",
+   "pos": "verb phrase",
+   "ru": "упиваться, греться в",
+   "m": "enjoy attention or success in a relaxed, visible way",
+   "n": "literal with sunshine; figurative with praise or fame",
+   "col": "bask in the applause"
+  },
+  {
+   "c": "off the map",
+   "pos": "adverbial phrase",
+   "ru": "в глуши, за чертой мира",
+   "m": "far from anywhere known or important; out of contact",
+   "n": "a place is off the map; a person can drop off the map",
+   "col": "a town off the map"
+  },
+  {
+   "c": "wary",
+   "pos": "adjective",
+   "ru": "настороженный, осторожный",
+   "m": "careful because you suspect danger or a trick",
+   "n": "wary of + noun or -ing; warier, wariest",
+   "col": "wary of strangers"
+  },
+  {
+   "c": "fan the flames",
+   "pos": "verb phrase",
+   "ru": "подливать масла в огонь",
+   "m": "make a conflict or a strong feeling worse",
+   "n": "fan is a verb here: fanned, fanning",
+   "col": "fan the flames of a rivalry"
+  },
+  {
+   "c": "at the expense of",
+   "pos": "prepositional phrase",
+   "ru": "ценой, в ущерб",
+   "m": "with harm or cost to something else",
+   "n": "names what loses: at the expense of quality",
+   "col": "profit at the expense of quality"
+  },
+  {
+   "c": "out of thin air",
+   "pos": "adverbial phrase",
+   "ru": "ниоткуда, из воздуха",
+   "m": "from nothing; with no visible source",
+   "n": "for appearing or inventing; disappearing is 'into thin air'",
+   "col": "appear out of thin air"
+  },
+  {
+   "c": "inkling of",
+   "pos": "noun phrase",
+   "ru": "смутное представление, догадка",
+   "m": "a slight suspicion or first idea about something",
+   "n": "with 'an' and 'of'; often negative: not an inkling",
+   "col": "not the slightest inkling of trouble"
+  },
+  {
+   "c": "ruffle feathers",
+   "pos": "verb phrase",
+   "ru": "задевать, обижать людей",
+   "m": "annoy or upset people, usually mildly",
+   "n": "feathers is almost always plural; the passive is common",
+   "col": "ruffle a few feathers"
+  },
+  {
+   "c": "all-consuming",
+   "pos": "adjective",
+   "ru": "всепоглощающий",
+   "m": "taking up all your time, energy or attention",
+   "n": "before a noun or after a linking verb",
+   "col": "an all-consuming hobby"
+  },
+  {
+   "c": "see eye to eye",
+   "pos": "verb phrase",
+   "ru": "сходиться во взглядах, полностью соглашаться",
+   "m": "agree completely; share the same view",
+   "n": "with on/about a topic or with a person",
+   "col": "see eye to eye on politics"
+  },
+  {
+   "c": "rib someone",
+   "pos": "verb phrase",
+   "ru": "подкалывать, поддразнивать",
+   "m": "tease someone in a friendly way",
+   "n": "rib–ribbed; about something small, never cruel",
+   "col": "rib a teammate"
+  },
+  {
+   "c": "tight-knit",
+   "pos": "adjective",
+   "ru": "сплочённый, крепкий",
+   "m": "strongly bonded; closely connected",
+   "n": "for groups, families, communities; keep the hyphen",
+   "col": "a tight-knit circle of friends"
+  }
+ ],
+ "notice": {
+  "head": "Maple Street Bakery Stays Open After Rent Fight",
+  "text": "When Marta, who owns the Corner Bakery on Maple Street, announced the shop might close, the block reacted within hours. Maple Street is a [[tight-knit]] place: people lend tools, water each other's plants, and notice a strange car by morning. Some neighbors were [[wary]] of the landlord's opening offer — a one-year lease at nearly double the rent — and a few had [[an inkling]] that he already had a buyer. The local blog [[fanned the flames]] with a post about “greedy developers,” and by evening people were talking about a rent strike. Marta begged them not to [[blow the dispute out of proportion]]. “He is not a villain,” she said. “We just don't [[see eye to eye]] on the numbers.” A petition with two hundred signatures [[ruffled a few feathers]] at city hall, but the morning crowd — retirees, students, off-duty nurses — was hardly a [[conducive]] audience for staying calm: they had saved the hardware store in 2019, and they wanted a fight. Marta, who has [[a knack for]] keeping a room friendly, hosted meetings in the back room for two weeks. She heard everyone out, even the retired lawyer who [[grasped at straws]] to find a loophole in the lease, and the teenagers who [[ribbed]] her about her “corporate lawyer voice.” A city planner friend [[shed light on]] a zoning rule that allows a café on the ground floor, and a crowdfunding page pulled eleven thousand dollars [[out of thin air]]. The final two months were [[all-consuming]] — Marta called them “a second job I did not apply for” — and the campaign ran [[at the expense of]] her sleep. In the end the landlord signed a five-year lease. The new wooden sign, carved by a neighbor, [[does justice to]] the place, and on Sunday mornings the whole block [[basks in]] the smell of cardamom buns. The shop sits two doors [[off the map]] of every tourist guide, which suits everyone just fine. Marta says the fight gave the street [[closure]]: “We [[held firm to]] the plan, and the plan held.”",
+  "marks": [
+   19,
+   10,
+   14,
+   11,
+   4,
+   17,
+   15,
+   2,
+   0,
+   1,
+   18,
+   5,
+   13,
+   16,
+   12,
+   6,
+   8,
+   9,
+   7,
+   3
+  ]
+ },
+ "ccq": [
+  {
+   "i": 0,
+   "q": "Two colleagues learn a new software. One picks it up in an hour, as if it were obvious. What do you say?",
+   "a": "She has a knack for it.",
+   "b": "She is wary of it.",
+   "right": 0
+  },
+  {
+   "i": 1,
+   "q": "The lawyer has one weak, unlikely theory left and clings to it. That is…",
+   "a": "grasping at straws",
+   "b": "seeing eye to eye",
+   "right": 0
+  },
+  {
+   "i": 2,
+   "q": "Which room is conducive to studying?",
+   "a": "quiet, well lit, phone in another room",
+   "b": "loud music and constant interruptions",
+   "right": 0
+  },
+  {
+   "i": 3,
+   "q": "The committee voted against him twice, but he still won't abandon the idea. He…",
+   "a": "holds firm to it",
+   "b": "fans the flames",
+   "right": 0
+  },
+  {
+   "i": 4,
+   "q": "Your coffee order is wrong and you call it “a betrayal that ruins my week.” You are…",
+   "a": "blowing it out of proportion",
+   "b": "doing it justice",
+   "right": 0
+  },
+  {
+   "i": 5,
+   "q": "New documents explained what actually happened at the meeting. They…",
+   "a": "shed light on it",
+   "b": "ruffle feathers",
+   "right": 0
+  },
+  {
+   "i": 6,
+   "q": "The photo captured the view perfectly — color, scale, everything. The photo…",
+   "a": "does the view justice",
+   "b": "blows the view out of proportion",
+   "right": 0
+  },
+  {
+   "i": 7,
+   "q": "After the trial ended, the family finally felt the matter was behind them. They got…",
+   "a": "closure",
+   "b": "an inkling",
+   "right": 0
+  },
+  {
+   "i": 8,
+   "q": "The actor stood on stage, smiling, letting the applause roll over him. He…",
+   "a": "basked in it",
+   "b": "was wary of it",
+   "right": 0
+  },
+  {
+   "i": 9,
+   "q": "Which place is off the map?",
+   "a": "a village with one road in and no cell service",
+   "b": "a suburb fifteen minutes from downtown",
+   "right": 0
+  },
+  {
+   "i": 10,
+   "q": "A stranger offers you a “free” phone on the street. A sensible person feels…",
+   "a": "wary",
+   "b": "tight-knit",
+   "right": 0
+  },
+  {
+   "i": 11,
+   "q": "Two coworkers are arguing. Which reply fans the flames?",
+   "a": "“And nobody liked your presentation either.”",
+   "b": "“Okay, let's both calm down and look at the facts.”",
+   "right": 0
+  },
+  {
+   "i": 12,
+   "q": "He passed the exam, but he slept four hours a night for a month to do it. He passed…",
+   "a": "at the expense of his health",
+   "b": "out of thin air",
+   "right": 0
+  },
+  {
+   "i": 13,
+   "q": "Nobody could say where the money came from — it simply appeared. It appeared…",
+   "a": "out of thin air",
+   "b": "from her savings account",
+   "right": 0
+  },
+  {
+   "i": 14,
+   "q": "Before the announcement, did the employees know what was coming?",
+   "a": "No — not the slightest inkling of it",
+   "b": "Yes — they saw eye to eye on it",
+   "right": 0
+  },
+  {
+   "i": 15,
+   "q": "The new dress code annoyed several people but caused no real conflict. It…",
+   "a": "ruffled a few feathers",
+   "b": "held firm",
+   "right": 0
+  },
+  {
+   "i": 16,
+   "q": "Which hobby is all-consuming?",
+   "a": "one that fills every free evening and most thoughts",
+   "b": "one she touches once a month",
+   "right": 0
+  },
+  {
+   "i": 17,
+   "q": "After an hour they still disagreed about the budget. So they…",
+   "a": "don't see eye to eye on it",
+   "b": "bask in it",
+   "right": 0
+  },
+  {
+   "i": 18,
+   "q": "His friends kept joking about his new haircut at the party — he laughed along. They…",
+   "a": "ribbed him about it",
+   "b": "fanned the flames",
+   "right": 0
+  },
+  {
+   "i": 19,
+   "q": "Which group is tight-knit?",
+   "a": "neighbors who share tools, keys and Sunday dinners",
+   "b": "coworkers who nod in the hallway and nothing more",
+   "right": 0
+  }
+ ],
+ "forks": [
+  {
+   "i": 4,
+   "opts": [
+    "the truth",
+    "a minor incident",
+    "a setback",
+    "the risks"
+   ],
+   "odd": 0,
+   "why": "You can blow a setback, an incident or risks out of proportion. “Blow the truth” is a different verb — it means to reveal a secret.",
+   "stem": "blow ___ out of proportion"
+  },
+  {
+   "i": 11,
+   "opts": [
+    "controversy",
+    "panic",
+    "a candle",
+    "a rivalry"
+   ],
+   "odd": 2,
+   "why": "“Fan the flames of” is figurative: conflict, anger, publicity. You fan a fire, not a candle.",
+   "stem": "fan the flames of ___"
+  },
+  {
+   "i": 0,
+   "opts": [
+    "fixing bikes",
+    "storytelling",
+    "being tall",
+    "explaining things"
+   ],
+   "odd": 2,
+   "why": "A knack is an acquired skill, not a physical trait.",
+   "stem": "a knack for ___"
+  },
+  {
+   "i": 17,
+   "opts": [
+    "at the movie",
+    "about the plan",
+    "on the budget",
+    "with my brother"
+   ],
+   "odd": 0,
+   "why": "You see eye to eye on or about a topic, and with a person — not at an event.",
+   "stem": "see eye to eye ___"
+  },
+  {
+   "i": 8,
+   "opts": [
+    "her sudden fame",
+    "the applause",
+    "the warm glow",
+    "the deadline"
+   ],
+   "odd": 3,
+   "why": "You bask in pleasant things — attention, warmth, praise. A deadline is something you dread.",
+   "stem": "bask in ___"
+  },
+  {
+   "i": 19,
+   "opts": [
+    "family",
+    "schedule",
+    "community",
+    "circle of friends"
+   ],
+   "odd": 1,
+   "why": "Tight-knit describes bonded people. “Tight schedule” is a different sense of tight.",
+   "stem": "tight-knit ___"
+  },
+  {
+   "i": 2,
+   "opts": [
+    "to creativity",
+    "of quick results",
+    "to open discussion",
+    "to learning"
+   ],
+   "odd": 1,
+   "why": "Conducive is always followed by to.",
+   "stem": "conducive ___"
+  },
+  {
+   "i": 6,
+   "opts": [
+    "for the team",
+    "to the view",
+    "to her talent",
+    "to a great meal"
+   ],
+   "odd": 0,
+   "why": "The pattern is do justice TO something.",
+   "stem": "do justice ___"
+  },
+  {
+   "i": 15,
+   "opts": [
+    "a few feathers",
+    "some feathers",
+    "feathers",
+    "some heads"
+   ],
+   "odd": 3,
+   "why": "The idiom lives on feathers. “Ruffle heads” is not an idiom.",
+   "stem": "ruffle ___"
+  },
+  {
+   "i": 5,
+   "opts": [
+    "on the case",
+    "in the details",
+    "on the cause",
+    "on the problem"
+   ],
+   "odd": 1,
+   "why": "Light is shed ON something.",
+   "stem": "shed light ___"
+  }
+ ],
+ "build": [
+  {
+   "i": 2,
+   "tiles": [
+    "conducive",
+    "to",
+    "for",
+    "on"
+   ],
+   "ans": [
+    0,
+    1
+   ]
+  },
+  {
+   "i": 12,
+   "tiles": [
+    "at",
+    "the",
+    "expense",
+    "of",
+    "cost"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "i": 13,
+   "tiles": [
+    "out",
+    "of",
+    "thin",
+    "air",
+    "thick"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "i": 3,
+   "tiles": [
+    "hold",
+    "firm",
+    "to",
+    "on"
+   ],
+   "ans": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "i": 4,
+   "tiles": [
+    "blow",
+    "it",
+    "out",
+    "of",
+    "proportion",
+    "into"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "i": 5,
+   "tiles": [
+    "shed",
+    "light",
+    "on",
+    "in"
+   ],
+   "ans": [
+    0,
+    1,
+    2
+   ]
+  }
+ ],
+ "upgrade": [
+  {
+   "i": 4,
+   "flat": "The local blog [[made a minor delay sound like a citywide scandal]].",
+   "gap": "The local blog ______.",
+   "re": "(blew|blown|blow)\\b.{0,40}\\bout of proportion",
+   "no": "blow up",
+   "model": "The local blog blew a minor delay out of proportion."
+  },
+  {
+   "i": 0,
+   "flat": "My grandfather [[has a real gift for]] fixing old radios.",
+   "gap": "My grandfather ______ fixing old radios.",
+   "re": "(has|have|had) a knack for",
+   "no": "gift|talent",
+   "model": "My grandfather has a knack for fixing old radios."
+  },
+  {
+   "i": 8,
+   "flat": "After the win she [[enjoyed every minute of the attention]].",
+   "gap": "After the win she ______.",
+   "re": "bask(ed|ing|s)? in",
+   "no": "enjoy",
+   "model": "After the win she basked in the attention."
+  },
+  {
+   "i": 13,
+   "flat": "He [[invented]] an excuse [[from nothing]].",
+   "gap": "He ______ an excuse.",
+   "re": "\\b(pulled|produced|got|made|created)\\b.{0,20}\\bout of thin air",
+   "no": "into thin air",
+   "model": "He pulled an excuse out of thin air."
+  },
+  {
+   "i": 6,
+   "flat": "My phone camera doesn't [[show how beautiful]] the place really is.",
+   "gap": "My phone camera doesn't ______ the place.",
+   "re": "(do|does|did|doing|done)(\\s+\\S+){0,3}\\s+justice\\b",
+   "no": "give|make",
+   "model": "My phone camera doesn't do the place justice."
+  },
+  {
+   "i": 16,
+   "flat": "Restoring the boat became [[a hobby that took over his whole life]].",
+   "gap": "Restoring the boat became ______.",
+   "re": "all[- ]consuming",
+   "no": "",
+   "model": "Restoring the boat became all-consuming."
+  },
+  {
+   "i": 11,
+   "flat": "Her sarcastic reply [[made the argument worse]].",
+   "gap": "Her sarcastic reply ______.",
+   "re": "fan(ned|ning)? the flames",
+   "no": "",
+   "model": "Her sarcastic reply fanned the flames."
+  },
+  {
+   "i": 17,
+   "flat": "We [[totally agree]] on this one.",
+   "gap": "We ______ on this one.",
+   "re": "see eye to eye",
+   "no": "agree",
+   "model": "We see eye to eye on this one."
+  },
+  {
+   "i": 19,
+   "flat": "It's [[a very close]] community — everyone knows everyone.",
+   "gap": "It's ______ community — everyone knows everyone.",
+   "re": "tight[- ]knit\\b",
+   "no": "",
+   "model": "It's a tight-knit community — everyone knows everyone."
+  },
+  {
+   "i": 2,
+   "flat": "The quiet library is [[perfect for]] focusing.",
+   "gap": "The quiet library is ______ focusing.",
+   "re": "conducive to",
+   "no": "for",
+   "model": "The quiet library is conducive to focusing."
+  },
+  {
+   "i": 14,
+   "flat": "I had [[only a vague suspicion]] of what was about to happen.",
+   "gap": "I had ______ what was about to happen.",
+   "re": "(an |no |not the slightest )?inkling of",
+   "no": "",
+   "model": "I had no inkling of what was about to happen."
+  },
+  {
+   "i": 5,
+   "flat": "The new evidence finally [[explained what had happened]].",
+   "gap": "The new evidence finally ______.",
+   "re": "shed(s|ding)? light on",
+   "no": "",
+   "model": "The new evidence finally shed light on what had happened."
+  }
+ ],
+ "translate": [
+  {
+   "i": 4,
+   "ru": "Да не раздувай из этого катастрофу — задержка всего на десять минут.",
+   "en": "Don't blow it out of proportion — it's only a ten-minute delay.",
+   "note": "Раздувать maps to blow something OUT of proportion. The object goes in the middle: blow it out of proportion — never “blow up it.”",
+   "re": "(don['’]t|do not) blow .{0,25}out of proportion"
+  },
+  {
+   "i": 17,
+   "ru": "Мы с братом всегда полностью сходимся во взглядах на политику.",
+   "en": "My brother and I always see eye to eye on politics.",
+   "note": "No preposition between the two eyes, and it's on/about a topic or with a person.",
+   "re": "see eye to eye"
+  },
+  {
+   "i": 0,
+   "ru": "У неё настоящий дар объяснять сложное простыми словами.",
+   "en": "She has a knack for explaining complicated things in simple words.",
+   "note": "Calque risk: “gift to explain.” In English it's a knack FOR + -ing.",
+   "re": "(has|have|had) a knack for"
+  },
+  {
+   "i": 5,
+   "ru": "Эти письма наконец пролили свет на то, что случилось в тот вечер.",
+   "en": "The letters finally shed light on what happened that evening.",
+   "note": "Пролить свет pulls you toward “pour light.” The English verb is shed, and the preposition is on.",
+   "re": "shed light on"
+  },
+  {
+   "i": 13,
+   "ru": "Откуда ты взял эти цифры? Ты их что, из воздуха достал?",
+   "en": "Where did you get those numbers? Did you pull them out of thin air?",
+   "note": "Из воздуха is out of THIN air — thin is obligatory, and inventing or producing is out of, not into.",
+   "re": "out of thin air"
+  },
+  {
+   "i": 19,
+   "ru": "Это очень сплочённый коллектив — все друг за друга горой.",
+   "en": "It's a tight-knit team — everyone stands up for each other.",
+   "note": "Сплочённый is tight-knit (keep the hyphen!) for groups. A “tight team” alone means something else.",
+   "re": "tight[- ]knit"
+  },
+  {
+   "i": 1,
+   "ru": "После провала на экзамене он хватался за соломинку, придумывая всё новые оправдания.",
+   "en": "After failing the exam, he grasped at straws, coming up with new excuses.",
+   "note": "Russian keeps it singular — соломинку. English uses the plural: grasp at straws. And it's grasp AT, not grasp FOR.",
+   "re": "grasp\\w* at straws?\\b"
+  },
+  {
+   "i": 8,
+   "ru": "Она упивалась каждой минутой внимания публики.",
+   "en": "She basked in every minute of the audience's attention.",
+   "note": "No reflexive in English — not “basked herself.” Bask in + noun: bask in the sun, bask in the attention.",
+   "re": "bask\\w* in\\b"
+  },
+  {
+   "i": 11,
+   "ru": "Его грубый ответ только подлил масла в огонь.",
+   "en": "His rude reply only fanned the flames.",
+   "note": "The oil doesn't travel: English fans THE flames — plural, with fan (fan → fanned → fanning).",
+   "re": "fan\\w* the flames"
+  },
+  {
+   "i": 12,
+   "ru": "Он сделал карьеру ценой личной жизни.",
+   "en": "He built a career at the expense of his personal life.",
+   "note": "Russian “ценой” is a bare instrumental. English needs the full frame: AT the expense OF + noun.",
+   "re": "at the expense of\\b"
+  },
+  {
+   "i": 14,
+   "ru": "У меня нет ни малейшего представления, где он сейчас живёт.",
+   "en": "I don't have the slightest inkling of where he lives now.",
+   "note": "An inkling OF, not “about” — the slightest inkling of something. No article: not “an inkling” here because of “the slightest.”",
+   "re": "inkling of\\b"
+  },
+  {
+   "i": 15,
+   "ru": "Новый начальник сразу начал задевать подчинённых жёсткой критикой.",
+   "en": "The new boss immediately started ruffling feathers with his harsh criticism.",
+   "note": "Feathers stay plural: ruffle (someone's) feathers. Also common: ruffled a few feathers.",
+   "re": "ruffl\\w* (some(one'?s|body'?s|one'?s)? ?|a few |a lot of |some )?feathers"
+  }
+ ],
+ "use": [
+  {
+   "q": "Tell about a small problem that someone — you, a friend, the internet — blew out of proportion. What fanned the flames? Did everyone see eye to eye in the end?",
+   "chunks": [
+    [
+     "blow out of proportion",
+     "blow\\w*.{0,30}out of proportion"
+    ],
+    [
+     "fan the flames",
+     "fan(ned|ning)? the flames"
+    ],
+    [
+     "see eye to eye",
+     "see eye to eye"
+    ],
+    [
+     "ruffle feathers",
+     "ruffl\\w*.{0,12}feathers"
+    ]
+   ],
+   "model": "Our neighbor's barbecue smoke set off the building chat, and within an hour people were blowing it out of proportion — someone even mentioned lawyers. A few sarcastic replies fanned the flames and ruffled feathers on both sides. In the end we talked on the stairs and saw eye to eye: the grill moves two meters, and everyone calms down."
+  },
+  {
+   "q": "Describe a group you belong to — family, friends, a team. What makes it tight-knit? What is conducive to a good atmosphere, and what ruffles its feathers?",
+   "chunks": [
+    [
+     "tight-knit",
+     "tight[- ]knit"
+    ],
+    [
+     "conducive to",
+     "conducive to"
+    ],
+    [
+     "bask in",
+     "bask\\w* in"
+    ],
+    [
+     "ruffle feathers",
+     "ruffl\\w*.{0,12}feathers"
+    ]
+   ],
+   "model": "My rowing club is a tight-knit group: six people who show up at 6 a.m. and know each other's jobs by heart. What is conducive to a good atmosphere is simple — nobody hogs the credit. After a good race we bask in it for about an hour, and the only thing that ruffles feathers is when someone skips the cleanup."
+  },
+  {
+   "q": "Talk about learning something difficult. Did you have a knack for it? Were you wary of anything at the start? Did you ever grasp at straws?",
+   "chunks": [
+    [
+     "a knack for",
+     "knack for"
+    ],
+    [
+     "wary",
+     "wary"
+    ],
+    [
+     "grasp at straws",
+     "grasp\\w* at straws"
+    ],
+    [
+     "out of thin air",
+     "out of thin air"
+    ]
+   ],
+   "model": "I did not have a knack for driving at all — my first instructor grew wary of me by lesson three. Every parking attempt was grasping at straws: turn the wheel, hope, invent space out of thin air. It clicked around lesson twenty, but I still keep an inkling of that fear on icy roads."
+  },
+  {
+   "q": "Describe a project or hobby that took over your life for a while. Was it all-consuming? What happened at the expense of it? How did you get closure when it ended?",
+   "chunks": [
+    [
+     "all-consuming",
+     "all[- ]consuming"
+    ],
+    [
+     "at the expense of",
+     "at the expense of"
+    ],
+    [
+     "closure",
+     "closure"
+    ],
+    [
+     "do justice to",
+     "do .{0,12}justice"
+    ]
+   ],
+   "model": "Last year I restored an old motorcycle, and it became all-consuming — every evening, most weekends. It happened at the expense of my sleep and, honestly, my friendships; I did justice to neither. When I finally sold it, signing the last papers gave me real closure, and I promised myself the next hobby gets a schedule."
+  }
+ ],
+ "lock": [
+  {
+   "i": 4,
+   "clue": "make something seem far more serious than it really is — the blog ______ a minor delay",
+   "re": "(blow|blew|blown)\\b.{0,40}\\bout of proportion",
+   "model": "blew a minor delay out of proportion"
+  },
+  {
+   "i": 14,
+   "clue": "from nothing; with no visible source — the money appeared ______",
+   "re": "out of thin air",
+   "model": "out of thin air"
+  },
+  {
+   "i": 2,
+   "clue": "helping something happen — an atmosphere ______ creativity",
+   "re": "conducive to",
+   "model": "conducive to"
+  },
+  {
+   "i": 16,
+   "clue": "taking up all your time and energy — the hobby became ______",
+   "re": "all[- ]consuming",
+   "model": "all-consuming"
+  },
+  {
+   "i": 5,
+   "clue": "make something clearer — the report ______ the problem",
+   "re": "shed(s|ding)? light on",
+   "model": "shed light on"
+  },
+  {
+   "i": 10,
+   "clue": "careful because you suspect a trick",
+   "re": "\\bwary\\b",
+   "model": "wary"
+  },
+  {
+   "i": 18,
+   "clue": "tease someone in a friendly way",
+   "re": "\\brib(bed|bing)?\\b",
+   "model": "rib someone"
+  },
+  {
+   "i": 8,
+   "clue": "enjoy attention visibly and calmly — she ______ the applause",
+   "re": "bask(ed|ing|s)? in",
+   "model": "basked in"
+  },
+  {
+   "i": 12,
+   "clue": "with harm or cost to something else — profit ______ quality",
+   "re": "at the expense of",
+   "model": "at the expense of"
+  },
+  {
+   "i": 15,
+   "clue": "mildly annoy people — the memo ______",
+   "re": "ruffl\\w*.{0,12}feathers",
+   "model": "ruffled a few feathers"
+  },
+  {
+   "i": 0,
+   "clue": "a natural skill — she ______ explaining things",
+   "re": "(has|have|had) a knack for",
+   "model": "has a knack for"
+  },
+  {
+   "i": 1,
+   "clue": "try weak ideas because nothing better is left",
+   "re": "grasp\\w* at straws",
+   "model": "grasp at straws"
+  },
+  {
+   "i": 7,
+   "clue": "the feeling that a difficult event is finally over",
+   "re": "closure",
+   "model": "closure"
+  },
+  {
+   "i": 13,
+   "clue": "invented from nothing — pulled an excuse ______",
+   "re": "out of thin air",
+   "model": "out of thin air"
+  },
+  {
+   "i": 14,
+   "clue": "a slight suspicion — not the slightest ______ trouble",
+   "re": "inkling of",
+   "model": "inkling of"
+  },
+  {
+   "i": 11,
+   "clue": "make a conflict worse — the post ______",
+   "re": "fan(ned|ning)? the flames",
+   "model": "fanned the flames"
+  },
+  {
+   "i": 3,
+   "clue": "stick to a decision despite pressure — ______ the plan",
+   "re": "hold\\w* firm to",
+   "model": "hold firm to"
+  },
+  {
+   "i": 17,
+   "clue": "agree completely — we ______ on the budget",
+   "re": "see eye to eye",
+   "model": "see eye to eye"
+  },
+  {
+   "i": 9,
+   "clue": "far away, unknown — a town ______",
+   "re": "off the map",
+   "model": "off the map"
+  },
+  {
+   "i": 19,
+   "clue": "strongly bonded — a ______ community",
+   "re": "tight[- ]knit",
+   "model": "tight-knit"
+  }
+ ]
+}
+</script>
+<script>
+
+/* ================= ENGINE ================= */
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const I=DATA.items, N=I.length;
+const FAST=/[?&]fast=1/.test(location.search);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function norm(s){return String(s).toLowerCase().replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[^a-z0-9\s'-]/g,' ').replace(/\s+/g,' ').trim()}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function hash(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0}return(h>>>0).toString(36)}
+const SAVE_KEY='vp:stuck-in-questions-trail:'+hash(JSON.stringify([DATA.notice,DATA.ccq,DATA.forks,DATA.build,DATA.upgrade,DATA.translate,DATA.use,DATA.lock]));
+function loadState(){try{return JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){return null}}
+let saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}},300)}
+function wipeState(){try{localStorage.removeItem(SAVE_KEY)}catch(e){}}
+
+/* ---------- SFX ---------- */
+const SFX=(function(){
+  let ctx=null,master=null,on=true,hushed=false;const log=[];
+  try{on=localStorage.getItem('vp:sound')!=='off'}catch(e){}
+  function ac(){if(!ctx){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;try{ctx=new AC()}catch(e){return null}
+    const comp=ctx.createDynamicsCompressor();comp.connect(ctx.destination);master=ctx.createGain();master.gain.value=.55;master.connect(comp)}
+    if(ctx.state==='suspended'){try{ctx.resume()}catch(e){}}return ctx}
+  function tone(f,at,dur,type,vol,slide){const c=ctx,t=c.currentTime+at,o=c.createOscillator(),g=c.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);
+    if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.2,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.05)}
+  function noise(at,dur,vol,ft,f1,f2){const c=ctx,t=c.currentTime+at,len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);
+    for(let i=0;i<len;i++)d[i]=Math.random()*2-1;const src=c.createBufferSource();src.buffer=buf;const fl=c.createBiquadFilter();fl.type=ft||'bandpass';fl.Q.value=1.2;fl.frequency.setValueAtTime(f1||1500,t);
+    if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+dur);const g=ctx.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.1,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    src.connect(fl);fl.connect(g);g.connect(master);src.start(t);src.stop(t+dur+.05)}
+  const SOUNDS={
+    right:()=>{tone(1318,0,.14,'sine',.16);tone(1760,.09,.26,'sine',.14)},
+    wrong:()=>{tone(220,0,.3,'sine',.12,165)},
+    flip:()=>{noise(0,.09,.06,'highpass',2000,5000)},
+    stage:()=>{[784,988,1175].forEach((f,i)=>tone(f,i*.1,.2,'sine',.11)},
+    tick:()=>{tone(990,0,.05,'square',.05)},
+    win:()=>{[659,784,988,1318,1568].forEach((f,i)=>tone(f,i*.08,i===4?.6:.15,'triangle',.11));for(let k=0;k<12;k++)tone(900+Math.random()*900,.35+Math.random()*1.1,.07,'sine',.05,1500)}
+  };
+  function play(n){if(!on||hushed||!SOUNDS[n])return;if(!ac())return;try{SOUNDS[n]();log.push(n)}catch(e){}}
+  function set(v){on=v;try{localStorage.setItem('vp:sound',v?'on':'off')}catch(e){}}
+  return {play,set,isOn:()=>on,hush:v=>{hushed=!!v},log};
+})();
+window.SFX=SFX;
+function drawMute(){const b=$('#mute'),on=SFX.isOn();b.textContent=on?'🔊':'🔇';b.setAttribute('aria-pressed',on?'false':'true');b.setAttribute('aria-label',on?'Sound on. Tap to mute.':'Sound off. Tap to turn on.')}
+drawMute();$('#mute').onclick=()=>{SFX.set(!SFX.isOn());drawMute();if(SFX.isOn())SFX.play('flip')};
+
+/* ---------- state ---------- */
+const fresh=()=>({stage:0,
+  cards:{flip:[...Array(N)].map(()=>false),order:shuffle([...Array(N).keys()])},
+  found:[],
+  ccq:{queue:shuffle(DATA.ccq.map((_,k)=>k)),right:[],cur:null},
+  fork:{sel:{},solved:[],border:{}},
+  build:{sel:{},solved:[],tiles:{}},
+  up:{val:{},state:{},order:shuffle(DATA.upgrade.map((_,k)=>k))},
+  tr:{val:{},state:{}},
+  use:{order:shuffle(DATA.use.map((_,k)=>k)),txt:{},done:[],cur:0},
+  lock:{round:0,order:shuffle(DATA.lock.map((_,k)=>k)),val:{},state:{}},
+  celebrated:[]});
+let S=loadState()||fresh();
+S.celebrated=S.celebrated||[];
+
+/* ---------- helpers ---------- */
+function celebrate(key,n){if(S.celebrated.includes(key))return;S.celebrated.push(key);save();SFX.play(key==='all'?'win':'stage');rain(n||26,key==='all')}
+function rain(n,big){
+  if(RM)return;const r=document.createElement('div');r.className='rain';
+  const chars=big?['📰','⭐','✂️','❝','§','🖊️','📰','⭐','✂️','❝']:['⭐','❝','§','🖊️','⭐','❝'];
+  for(let i=0;i<n;i++){const el=document.createElement('i');el.textContent=chars[i%chars.length];
+    el.style.left=Math.random()*96+'vw';el.style.animationDuration=(1.6+Math.random()*1.6)+'s';el.style.animationDelay=(Math.random()*.5)+'s';
+    el.style.fontSize=(16+Math.random()*(big?22:14))+'px';r.appendChild(el)}
+  document.body.appendChild(r);setTimeout(()=>r.remove(),FAST?200:4200);
+}
+/* decorative drifting badges */
+(function(){const d=$('#drift'),c=['§','✎','❝','24/7','¶','✂','★','@'];
+  for(let i=0;i<8;i++){const s=document.createElement('span');s.textContent=c[i];
+    s.style.left=(4+Math.random()*90)+'vw';s.style.top=(4+Math.random()*88)+'vh';
+    s.style.animationDelay=(-Math.random()*14)+'s';if(i%3===0)s.classList.add('alt');d.appendChild(s)}})();
+
+/* ---------- remaining per stage ---------- */
+function remaining(k){
+  switch(k){
+    case 0:return S.cards.flip.filter(f=>!f).length;
+    case 1:return DATA.notice.marks.length-S.found.length;
+    case 2:return S.ccq.queue.length;
+    case 3:return DATA.forks.length-S.fork.solved.length+DATA.build.length-S.build.solved.length;
+    case 4:return DATA.upgrade.length-Object.values(S.up.state).filter(v=>v==='ok').length;
+    case 5:return DATA.translate.length-Object.values(S.tr.state).filter(v=>v==='ok').length;
+    case 6:return DATA.use.length-S.use.done.length;
+    case 7:return curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]!=='ok').length;
+  }
+  return 0;
+}
+function curLock(){const o=S.lock.order,ten=o.slice(S.lock.round*10,S.lock.round*10+10);return ten.map((k,j)=>({k,j}))}
+function totalLeft(){let t=0;for(let k=0;k<8;k++)t+=remaining(k);return t}
+function drawBadges(){
+  document.querySelectorAll('#nav button').forEach((b,k)=>{
+    const r=remaining(k);b.querySelector('.tb').textContent=r;b.classList.toggle('done',r===0)});
+  $('#total').textContent=totalLeft();
+  if(totalLeft()===0)celebrate('all',44);
+}
+
+/* ---------- nav ---------- */
+const STAGES=['Cards','Notice','Meaning','Partners','Upgrade','Translate','Use it','Lock it in'];
+const main=$('#main');
+$('#nav').innerHTML=STAGES.map((t,i)=>`<button type="button" data-i="${i}">${i+1}. ${t}<span class="badge tb">–</span></button>`).join('');
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+function go(i){
+  clearInterval(window._tm);SFX.hush(false);
+  S.stage=Math.max(0,Math.min(7,i));save();
+  document.querySelectorAll('#nav button').forEach((b,k)=>b.classList.toggle('on',k===S.stage));
+  const on=$('#nav').children[S.stage];if(on&&on.scrollIntoView)on.scrollIntoView({inline:'center',block:'nearest',behavior:(FAST||RM)?'auto':'smooth'});
+  $('#prev').style.visibility=S.stage?'visible':'hidden';$('#next').style.visibility=S.stage<7?'visible':'hidden';
+  main.innerHTML='';R[S.stage]();drawBadges();
+  const top=document.querySelector('.navrail').getBoundingClientRect().top+window.pageYOffset;
+  if(window.pageYOffset>top)window.scrollTo(0,top);
+}
+$('#prev').onclick=()=>go(S.stage-1);
+$('#next').onclick=()=>go(S.stage+1);
+const head=(n,h,t)=>`<div class="shead"><span class="badge">${n}</span><div><h2>${h}</h2><p>${t}</p></div></div>`;
+const itemLine=i=>`<b>${esc(I[i].c)}</b> <span class="ru">${esc(I[i].ru)}</span>`;
+
+
+/* ---------- STAGE 0 · Cards ---------- */
+R=[];
+R[0]=()=>{
+  main.innerHTML=`<section class="stage">`+head(1,'Meet the twenty','Flip each card. Read the meaning, the Russian, and one partner it likes. Nothing is checked — just get acquainted.')+
+  `<div class="row" style="margin:6px 0 2px"><span class="prog" style="flex:1"><i id="pg"></i></span><span class="hand" id="cnt" style="color:var(--red-d)"></span></div>
+   <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px"></div></section>`;
+  const g=$('#grid');
+  S.cards.order.forEach(i=>{
+    const f=S.cards.flip[i];
+    g.insertAdjacentHTML('beforeend',
+     `<button type="button" class="fcard${f?' flip':''}" data-i="${i}" aria-pressed="${f}">
+        <span class="face front"><span class="c">${esc(I[i].c)}</span><span class="p">${esc(I[i].pos)}</span><span class="hint">tap to flip</span></span>
+        <span class="face back"><span class="m">${esc(I[i].m)}</span><span class="ru">${esc(I[i].ru)}</span><span class="col"><b>${esc(I[i].col)}</b></span><span class="nt">${esc(I[i].n)}</span></span>
+      </button>`);
+  });
+  const upd=()=>{const done=S.cards.flip.filter(Boolean).length;$('#pg').style.width=(done/N*100)+'%';$('#cnt').textContent=done+' / '+N};
+  upd();
+  g.querySelectorAll('.fcard').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;S.cards.flip[i]=!S.cards.flip[i];b.classList.toggle('flip',S.cards.flip[i]);SFX.play('flip');save();upd();drawBadges();
+  });
+};
+
+/* ---------- STAGE 1 · Notice ---------- */
+R[1]=()=>{
+  main.innerHTML=`<section class="stage">`+head(2,'Find them in the wild','Read the piece once for the story. Then tap every phrase from our twenty hiding inside it. Tap the whole phrase, not one word.')+
+  `<div class="card" style="background:var(--soft)"><div class="hand" style="font-size:26px;font-weight:700;margin-bottom:6px">${esc(DATA.notice.head)}</div>
+   <p id="art" style="margin:0;font-size:17.5px;line-height:1.75"></p></div>
+   <div class="detail card" id="det"><span class="mute">Tap a phrase to see what it means and how it behaves.</span></div>
+   <div class="row" style="margin-top:8px"><span class="hand" id="cnt" style="font-size:18px;color:var(--red-d)"></span><button type="button" class="btn ghost sm" id="rev" hidden>Show me what I missed</button></div></section>`;
+  let misses=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{
+    const k=DATA.notice.marks[DATA.notice.text.slice(0,DATA.notice.text.indexOf(t)).split('[[').length-1];
+    return `<span class="t" data-i="${k}">${esc(t)}</span>`;
+  });
+  /* simpler robust mark mapping: rebuild */
+  let mi=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{const k=DATA.notice.marks[mi++];return `<span class="t" data-i="${k}">${esc(t)}</span>`});
+  $('#art').querySelectorAll('.t').forEach(s=>{if(S.found.includes(+s.dataset.i))s.classList.add('f')});
+  const cnt=()=>{const left=DATA.notice.marks.length-S.found.length;$('#cnt').textContent=(DATA.notice.marks.length-left)+' / '+DATA.notice.marks.length+' found';
+    $('#rev').hidden=!(S.found.length>=7||misses>=4)};
+  $('#art').addEventListener('click',e=>{
+    const s=e.target.closest('span.t');
+    if(!s){const p=e.target.closest('#art');if(!p)return;misses++;$('#art').classList.remove('shake');void $('#art').offsetWidth;$('#art').classList.add('shake');SFX.play('wrong');cnt();return}
+    const i=+s.dataset.i,isNew=!S.found.includes(i);
+    if(isNew){S.found.push(i);s.classList.add('f');SFX.play('right');save();drawBadges()}
+    $('#det').innerHTML=`<div class="hand" style="font-size:21px">${esc(I[i].c)}</div><div class="ru" style="color:var(--red-d);font-weight:700">${esc(I[i].ru)}</div><div style="margin-top:4px">${esc(I[i].m[0].toUpperCase()+I[i].m.slice(1))}.</div><div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div>`;
+    cnt();if(S.found.length===DATA.notice.marks.length)celebrate('s2');
+  });
+  $('#rev').onclick=()=>{$('#art').querySelectorAll('span.t').forEach(s=>{s.classList.add('f');if(!S.found.includes(+s.dataset.i))S.found.push(+s.dataset.i)});save();cnt();drawBadges()};
+  cnt();
+};
+
+/* ---------- STAGE 2 · Meaning (either/or, wrong → back of queue) ---------- */
+R[2]=()=>{
+  main.innerHTML=`<section class="stage">`+head(3,'Do you really get it?','Quick either/or questions. A wrong answer sends the phrase to the back of the queue, so it comes back.')+
+  `<div class="prog"><i id="pg"></i></div><div id="q"></div></section>`;
+  const show=()=>{
+    $('#pg').style.width=(S.ccq.right.length/DATA.ccq.length*100)+'%';
+    if(!S.ccq.queue.length){$('#q').innerHTML=`<div class="card"><span class="okc">All ${DATA.ccq.length} cleared.</span> <span class="mute">Next: the words each phrase likes to go with.</span></div>`;celebrate('s3');drawBadges();return}
+    const qi=S.ccq.queue[0],q=DATA.ccq[qi],i=q.i;
+    const oo=S.ccq.optOrder&&S.ccq.optOrder[qi];const ord=oo||(S.ccq.optOrder=S.ccq.optOrder||{},S.ccq.optOrder[qi]=shuffle([0,1]));
+    $('#q').innerHTML=`<div class="card"><div style="font-size:16.5px;margin-bottom:10px">${esc(q.q)}</div><div class="opts row" style="flex-direction:column;align-items:stretch;gap:8px">
+      ${ord.map(k=>`<button type="button" class="btn ghost" data-k="${k}" style="text-align:left">${esc(k===0?q.a:q.b)}</button>`).join('')}</div><div class="fb" id="fb"></div></div>`;
+    const bs=[...main.querySelectorAll('#q .opts button')];
+    bs.forEach((b,k)=>b.onclick=()=>{
+      const kk=+b.dataset.k,ok=kk===q.right;
+      bs.forEach(x=>x.disabled=true);
+      bs.find(x=>+x.dataset.k===q.right).style.background='var(--ok-soft)';
+      if(!ok){b.style.background='var(--bad-soft)'}
+      S.ccq.queue.shift();if(ok){if(!S.ccq.right.includes(qi))S.ccq.right.push(qi)}else S.ccq.queue.push(qi);
+      SFX.play(ok?'right':'wrong');save();drawBadges();
+      $('#fb').className='fb show';
+      $('#fb').innerHTML=`${itemLine(i)} — ${esc(I[i].m)}.<div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div><p style="margin:10px 0 0"><button type="button" class="btn sm" id="nx">Next</button></p>`;
+      $('#nx').onclick=show;
+    });
+  };
+  show();
+};
+
+
+/* ---------- STAGE 3 · Partners ---------- */
+R[3]=()=>{
+  main.innerHTML=`<section class="stage">`+head(4,'Which words go together?','Part A: each frame takes three of the four options — pick the three that sound natural, then check. Part B: build the exact phrase from the tiles, small words included. One tile in each set is a trap.')+
+  `<h3 class="hand" style="font-size:22px;margin:16px 0 4px">Part A · Three of four</h3><div id="forks"></div>
+   <h3 class="hand" style="font-size:22px;margin:22px 0 4px">Part B · Build the frame</h3><div id="builds"></div></section>`;
+  const fw=$('#forks');
+  DATA.forks.forEach((f,fk)=>{
+    const solved=S.fork.solved.includes(fk);
+    fw.insertAdjacentHTML('beforeend',
+     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-fk="${fk}">
+        <div class="hand" style="font-size:20px;margin-bottom:8px">${esc(f.stem)}</div>
+        <div class="row" style="gap:6px">${f.opts.map((o,ok)=>`<button type="button" class="chip${(S.fork.sel[fk]||[]).includes(ok)?' sel':''}" data-ok="${ok}" ${solved?'disabled':''}>${esc(o)}</button>`).join('')}</div>
+        <div class="fb" id="ff${fk}"></div></div>`);
+  });
+  fw.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+    const fk=+c.closest('.card').dataset.fk,ok=+c.dataset.ok;
+    S.fork.sel[fk]=S.fork.sel[fk]||[];
+    const j=S.fork.sel[fk].indexOf(ok);
+    if(j>=0)S.fork.sel[fk].splice(j,1);else{S.fork.sel[fk].push(ok);if(S.fork.sel[fk].length>3)S.fork.sel[fk].shift()}
+    const card=c.closest('.card');
+    card.querySelectorAll('.chip').forEach(x=>x.classList.toggle('sel',S.fork.sel[fk].includes(+x.dataset.ok)));
+    SFX.play('flip');
+  });
+  fw.querySelectorAll('.card').forEach(card=>{
+    const fk=+card.dataset.fk,f=DATA.forks[fk];
+    if(S.fork.solved.includes(fk)){card.querySelector(`#ff${fk}`).innerHTML=`<span class="okc">Right.</span> <span class="mute small">${esc(f.why)}</span>`;return}
+    const fb=card.querySelector(`#ff${fk}`);
+    const check=()=>{
+      const sel=S.fork.sel[fk]||[];
+      if(sel.length!==3){fb.insertAdjacentHTML('beforeend',` <span class="mute">Pick exactly three.</span>`);return}
+      if(!sel.includes(f.odd)){
+        if(!S.fork.solved.includes(fk))S.fork.solved.push(fk);
+        card.style.background='var(--ok-soft)';card.querySelectorAll('.chip').forEach(x=>x.disabled=true);
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Right.</span> <span class="mute small">${esc(f.why)}</span>`;
+        SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not quite.</span> <span class="mute small">${esc(f.why)}</span> <button type="button" class="btn sm ghost">Try again</button>`;
+        fb.querySelector('button').onclick=()=>{fb.className='fb';fb.innerHTML='<button type="button" class="btn sm">Check</button>';fb.querySelector('button').onclick=check;};
+      }
+    };
+    fb.innerHTML='<button type="button" class="btn sm">Check</button>';
+    fb.querySelector('button').onclick=check;
+  });
+  /* Part B */
+  const bw=$('#builds');
+  DATA.build.forEach((b,bk)=>{
+    const solved=S.build.solved.includes(bk);
+    if(!S.build.tiles[bk])S.build.tiles[bk]=shuffle(b.tiles.map((_,k)=>k));
+    const order=S.build.tiles[bk];
+    bw.insertAdjacentHTML('beforeend',
+     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-bk="${bk}">
+        <div class="hand" style="font-size:20px;margin-bottom:8px">${esc(I[b.i].c)}</div>
+        <div class="slot row" data-slot style="gap:6px;min-height:44px;border-bottom:2.5px dashed var(--mute);padding-bottom:6px;margin-bottom:10px"></div>
+        <div class="row" data-tray style="gap:6px">${order.map((tk,pos)=>`<button type="button" class="chip" data-tk="${tk}" data-pos="${pos}" ${solved?'disabled':''}>${esc(b.tiles[tk])}</button>`).join('')}</div>
+        <div class="row" style="margin-top:8px"><button type="button" class="btn sm" data-chk ${solved?'disabled':''}>Check</button><button type="button" class="btn sm ghost" data-clr ${solved?'disabled':''}>Clear</button></div>
+        <div class="fb" data-fb></div></div>`);
+    const card=bw.querySelector(`[data-bk="${bk}"]`),slot=card.querySelector('[data-slot]'),fb=card.querySelector('[data-fb]');
+    const render=()=>{slot.innerHTML=(S.build.sel[bk]||[]).map((tk,pos)=>`<button type="button" class="chip sel" data-out="${pos}">${esc(b.tiles[tk])}</button>`).join('')||'<span class="mute small">tap the tiles in order</span>';
+      card.querySelectorAll('[data-tray] .chip').forEach(c=>{const tk=+c.dataset.tk;c.style.visibility=(S.build.sel[bk]||[]).includes(tk)?'hidden':'visible'})};
+    render();
+    card.querySelectorAll('[data-tray] .chip').forEach(c=>c.onclick=()=>{
+      const tk=+c.dataset.tk;S.build.sel[bk]=S.build.sel[bk]||[];S.build.sel[bk].push(tk);SFX.play('flip');render();save();
+    });
+    slot.addEventListener('click',e=>{const o=e.target.closest('[data-out]');if(!o)return;S.build.sel[bk].splice(+o.dataset.out,1);render();save()});
+    card.querySelector('[data-clr]').onclick=()=>{S.build.sel[bk]=[];render();save()};
+    card.querySelector('[data-chk]').onclick=()=>{
+      const sel=S.build.sel[bk]||[];
+      const right=sel.length===b.ans.length&&sel.every((tk,j)=>tk===b.ans[j]);
+      if(right){
+        if(!S.build.solved.includes(bk))S.build.solved.push(bk);
+        card.style.background='var(--ok-soft)';card.querySelectorAll('button').forEach(x=>x.disabled=true);
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly right.</span> <span class="mute small">${esc(I[b.i].n)}</span>`;
+        SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not that order.</span> <span class="mute small">The tiles went back — try again.</span>`;
+        setTimeout(()=>{S.build.sel[bk]=[];render()},700);
+      }
+    };
+  });
+};
+
+/* ---------- STAGE 4 · Upgrade ---------- */
+R[4]=()=>{
+  main.innerHTML=`<section class="stage">`+head(5,'Upgrade the plain version','The highlighted part is correct but plain. Type the phrase that says it better, in the right form for the sentence. No word bank: pull it from memory first.')+
+  `<div class="prog"><i id="pg"></i></div><div id="ups"></div></section>`;
+  const up=$('#ups');
+  S.up.order.forEach(uk=>{
+    const u=DATA.upgrade[uk],st=S.up.state[uk];
+    up.insertAdjacentHTML('beforeend',
+     `<div class="card" data-uk="${uk}" style="${st==='ok'?'background:var(--ok-soft)':''}">
+        <div style="font-size:16px;margin-bottom:6px">The flat version: ${esc(u.flat).replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>')}</div>
+        <div style="font-size:16.5px;margin-bottom:8px">${esc(u.gap)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.up.val[uk]||'')}" placeholder="type the stronger phrase" ${st==='ok'?'disabled':''} aria-label="your upgrade">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div>
+        <div class="fb" data-fb></div></div>`);
+    const card=up.querySelector(`[data-uk="${uk}"]`),inp=card.querySelector('[data-in]'),fb=card.querySelector('[data-fb]');
+    const ok=v=>{const t=norm(v);return new RegExp(u.re,'i').test(t)&&!(u.no&&new RegExp(u.no,'i').test(t))};
+    if(st==='ok')fb.innerHTML=`<span class="okc">Upgraded.</span> <span class="mute small">${esc(u.model)}</span>`;
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.up.val[uk]=v;
+      if(ok(v)){S.up.state[uk]='ok';card.style.background='var(--ok-soft)';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly it.</span> <span class="mute small">${esc(u.model)} — ${esc(I[u.i].ru)}</span>`;
+        SFX.play('right');save();drawBadges();
+        if(Object.values(S.up.state).filter(x=>x==='ok').length===DATA.upgrade.length)celebrate('s5');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
+        S.up.state[uk]='miss';save();
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not there yet.</span> <span class="mute small">One more try from memory — then look: <b>${esc(u.model)}</b></span>`;
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.up.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.upgrade.length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+};
+
+
+/* ---------- STAGE 5 · Translate ---------- */
+R[5]=()=>{
+  main.innerHTML=`<section class="stage">`+head(6,'Say it in English','Say or type your version first, then compare. This is where Russian pulls you toward a calque, so read the note under each answer.')+
+  `<div class="prog"><i id="pg"></i></div><div id="trs"></div></section>`;
+  const tr=$('#trs');
+  DATA.translate.forEach((t,tk)=>{
+    const st=S.tr.state[tk];
+    tr.insertAdjacentHTML('beforeend',
+     `<div class="card" data-tk="${tk}" style="${st==='ok'?'background:var(--ok-soft)':''}">
+        <div class="hand" style="font-size:21px;margin-bottom:6px">${esc(t.ru)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.tr.val[tk]||'')}" placeholder="your English version" ${st==='ok'?'disabled':''} aria-label="your translation">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div>
+        <div class="fb" data-fb></div></div>`);
+    const card=tr.querySelector(`[data-tk="${tk}"]`),inp=card.querySelector('[data-in]'),fb=card.querySelector('[data-fb]');
+    const showSol=()=>{fb.className='fb show';
+      fb.innerHTML=`<div><b>${esc(t.en)}</b></div><div class="mute small" style="margin-top:4px">⚠ ${esc(t.note)}</div>`};
+    if(st==='ok')showSol();
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.tr.val[tk]=v;
+      if(new RegExp(t.re,'i').test(norm(v))){
+        S.tr.state[tk]='ok';card.style.background='var(--ok-soft)';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        SFX.play('right');save();drawBadges();showSol();
+        if(Object.values(S.tr.state).filter(x=>x==='ok').length===DATA.translate.length)celebrate('s6');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');S.tr.state[tk]='miss';save();
+        showSol();
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.tr.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.translate.length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+};
+
+/* ---------- STAGE 6 · Use it ---------- */
+R[6]=()=>{
+  main.innerHTML=`<section class="stage">`+head(7,'Now say something real','Pick a question. Answer it out loud for 90 seconds, aiming for the phrases below. Then write it: every target phrase lights up as you use it.')+
+  `<div id="prompts" class="row" style="gap:8px;margin:6px 0"></div>
+   <div id="body"></div></section>`;
+  const pb=$('#prompts');
+  DATA.use.forEach((u,uk)=>{
+    const done=S.use.done.includes(uk);
+    pb.insertAdjacentHTML('beforeend',`<button type="button" class="chip${S.use.cur===uk?' sel':''}${done?'':''}" data-p="${uk}">${uk+1}. ${done?'✓ ':''}${esc(u.q.slice(0,52))}…</button>`);
+  });
+  pb.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{S.use.cur=+b.dataset.p;save();R[6]()});
+  const u=DATA.use[S.use.cur];
+  const words=norm(S.use.txt[S.use.cur]||'').split(' ').filter(Boolean).length;
+  $('#body').innerHTML=`
+   <div class="card">
+     <div style="font-size:17px;font-weight:700">${esc(u.q)}</div>
+     <div class="row" style="margin-top:10px;gap:6px">${u.chunks.map(([lab])=>`<span class="chip" data-chip="${esc(lab)}" style="pointer-events:none">${esc(lab)}</span>`).join('')}</div>
+     <div class="row" style="margin-top:12px"><button type="button" class="btn teal sm" id="tmr">⏱ 90 seconds, talk</button><span class="hand" id="tt" style="font-size:19px;color:var(--red-d)"></span></div>
+     <textarea id="w" placeholder="Now write your answer here — aim for 40+ words and light up all four phrases." aria-label="your answer">${esc(S.use.txt[S.use.cur]||'')}</textarea>
+     <div class="row" style="margin-top:6px"><span class="mute small" id="wc">${words} words</span><span class="mute small" id="lit"></span></div>
+     <div class="model" id="mo" hidden></div>
+   </div>`;
+  const ta=$('#w');
+  const light=()=>{
+    const t=ta.value;S.use.txt[S.use.cur]=t;save();
+    const n=norm(t).split(' ').filter(Boolean).length;$('#wc').textContent=n+' words';
+    const used=u.chunks.map(([lab,re])=>[lab,new RegExp(re,'i').test(norm(t))]);
+    document.querySelectorAll('[data-chip]').forEach(c=>{const on=used.find(([lab])=>lab===c.dataset.chip)[1];c.classList.toggle('sel',on)});
+    $('#lit').textContent=used.filter(x=>x[1]).length+' / '+u.chunks.length+' phrases lit';
+    if(n>=40){
+      if(!S.use.done.includes(S.use.cur)){S.use.done.push(S.use.cur);SFX.play('right');drawBadges()}
+      $('#mo').hidden=false;
+    }
+  };
+  ta.addEventListener('input',light);
+  if(words>=40){$('#mo').hidden=false;$('#mo').innerHTML=`<div class="fb show"><div class="hand" style="font-size:20px">One way to say it</div><div style="margin-top:4px">${esc(u.model)}</div><p style="margin:8px 0 0"><button type="button" class="btn sm ghost" id="spk">🔊 Read it aloud</button></p></div>`;
+    $('#spk').onclick=()=>{try{const u2=new SpeechSynthesisUtterance(u.model);u2.lang='en-US';const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('en-US'));if(v)u2.voice=v;SFX.hush(true);speechSynthesis.cancel();speechSynthesis.speak(u2);u2.onend=()=>SFX.hush(false)}catch(e){}};}
+  $('#tmr').onclick=()=>{
+    clearInterval(window._tm);let s=90;SFX.play('stage');
+    window._tm=setInterval(()=>{s--;$('#tt').textContent=s>0?s+'s':'Time! Which phrases came out easily?';
+      if(s<=10&&s>0&&s%2===0)SFX.play('tick');
+      if(s<=0){clearInterval(window._tm);SFX.play('stage')}},1000);
+  };
+  light();
+};
+
+/* ---------- STAGE 7 · Lock it in ---------- */
+R[7]=()=>{
+  if(S.lock.round*10>=S.lock.order.length)S.lock.round=0;
+  main.innerHTML=`<section class="stage">`+head(8,'Lock it in','Best done a day or two after the other stages, without looking back. Read the clue, type the phrase. Retrieval after a gap is what makes vocabulary stick.')+
+  `<div class="prog"><i id="pg"></i></div><div id="lk"></div>
+   <div class="row" style="margin-top:12px"><button type="button" class="btn" id="rck">Check all</button><button type="button" class="btn ghost" id="rnew">New round</button></div><div class="fb" id="rres"></div></section>`;
+  const lk=$('#lk');
+  curLock().forEach(({k,j})=>{
+    const l=DATA.lock[k],st=S.lock.state['r'+S.lock.round+'_'+k];
+    lk.insertAdjacentHTML('beforeend',
+     `<div class="card" data-k="${k}" style="margin:8px 0;padding:12px 14px;${st==='ok'?'background:var(--ok-soft)':''}">
+        <div style="font-size:15.5px;margin-bottom:6px">${esc(l.clue)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.lock.val[k]||'')}" placeholder="type the phrase" ${st==='ok'?'disabled':''} aria-label="answer">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div></div>`);
+    const card=lk.querySelector(`[data-k="${k}"]`),inp=card.querySelector('[data-in]');
+    const ok=v=>new RegExp(l.re,'i').test(norm(v));
+    if(st==='ok'){card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`)}
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.lock.val[k]=v;
+      if(ok(v)){S.lock.state['r'+S.lock.round+'_'+k]='ok';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        card.style.background='var(--ok-soft)';card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`);
+        SFX.play('right');save();drawBadges();
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');save();
+        card.insertAdjacentHTML('beforeend',`<div class="fb" data-miss><span style="color:var(--bad);font-weight:800">Not it.</span> <span class="mute small">Model: <b>${esc(l.model)}</b></span></div>`);
+        setTimeout(()=>{const m=card.querySelector('[data-miss]');if(m)m.remove()},FAST?200:2600);
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok').length;p.style.width=(done/curLock().length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+  $('#rck').onclick=()=>{lk.querySelectorAll('[data-chk]:not([disabled])').forEach(b=>b.click());
+    const allOk=curLock().every(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok');
+    $('#rres').className='fb show';
+    $('#rres').innerHTML=allOk?`<span class="okc">Round clear.</span> <span class="mute">New round for the rest, or come back tomorrow.</span>`:`<span style="color:var(--bad);font-weight:800">Some lines are still open.</span> <span class="mute">They stay — check them above.</span>`;
+    if(allOk)celebrate('s7');
+  };
+  $('#rnew').onclick=()=>{S.lock.round=(S.lock.round+1)%Math.ceil(S.lock.order.length/10);S.lock.order=shuffle(DATA.lock.map((_,k)=>k));save();R[7]()};
+};
+
+/* ---------- boot ---------- */
+if(loadState()){
+  const t=$('#toast');t.hidden=false;
+  t.innerHTML=`Welcome back. Your progress is saved. <button type="button" id="wipe">Start over</button>`;
+  let armed=false;
+  $('#wipe').onclick=()=>{if(!armed){armed=true;$('#wipe').textContent='Tap again to clear everything';setTimeout(()=>{armed=false;$('#wipe').textContent='Start over'},4000);return}
+    wipeState();location.reload()};
+}
+go(Math.min(S.stage||0,7));
+
+</script>
+</body>
+</html>

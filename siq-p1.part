@@ -1,0 +1,235 @@
+
+/* stage-specific */
+.fcard{position:relative;display:block;width:100%;min-height:150px;border:2px solid var(--line);border-radius:16px;background:var(--card);
+  box-shadow:4px 4px 0 rgba(43,37,38,.16);cursor:pointer;perspective:600px;text-align:left;padding:0;transform-style:preserve-3d;transition:transform .35s}
+.fcard .face{display:flex;flex-direction:column;gap:6px;padding:14px 16px;backface-visibility:hidden}
+.fcard .front .c{font:700 20px/1.15 var(--display)}
+.fcard .front .p{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.fcard .front .hint{margin-top:auto;font:14px var(--hand);color:var(--mute)}
+.fcard .back{position:absolute;inset:0;background:var(--hl);border-radius:14px;transform:rotateY(180deg)}
+.fcard .back .m{font-size:14.5px;line-height:1.4}
+.fcard .back .ru{color:var(--red-d);font-weight:800;font-size:14px}
+.fcard .back .col{font-size:14px}
+.fcard .back .nt{font:14px var(--hand);color:var(--mute)}
+.fcard.flip{transform:rotateY(180deg)}
+#art span.t{cursor:pointer;padding:0 1px;border-radius:3px}
+#art span.t.f{background:linear-gradient(180deg,transparent 8%,var(--hl) 8%,var(--hl) 92%,transparent 92%);border-bottom-color:transparent}
+.ru{direction:ltr}
+.detail{min-height:64px}
+@media (max-width:480px){
+  .shead p{font-size:14px}
+  .hero h1{font-size:clamp(30px,10vw,40px)}
+}
+</style>
+</head>
+<body>
+<div class="drift" id="drift" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="total"><span class="badge tb" id="total">–</span><small id="totlab">badges left</small></div>
+    <h1><span>We're Stuck</span><span>in Questions:</span><span>the Trail</span></h1>
+    <div class="sub">20 phrases · 8 stages</div>
+    <p class="by">Vocabulary from Albert Samaha's article in <i>New York</i> magazine. Clear every badge to finish. Start at the cards, end by saying it yourself.</p>
+  </header>
+  <div class="navrail">
+    <nav id="nav" aria-label="Stages"></nav>
+    <div class="bar">
+      <button class="btn ghost sm" id="prev" type="button">← Back</button>
+      <button class="btn ghost sm" id="mute" type="button" style="min-width:44px;min-height:44px">🔊</button>
+      <button class="btn ghost sm" id="next" type="button">Next stage →</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <footer style="margin-top:26px;color:var(--mute);font-size:13px" class="hand">Your progress saves on this device. · @maybealexander1</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script id="data" type="application/json">
+{
+ "items": [
+  {
+   "c": "have a knack for",
+   "pos": "verb phrase",
+   "ru": "иметь дар к, быть искусным в",
+   "m": "a natural skill for doing something well, almost without trying",
+   "n": "for + -ing or a noun; warmer and more idiomatic than 'be good at'",
+   "col": "a knack for fixing things"
+  },
+  {
+   "c": "grasp at straws",
+   "pos": "verb phrase",
+   "ru": "хвататься за соломинку",
+   "m": "try weak, unlikely ideas because nothing better is left",
+   "n": "suggests desperation; often in the -ing form",
+   "col": "a lawyer grasping at straws"
+  },
+  {
+   "c": "conducive to",
+   "pos": "adjective phrase",
+   "ru": "способствующий, благоприятный для",
+   "m": "helping something happen; creating good conditions for it",
+   "n": "always 'to' + noun or -ing — never 'for'",
+   "col": "an atmosphere conducive to study"
+  },
+  {
+   "c": "hold firm to something",
+   "pos": "verb phrase",
+   "ru": "твёрдо держаться чего-то",
+   "m": "keep believing in or sticking to something despite pressure",
+   "n": "stronger than 'keep'; the object follows 'to'",
+   "col": "hold firm to a decision"
+  },
+  {
+   "c": "blow something out of proportion",
+   "pos": "verb phrase",
+   "ru": "раздувать до невероятных размеров",
+   "m": "make something seem far more serious than it really is",
+   "n": "the object goes in the middle: blow it out of proportion",
+   "col": "blow a setback out of proportion"
+  },
+  {
+   "c": "shed light on",
+   "pos": "verb phrase",
+   "ru": "проливать свет на",
+   "m": "make something clearer or easier to understand",
+   "n": "shed–shed–shed; light ON, not 'to'",
+   "col": "documents that shed light on the case"
+  },
+  {
+   "c": "do justice to",
+   "pos": "verb phrase",
+   "ru": "делать честь; в полной мере передавать",
+   "m": "show or represent something as good as it really is",
+   "n": "'do yourself justice' = perform as well as you can",
+   "col": "a photo that does justice to the view"
+  },
+  {
+   "c": "closure",
+   "pos": "noun",
+   "ru": "завершение, чувство завершённости",
+   "m": "the feeling that a difficult event is finally over",
+   "n": "very common in American news and psychology talk",
+   "col": "a sense of closure"
+  },
+  {
+   "c": "bask in",
+   "pos": "verb phrase",
+   "ru": "упиваться, греться в",
+   "m": "enjoy attention or success in a relaxed, visible way",
+   "n": "literal with sunshine; figurative with praise or fame",
+   "col": "bask in the applause"
+  },
+  {
+   "c": "off the map",
+   "pos": "adverbial phrase",
+   "ru": "в глуши, за чертой мира",
+   "m": "far from anywhere known or important; out of contact",
+   "n": "a place is off the map; a person can drop off the map",
+   "col": "a town off the map"
+  },
+  {
+   "c": "wary",
+   "pos": "adjective",
+   "ru": "настороженный, осторожный",
+   "m": "careful because you suspect danger or a trick",
+   "n": "wary of + noun or -ing; warier, wariest",
+   "col": "wary of strangers"
+  },
+  {
+   "c": "fan the flames",
+   "pos": "verb phrase",
+   "ru": "подливать масла в огонь",
+   "m": "make a conflict or a strong feeling worse",
+   "n": "fan is a verb here: fanned, fanning",
+   "col": "fan the flames of a rivalry"
+  },
+  {
+   "c": "at the expense of",
+   "pos": "prepositional phrase",
+   "ru": "ценой, в ущерб",
+   "m": "with harm or cost to something else",
+   "n": "names what loses: at the expense of quality",
+   "col": "profit at the expense of quality"
+  },
+  {
+   "c": "out of thin air",
+   "pos": "adverbial phrase",
+   "ru": "ниоткуда, из воздуха",
+   "m": "from nothing; with no visible source",
+   "n": "for appearing or inventing; disappearing is 'into thin air'",
+   "col": "appear out of thin air"
+  },
+  {
+   "c": "inkling of",
+   "pos": "noun phrase",
+   "ru": "смутное представление, догадка",
+   "m": "a slight suspicion or first idea about something",
+   "n": "with 'an' and 'of'; often negative: not an inkling",
+   "col": "not the slightest inkling of trouble"
+  },
+  {
+   "c": "ruffle feathers",
+   "pos": "verb phrase",
+   "ru": "задевать, обижать людей",
+   "m": "annoy or upset people, usually mildly",
+   "n": "feathers is almost always plural; the passive is common",
+   "col": "ruffle a few feathers"
+  },
+  {
+   "c": "all-consuming",
+   "pos": "adjective",
+   "ru": "всепоглощающий",
+   "m": "taking up all your time, energy or attention",
+   "n": "before a noun or after a linking verb",
+   "col": "an all-consuming hobby"
+  },
+  {
+   "c": "see eye to eye",
+   "pos": "verb phrase",
+   "ru": "сходиться во взглядах, полностью соглашаться",
+   "m": "agree completely; share the same view",
+   "n": "with on/about a topic or with a person",
+   "col": "see eye to eye on politics"
+  },
+  {
+   "c": "rib someone",
+   "pos": "verb phrase",
+   "ru": "подкалывать, поддразнивать",
+   "m": "tease someone in a friendly way",
+   "n": "rib–ribbed; about something small, never cruel",
+   "col": "rib a teammate"
+  },
+  {
+   "c": "tight-knit",
+   "pos": "adjective",
+   "ru": "сплочённый, крепкий",
+   "m": "strongly bonded; closely connected",
+   "n": "for groups, families, communities; keep the hyphen",
+   "col": "a tight-knit circle of friends"
+  }
+ ],
+ "notice": {
+  "head": "Maple Street Bakery Stays Open After Rent Fight",
+  "text": "When Marta, who owns the Corner Bakery on Maple Street, announced the shop might close, the block reacted within hours. Maple Street is a [[tight-knit]] place: people lend tools, water each other's plants, and notice a strange car by morning. Some neighbors were [[wary]] of the landlord's opening offer — a one-year lease at nearly double the rent — and a few had [[an inkling]] that he already had a buyer. The local blog [[fanned the flames]] with a post about “greedy developers,” and by evening people were talking about a rent strike. Marta begged them not to [[blow the dispute out of proportion]]. “He is not a villain,” she said. “We just don't [[see eye to eye]] on the numbers.” A petition with two hundred signatures [[ruffled a few feathers]] at city hall, but the morning crowd — retirees, students, off-duty nurses — was hardly a [[conducive]] audience for staying calm: they had saved the hardware store in 2019, and they wanted a fight. Marta, who has [[a knack for]] keeping a room friendly, hosted meetings in the back room for two weeks. She heard everyone out, even the retired lawyer who [[grasped at straws]] to find a loophole in the lease, and the teenagers who [[ribbed]] her about her “corporate lawyer voice.” A city planner friend [[shed light on]] a zoning rule that allows a café on the ground floor, and a crowdfunding page pulled eleven thousand dollars [[out of thin air]]. The final two months were [[all-consuming]] — Marta called them “a second job I did not apply for” — and the campaign ran [[at the expense of]] her sleep. In the end the landlord signed a five-year lease. The new wooden sign, carved by a neighbor, [[does justice to]] the place, and on Sunday mornings the whole block [[basks in]] the smell of cardamom buns. The shop sits two doors [[off the map]] of every tourist guide, which suits everyone just fine. Marta says the fight gave the street [[closure]]: “We [[held firm to]] the plan, and the plan held.”",
+  "marks": [
+   19,
+   10,
+   14,
+   11,
+   4,
+   17,
+   15,
+   2,
+   0,
+   1,
+   18,
+   5,
+   13,
+   16,
+   12,
+   6,
+   8,
+   9,
+   7,
+   3
+  ]
+ },

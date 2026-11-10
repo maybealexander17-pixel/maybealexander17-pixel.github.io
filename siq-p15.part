@@ -1,0 +1,58 @@
+  main.innerHTML=`<section class="stage">`+head(6,'Say it in English','Say or type your version first, then compare. This is where Russian pulls you toward a calque, so read the note under each answer.')+
+  `<div class="prog"><i id="pg"></i></div><div id="trs"></div></section>`;
+  const tr=$('#trs');
+  DATA.translate.forEach((t,tk)=>{
+    const st=S.tr.state[tk];
+    tr.insertAdjacentHTML('beforeend',
+     `<div class="card" data-tk="${tk}" style="${st==='ok'?'background:var(--ok-soft)':''}">
+        <div class="hand" style="font-size:21px;margin-bottom:6px">${esc(t.ru)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.tr.val[tk]||'')}" placeholder="your English version" ${st==='ok'?'disabled':''} aria-label="your translation">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div>
+        <div class="fb" data-fb></div></div>`);
+    const card=tr.querySelector(`[data-tk="${tk}"]`),inp=card.querySelector('[data-in]'),fb=card.querySelector('[data-fb]');
+    const showSol=()=>{fb.className='fb show';
+      fb.innerHTML=`<div><b>${esc(t.en)}</b></div><div class="mute small" style="margin-top:4px">⚠ ${esc(t.note)}</div>`};
+    if(st==='ok')showSol();
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.tr.val[tk]=v;
+      if(new RegExp(t.re,'i').test(norm(v))){
+        S.tr.state[tk]='ok';card.style.background='var(--ok-soft)';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        SFX.play('right');save();drawBadges();showSol();
+        if(Object.values(S.tr.state).filter(x=>x==='ok').length===DATA.translate.length)celebrate('s6');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');S.tr.state[tk]='miss';save();
+        showSol();
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.tr.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.translate.length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+};
+
+/* ---------- STAGE 6 · Use it ---------- */
+R[6]=()=>{
+  main.innerHTML=`<section class="stage">`+head(7,'Now say something real','Pick a question. Answer it out loud for 90 seconds, aiming for the phrases below. Then write it: every target phrase lights up as you use it.')+
+  `<div id="prompts" class="row" style="gap:8px;margin:6px 0"></div>
+   <div id="body"></div></section>`;
+  const pb=$('#prompts');
+  DATA.use.forEach((u,uk)=>{
+    const done=S.use.done.includes(uk);
+    pb.insertAdjacentHTML('beforeend',`<button type="button" class="chip${S.use.cur===uk?' sel':''}${done?'':''}" data-p="${uk}">${uk+1}. ${done?'✓ ':''}${esc(u.q.slice(0,52))}…</button>`);
+  });
+  pb.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{S.use.cur=+b.dataset.p;save();R[6]()});
+  const u=DATA.use[S.use.cur];
+  const words=norm(S.use.txt[S.use.cur]||'').split(' ').filter(Boolean).length;
+  $('#body').innerHTML=`
+   <div class="card">
+     <div style="font-size:17px;font-weight:700">${esc(u.q)}</div>
+     <div class="row" style="margin-top:10px;gap:6px">${u.chunks.map(([lab])=>`<span class="chip" data-chip="${esc(lab)}" style="pointer-events:none">${esc(lab)}</span>`).join('')}</div>
+     <div class="row" style="margin-top:12px"><button type="button" class="btn teal sm" id="tmr">⏱ 90 seconds, talk</button><span class="hand" id="tt" style="font-size:19px;color:var(--red-d)"></span></div>
+     <textarea id="w" placeholder="Now write your answer here — aim for 40+ words and light up all four phrases." aria-label="your answer">${esc(S.use.txt[S.use.cur]||'')}</textarea>
+     <div class="row" style="margin-top:6px"><span class="mute small" id="wc">${words} words</span><span class="mute small" id="lit"></span></div>
+     <div class="model" id="mo" hidden></div>
+   </div>`;
+  const ta=$('#w');
+  const light=()=>{
+    const t=ta.value;S.use.txt[S.use.cur]=t;save();
+    const n=norm(t).split(' ').filter(Boolean).length;$('#wc').textContent=n+' words';
+    const used=u.chunks.map(([lab,re])=>[lab,new RegExp(re,'i').test(norm(t))]);

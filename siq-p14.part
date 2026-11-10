@@ -1,0 +1,58 @@
+      const tk=+c.dataset.tk;S.build.sel[bk]=S.build.sel[bk]||[];S.build.sel[bk].push(tk);SFX.play('flip');render();save();
+    });
+    slot.addEventListener('click',e=>{const o=e.target.closest('[data-out]');if(!o)return;S.build.sel[bk].splice(+o.dataset.out,1);render();save()});
+    card.querySelector('[data-clr]').onclick=()=>{S.build.sel[bk]=[];render();save()};
+    card.querySelector('[data-chk]').onclick=()=>{
+      const sel=S.build.sel[bk]||[];
+      const right=sel.length===b.ans.length&&sel.every((tk,j)=>tk===b.ans[j]);
+      if(right){
+        if(!S.build.solved.includes(bk))S.build.solved.push(bk);
+        card.style.background='var(--ok-soft)';card.querySelectorAll('button').forEach(x=>x.disabled=true);
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly right.</span> <span class="mute small">${esc(I[b.i].n)}</span>`;
+        SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not that order.</span> <span class="mute small">The tiles went back — try again.</span>`;
+        setTimeout(()=>{S.build.sel[bk]=[];render()},700);
+      }
+    };
+  });
+};
+
+/* ---------- STAGE 4 · Upgrade ---------- */
+R[4]=()=>{
+  main.innerHTML=`<section class="stage">`+head(5,'Upgrade the plain version','The highlighted part is correct but plain. Type the phrase that says it better, in the right form for the sentence. No word bank: pull it from memory first.')+
+  `<div class="prog"><i id="pg"></i></div><div id="ups"></div></section>`;
+  const up=$('#ups');
+  S.up.order.forEach(uk=>{
+    const u=DATA.upgrade[uk],st=S.up.state[uk];
+    up.insertAdjacentHTML('beforeend',
+     `<div class="card" data-uk="${uk}" style="${st==='ok'?'background:var(--ok-soft)':''}">
+        <div style="font-size:16px;margin-bottom:6px">The flat version: ${esc(u.flat).replace(/\[\[(.+?)\]\]/g,'<mark>$1</mark>')}</div>
+        <div style="font-size:16.5px;margin-bottom:8px">${esc(u.gap)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.up.val[uk]||'')}" placeholder="type the stronger phrase" ${st==='ok'?'disabled':''} aria-label="your upgrade">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div>
+        <div class="fb" data-fb></div></div>`);
+    const card=up.querySelector(`[data-uk="${uk}"]`),inp=card.querySelector('[data-in]'),fb=card.querySelector('[data-fb]');
+    const ok=v=>{const t=norm(v);return new RegExp(u.re,'i').test(t)&&!(u.no&&new RegExp(u.no,'i').test(t))};
+    if(st==='ok')fb.innerHTML=`<span class="okc">Upgraded.</span> <span class="mute small">${esc(u.model)}</span>`;
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.up.val[uk]=v;
+      if(ok(v)){S.up.state[uk]='ok';card.style.background='var(--ok-soft)';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly it.</span> <span class="mute small">${esc(u.model)} — ${esc(I[u.i].ru)}</span>`;
+        SFX.play('right');save();drawBadges();
+        if(Object.values(S.up.state).filter(x=>x==='ok').length===DATA.upgrade.length)celebrate('s5');
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
+        S.up.state[uk]='miss';save();
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not there yet.</span> <span class="mute small">One more try from memory — then look: <b>${esc(u.model)}</b></span>`;
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.up.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.upgrade.length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+};
+
+
+/* ---------- STAGE 5 · Translate ---------- */
+R[5]=()=>{

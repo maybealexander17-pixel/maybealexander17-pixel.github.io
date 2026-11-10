@@ -1,0 +1,103 @@
+.fcard .front .c{font:700 20px/1.15 var(--display)}
+.fcard .front .p{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.fcard .front .hint{margin-top:auto;font:14px var(--hand);color:var(--mute)}
+.fcard .back{position:absolute;inset:0;background:var(--hl);border-radius:14px;transform:rotateY(180deg)}
+.fcard .back .m{font-size:14.5px;line-height:1.4}
+.fcard .back .ru{color:var(--red-d);font-weight:800;font-size:14px}
+.fcard .back .col{font-size:14px}
+.fcard .back .nt{font:14px var(--hand);color:var(--mute)}
+.fcard.flip{transform:rotateY(180deg)}
+#art span.t{cursor:pointer;padding:0 1px;border-radius:3px}
+#art span.t.f{background:linear-gradient(180deg,transparent 8%,var(--hl) 8%,var(--hl) 92%,transparent 92%);border-bottom-color:transparent}
+.ru{direction:ltr}
+.detail{min-height:64px}
+@media (max-width:480px){
+  .shead p{font-size:14px}
+  .hero h1{font-size:clamp(30px,10vw,40px)}
+}
+</style>
+</head>
+<body>
+<div class="drift" id="drift" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="total"><span class="badge tb" id="total">–</span><small id="totlab">badges left</small></div>
+    <h1><span>We're Stuck</span><span>in Questions:</span><span>the Trail</span></h1>
+    <div class="sub">20 phrases · 8 stages</div>
+    <p class="by">Vocabulary from Albert Samaha's article in <i>New York</i> magazine. Clear every badge to finish. Start at the cards, end by saying it yourself.</p>
+  </header>
+  <div class="navrail">
+    <nav id="nav" aria-label="Stages"></nav>
+    <div class="bar">
+      <button class="btn ghost sm" id="prev" type="button">← Back</button>
+      <button class="btn ghost sm" id="mute" type="button" style="min-width:44px;min-height:44px">🔊</button>
+      <button class="btn ghost sm" id="next" type="button">Next stage →</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <footer style="margin-top:26px;color:var(--mute);font-size:13px" class="hand">Your progress saves on this device. · @maybealexander1</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script id="data" type="application/json">
+{
+ "items": [
+  {
+   "c": "have a knack for",
+   "pos": "verb phrase",
+   "ru": "иметь дар к, быть искусным в",
+   "m": "a natural skill for doing something well, almost without trying",
+   "n": "for + -ing or a noun; warmer and more idiomatic than 'be good at'",
+   "col": "a knack for fixing things"
+  },
+  {
+   "c": "grasp at straws",
+   "pos": "verb phrase",
+   "ru": "хвататься за соломинку",
+   "m": "try weak, unlikely ideas because nothing better is left",
+   "n": "suggests desperation; often in the -ing form",
+   "col": "a lawyer grasping at straws"
+  },
+  {
+   "c": "conducive to",
+   "pos": "adjective phrase",
+   "ru": "способствующий, благоприятный для",
+   "m": "helping something happen; creating good conditions for it",
+   "n": "always 'to' + noun or -ing — never 'for'",
+   "col": "an atmosphere conducive to study"
+  },
+  {
+   "c": "hold firm to something",
+   "pos": "verb phrase",
+   "ru": "твёрдо держаться чего-то",
+   "m": "keep believing in or sticking to something despite pressure",
+   "n": "stronger than 'keep'; the object follows 'to'",
+   "col": "hold firm to a decision"
+  },
+  {
+   "c": "blow something out of proportion",
+   "pos": "verb phrase",
+   "ru": "раздувать до невероятных размеров",
+   "m": "make something seem far more serious than it really is",
+   "n": "the object goes in the middle: blow it out of proportion",
+   "col": "blow a setback out of proportion"
+  },
+  {
+   "c": "shed light on",
+   "pos": "verb phrase",
+   "ru": "проливать свет на",
+   "m": "make something clearer or easier to understand",
+   "n": "shed–shed–shed; light ON, not 'to'",
+   "col": "documents that shed light on the case"
+  },
+  {
+   "c": "do justice to",
+   "pos": "verb phrase",
+   "ru": "делать честь; в полной мере передавать",
+   "m": "show or represent something as good as it really is",
+   "n": "'do yourself justice' = perform as well as you can",
+   "col": "a photo that does justice to the view"
+  },
+  {
+   "c": "closure",
+   "pos": "noun",
+   "ru": "завершение, чувство завершённости",

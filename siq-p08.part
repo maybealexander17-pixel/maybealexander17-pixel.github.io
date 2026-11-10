@@ -1,0 +1,133 @@
+   "model": "Our neighbor's barbecue smoke set off the building chat, and within an hour people were blowing it out of proportion — someone even mentioned lawyers. A few sarcastic replies fanned the flames and ruffled feathers on both sides. In the end we talked on the stairs and saw eye to eye: the grill moves two meters, and everyone calms down."
+  },
+  {
+   "q": "Describe a group you belong to — family, friends, a team. What makes it tight-knit? What is conducive to a good atmosphere, and what ruffles its feathers?",
+   "chunks": [
+    [
+     "tight-knit",
+     "tight[- ]knit"
+    ],
+    [
+     "conducive to",
+     "conducive to"
+    ],
+    [
+     "bask in",
+     "bask\w* in"
+    ],
+    [
+     "ruffle feathers",
+     "ruffl\w*.{0,12}feathers"
+    ]
+   ],
+   "model": "My rowing club is a tight-knit group: six people who show up at 6 a.m. and know each other's jobs by heart. What is conducive to a good atmosphere is simple — nobody hogs the credit. After a good race we bask in it for about an hour, and the only thing that ruffles feathers is when someone skips the cleanup."
+  },
+  {
+   "q": "Talk about learning something difficult. Did you have a knack for it? Were you wary of anything at the start? Did you ever grasp at straws?",
+   "chunks": [
+    [
+     "a knack for",
+     "knack for"
+    ],
+    [
+     "wary",
+     "wary"
+    ],
+    [
+     "grasp at straws",
+     "grasp\w* at straws"
+    ],
+    [
+     "out of thin air",
+     "out of thin air"
+    ]
+   ],
+   "model": "I did not have a knack for driving at all — my first instructor grew wary of me by lesson three. Every parking attempt was grasping at straws: turn the wheel, hope, invent space out of thin air. It clicked around lesson twenty, but I still keep an inkling of that fear on icy roads."
+  },
+  {
+   "q": "Describe a project or hobby that took over your life for a while. Was it all-consuming? What happened at the expense of it? How did you get closure when it ended?",
+   "chunks": [
+    [
+     "all-consuming",
+     "all[- ]consuming"
+    ],
+    [
+     "at the expense of",
+     "at the expense of"
+    ],
+    [
+     "closure",
+     "closure"
+    ],
+    [
+     "do justice to",
+     "do .{0,12}justice"
+    ]
+   ],
+   "model": "Last year I restored an old motorcycle, and it became all-consuming — every evening, most weekends. It happened at the expense of my sleep and, honestly, my friendships; I did justice to neither. When I finally sold it, signing the last papers gave me real closure, and I promised myself the next hobby gets a schedule."
+  }
+ ],
+ "lock": [
+  {
+   "i": 4,
+   "clue": "make something seem far more serious than it really is — the blog ______ a minor delay",
+   "re": "(blow|blew|blown)\b.{0,40}\bout of proportion",
+   "model": "blew a minor delay out of proportion"
+  },
+  {
+   "i": 14,
+   "clue": "from nothing; with no visible source — the money appeared ______",
+   "re": "out of thin air",
+   "model": "out of thin air"
+  },
+  {
+   "i": 2,
+   "clue": "helping something happen — an atmosphere ______ creativity",
+   "re": "conducive to",
+   "model": "conducive to"
+  },
+  {
+   "i": 16,
+   "clue": "taking up all your time and energy — the hobby became ______",
+   "re": "all[- ]consuming",
+   "model": "all-consuming"
+  },
+  {
+   "i": 5,
+   "clue": "make something clearer — the report ______ the problem",
+   "re": "shed(s|ding)? light on",
+   "model": "shed light on"
+  },
+  {
+   "i": 10,
+   "clue": "careful because you suspect a trick",
+   "re": "\bwary\b",
+   "model": "wary"
+  },
+  {
+   "i": 18,
+   "clue": "tease someone in a friendly way",
+   "re": "\brib(bed|bing)?\b",
+   "model": "rib someone"
+  },
+  {
+   "i": 8,
+   "clue": "enjoy attention visibly and calmly — she ______ the applause",
+   "re": "bask(ed|ing|s)? in",
+   "model": "basked in"
+  },
+  {
+   "i": 12,
+   "clue": "with harm or cost to something else — profit ______ quality",
+   "re": "at the expense of",
+   "model": "at the expense of"
+  },
+  {
+   "i": 15,
+   "clue": "mildly annoy people — the memo ______",
+   "re": "ruffl\w*.{0,12}feathers",
+   "model": "ruffled a few feathers"
+  },
+  {
+   "i": 0,
+   "clue": "a natural skill — she ______ explaining things",

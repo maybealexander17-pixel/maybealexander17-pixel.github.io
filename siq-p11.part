@@ -1,0 +1,57 @@
+const STAGES=['Cards','Notice','Meaning','Partners','Upgrade','Translate','Use it','Lock it in'];
+const main=$('#main');
+$('#nav').innerHTML=STAGES.map((t,i)=>`<button type="button" data-i="${i}">${i+1}. ${t}<span class="badge tb">–</span></button>`).join('');
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+function go(i){
+  clearInterval(window._tm);SFX.hush(false);
+  S.stage=Math.max(0,Math.min(7,i));save();
+  document.querySelectorAll('#nav button').forEach((b,k)=>b.classList.toggle('on',k===S.stage));
+  const on=$('#nav').children[S.stage];if(on&&on.scrollIntoView)on.scrollIntoView({inline:'center',block:'nearest',behavior:(FAST||RM)?'auto':'smooth'});
+  $('#prev').style.visibility=S.stage?'visible':'hidden';$('#next').style.visibility=S.stage<7?'visible':'hidden';
+  main.innerHTML='';R[S.stage]();drawBadges();
+  const top=document.querySelector('.navrail').getBoundingClientRect().top+window.pageYOffset;
+  if(window.pageYOffset>top)window.scrollTo(0,top);
+}
+$('#prev').onclick=()=>go(S.stage-1);
+$('#next').onclick=()=>go(S.stage+1);
+const head=(n,h,t)=>`<div class="shead"><span class="badge">${n}</span><div><h2>${h}</h2><p>${t}</p></div></div>`;
+const itemLine=i=>`<b>${esc(I[i].c)}</b> <span class="ru">${esc(I[i].ru)}</span>`;
+
+
+/* ---------- STAGE 0 · Cards ---------- */
+R=[];
+R[0]=()=>{
+  main.innerHTML=`<section class="stage">`+head(1,'Meet the twenty','Flip each card. Read the meaning, the Russian, and one partner it likes. Nothing is checked — just get acquainted.')+
+  `<div class="row" style="margin:6px 0 2px"><span class="prog" style="flex:1"><i id="pg"></i></span><span class="hand" id="cnt" style="color:var(--red-d)"></span></div>
+   <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px"></div></section>`;
+  const g=$('#grid');
+  S.cards.order.forEach(i=>{
+    const f=S.cards.flip[i];
+    g.insertAdjacentHTML('beforeend',
+     `<button type="button" class="fcard${f?' flip':''}" data-i="${i}" aria-pressed="${f}">
+        <span class="face front"><span class="c">${esc(I[i].c)}</span><span class="p">${esc(I[i].pos)}</span><span class="hint">tap to flip</span></span>
+        <span class="face back"><span class="m">${esc(I[i].m)}</span><span class="ru">${esc(I[i].ru)}</span><span class="col"><b>${esc(I[i].col)}</b></span><span class="nt">${esc(I[i].n)}</span></span>
+      </button>`);
+  });
+  const upd=()=>{const done=S.cards.flip.filter(Boolean).length;$('#pg').style.width=(done/N*100)+'%';$('#cnt').textContent=done+' / '+N};
+  upd();
+  g.querySelectorAll('.fcard').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;S.cards.flip[i]=!S.cards.flip[i];b.classList.toggle('flip',S.cards.flip[i]);SFX.play('flip');save();upd();drawBadges();
+  });
+};
+
+/* ---------- STAGE 1 · Notice ---------- */
+R[1]=()=>{
+  main.innerHTML=`<section class="stage">`+head(2,'Find them in the wild','Read the piece once for the story. Then tap every phrase from our twenty hiding inside it. Tap the whole phrase, not one word.')+
+  `<div class="card" style="background:var(--soft)"><div class="hand" style="font-size:26px;font-weight:700;margin-bottom:6px">${esc(DATA.notice.head)}</div>
+   <p id="art" style="margin:0;font-size:17.5px;line-height:1.75"></p></div>
+   <div class="detail card" id="det"><span class="mute">Tap a phrase to see what it means and how it behaves.</span></div>
+   <div class="row" style="margin-top:8px"><span class="hand" id="cnt" style="font-size:18px;color:var(--red-d)"></span><button type="button" class="btn ghost sm" id="rev" hidden>Show me what I missed</button></div></section>`;
+  let misses=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{
+    const k=DATA.notice.marks[DATA.notice.text.slice(0,DATA.notice.text.indexOf(t)).split('[[').length-1];
+    return `<span class="t" data-i="${k}">${esc(t)}</span>`;
+  });
+  /* simpler robust mark mapping: rebuild */
+  let mi=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{const k=DATA.notice.marks[mi++];return `<span class="t" data-i="${k}">${esc(t)}</span>`});

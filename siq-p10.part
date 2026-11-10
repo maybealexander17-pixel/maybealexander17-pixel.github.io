@@ -1,0 +1,72 @@
+    src.connect(fl);fl.connect(g);g.connect(master);src.start(t);src.stop(t+dur+.05)}
+  const SOUNDS={
+    right:()=>{tone(1318,0,.14,'sine',.16);tone(1760,.09,.26,'sine',.14)},
+    wrong:()=>{tone(220,0,.3,'sine',.12,165)},
+    flip:()=>{noise(0,.09,.06,'highpass',2000,5000)},
+    stage:()=>{[784,988,1175].forEach((f,i)=>tone(f,i*.1,.2,'sine',.11))},
+    tick:()=>{tone(990,0,.05,'square',.05)},
+    win:()=>{[659,784,988,1318,1568].forEach((f,i)=>tone(f,i*.08,i===4?.6:.15,'triangle',.11));for(let k=0;k<12;k++)tone(900+Math.random()*900,.35+Math.random()*1.1,.07,'sine',.05,1500)}
+  };
+  function play(n){if(!on||hushed||!SOUNDS[n])return;if(!ac())return;try{SOUNDS[n]();log.push(n)}catch(e){}}
+  function set(v){on=v;try{localStorage.setItem('vp:sound',v?'on':'off')}catch(e){}}
+  return {play,set,isOn:()=>on,hush:v=>{hushed=!!v},log};
+})();
+window.SFX=SFX;
+function drawMute(){const b=$('#mute'),on=SFX.isOn();b.textContent=on?'🔊':'🔇';b.setAttribute('aria-pressed',on?'false':'true');b.setAttribute('aria-label',on?'Sound on. Tap to mute.':'Sound off. Tap to turn on.')}
+drawMute();$('#mute').onclick=()=>{SFX.set(!SFX.isOn());drawMute();if(SFX.isOn())SFX.play('flip')};
+
+/* ---------- state ---------- */
+const fresh=()=>({stage:0,
+  cards:{flip:[...Array(N)].map(()=>false),order:shuffle([...Array(N).keys()])},
+  found:[],
+  ccq:{queue:shuffle(DATA.ccq.map((_,k)=>k)),right:[],cur:null},
+  fork:{sel:{},solved:[],border:{}},
+  build:{sel:{},solved:[],tiles:{}},
+  up:{val:{},state:{},order:shuffle(DATA.upgrade.map((_,k)=>k))},
+  tr:{val:{},state:{}},
+  use:{order:shuffle(DATA.use.map((_,k)=>k)),txt:{},done:[],cur:0},
+  lock:{round:0,order:shuffle(DATA.lock.map((_,k)=>k)),val:{},state:{}},
+  celebrated:[]});
+let S=loadState()||fresh();
+S.celebrated=S.celebrated||[];
+
+/* ---------- helpers ---------- */
+function celebrate(key,n){if(S.celebrated.includes(key))return;S.celebrated.push(key);save();SFX.play(key==='all'?'win':'stage');rain(n||26,key==='all')}
+function rain(n,big){
+  if(RM)return;const r=document.createElement('div');r.className='rain';
+  const chars=big?['📰','⭐','✂️','❝','§','🖊️','📰','⭐','✂️','❝']:['⭐','❝','§','🖊️','⭐','❝'];
+  for(let i=0;i<n;i++){const el=document.createElement('i');el.textContent=chars[i%chars.length];
+    el.style.left=Math.random()*96+'vw';el.style.animationDuration=(1.6+Math.random()*1.6)+'s';el.style.animationDelay=(Math.random()*.5)+'s';
+    el.style.fontSize=(16+Math.random()*(big?22:14))+'px';r.appendChild(el)}
+  document.body.appendChild(r);setTimeout(()=>r.remove(),FAST?200:4200);
+}
+/* decorative drifting badges */
+(function(){const d=$('#drift'),c=['§','✎','❝','24/7','¶','✂','★','@'];
+  for(let i=0;i<8;i++){const s=document.createElement('span');s.textContent=c[i];
+    s.style.left=(4+Math.random()*90)+'vw';s.style.top=(4+Math.random()*88)+'vh';
+    s.style.animationDelay=(-Math.random()*14)+'s';if(i%3===0)s.classList.add('alt');d.appendChild(s)}})();
+
+/* ---------- remaining per stage ---------- */
+function remaining(k){
+  switch(k){
+    case 0:return S.cards.flip.filter(f=>!f).length;
+    case 1:return DATA.notice.marks.length-S.found.length;
+    case 2:return S.ccq.queue.length;
+    case 3:return DATA.forks.length-S.fork.solved.length+DATA.build.length-S.build.solved.length;
+    case 4:return DATA.upgrade.length-Object.values(S.up.state).filter(v=>v==='ok').length;
+    case 5:return DATA.translate.length-Object.values(S.tr.state).filter(v=>v==='ok').length;
+    case 6:return DATA.use.length-S.use.done.length;
+    case 7:return curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]!=='ok').length;
+  }
+  return 0;
+}
+function curLock(){const o=S.lock.order,ten=o.slice(S.lock.round*10,S.lock.round*10+10);return ten.map((k,j)=>({k,j}))}
+function totalLeft(){let t=0;for(let k=0;k<8;k++)t+=remaining(k);return t}
+function drawBadges(){
+  document.querySelectorAll('#nav button').forEach((b,k)=>{
+    const r=remaining(k);b.querySelector('.tb').textContent=r;b.classList.toggle('done',r===0)});
+  $('#total').textContent=totalLeft();
+  if(totalLeft()===0)celebrate('all',44);
+}
+
+/* ---------- nav ----------

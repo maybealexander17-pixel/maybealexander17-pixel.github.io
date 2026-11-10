@@ -1,0 +1,20 @@
+    $('#rres').className='fb show';
+    $('#rres').innerHTML=allOk?`<span class="okc">Round clear.</span> <span class="mute">New round for the rest, or come back tomorrow.</span>`:`<span style="color:var(--bad);font-weight:800">Some lines are still open.</span> <span class="mute">They stay — check them above.</span>`;
+    if(allOk)celebrate('s7');
+  };
+  $('#rnew').onclick=()=>{S.lock.round=(S.lock.round+1)%Math.ceil(S.lock.order.length/10);S.lock.order=shuffle(DATA.lock.map((_,k)=>k));save();R[7]()};
+};
+
+/* ---------- boot ---------- */
+if(loadState()){
+  const t=$('#toast');t.hidden=false;
+  t.innerHTML=`Welcome back. Your progress is saved. <button type="button" id="wipe">Start over</button>`;
+  let armed=false;
+  $('#wipe').onclick=()=>{if(!armed){armed=true;$('#wipe').textContent='Tap again to clear everything';setTimeout(()=>{armed=false;$('#wipe').textContent='Start over'},4000);return}
+    wipeState();location.reload()};
+}
+go(Math.min(S.stage||0,7));
+
+</script>
+</body>
+</html>

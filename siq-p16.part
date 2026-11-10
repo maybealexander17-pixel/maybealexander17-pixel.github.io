@@ -1,0 +1,52 @@
+    document.querySelectorAll('[data-chip]').forEach(c=>{const on=used.find(([lab])=>lab===c.dataset.chip)[1];c.classList.toggle('sel',on)});
+    $('#lit').textContent=used.filter(x=>x[1]).length+' / '+u.chunks.length+' phrases lit';
+    if(n>=40){
+      if(!S.use.done.includes(S.use.cur)){S.use.done.push(S.use.cur);SFX.play('right');drawBadges()}
+      $('#mo').hidden=false;
+    }
+  };
+  ta.addEventListener('input',light);
+  if(words>=40){$('#mo').hidden=false;$('#mo').innerHTML=`<div class="fb show"><div class="hand" style="font-size:20px">One way to say it</div><div style="margin-top:4px">${esc(u.model)}</div><p style="margin:8px 0 0"><button type="button" class="btn sm ghost" id="spk">🔊 Read it aloud</button></p></div>`;
+    $('#spk').onclick=()=>{try{const u2=new SpeechSynthesisUtterance(u.model);u2.lang='en-US';const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.startsWith('en-US'));if(v)u2.voice=v;SFX.hush(true);speechSynthesis.cancel();speechSynthesis.speak(u2);u2.onend=()=>SFX.hush(false)}catch(e){}};}
+  $('#tmr').onclick=()=>{
+    clearInterval(window._tm);let s=90;SFX.play('stage');
+    window._tm=setInterval(()=>{s--;$('#tt').textContent=s>0?s+'s':'Time! Which phrases came out easily?';
+      if(s<=10&&s>0&&s%2===0)SFX.play('tick');
+      if(s<=0){clearInterval(window._tm);SFX.play('stage')}},1000);
+  };
+  light();
+};
+
+/* ---------- STAGE 7 · Lock it in ---------- */
+R[7]=()=>{
+  if(S.lock.round*10>=S.lock.order.length)S.lock.round=0;
+  main.innerHTML=`<section class="stage">`+head(8,'Lock it in','Best done a day or two after the other stages, without looking back. Read the clue, type the phrase. Retrieval after a gap is what makes vocabulary stick.')+
+  `<div class="prog"><i id="pg"></i></div><div id="lk"></div>
+   <div class="row" style="margin-top:12px"><button type="button" class="btn" id="rck">Check all</button><button type="button" class="btn ghost" id="rnew">New round</button></div><div class="fb" id="rres"></div></section>`;
+  const lk=$('#lk');
+  curLock().forEach(({k,j})=>{
+    const l=DATA.lock[k],st=S.lock.state['r'+S.lock.round+'_'+k];
+    lk.insertAdjacentHTML('beforeend',
+     `<div class="card" data-k="${k}" style="margin:8px 0;padding:12px 14px;${st==='ok'?'background:var(--ok-soft)':''}">
+        <div style="font-size:15.5px;margin-bottom:6px">${esc(l.clue)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.lock.val[k]||'')}" placeholder="type the phrase" ${st==='ok'?'disabled':''} aria-label="answer">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div></div>`);
+    const card=lk.querySelector(`[data-k="${k}"]`),inp=card.querySelector('[data-in]');
+    const ok=v=>new RegExp(l.re,'i').test(norm(v));
+    if(st==='ok'){card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`)}
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.lock.val[k]=v;
+      if(ok(v)){S.lock.state['r'+S.lock.round+'_'+k]='ok';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        card.style.background='var(--ok-soft)';card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`);
+        SFX.play('right');save();drawBadges();
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');save();
+        card.insertAdjacentHTML('beforeend',`<div class="fb" data-miss><span style="color:var(--bad);font-weight:800">Not it.</span> <span class="mute small">Model: <b>${esc(l.model)}</b></span></div>`);
+        setTimeout(()=>{const m=card.querySelector('[data-miss]');if(m)m.remove()},FAST?200:2600);
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok').length;p.style.width=(done/curLock().length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+  $('#rck').onclick=()=>{lk.querySelectorAll('[data-chk]:not([disabled])').forEach(b=>b.click());
+    const allOk=curLock().every(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok');

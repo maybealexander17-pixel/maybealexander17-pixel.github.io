@@ -1,0 +1,53 @@
+  $('#art').querySelectorAll('.t').forEach(s=>{if(S.found.includes(+s.dataset.i))s.classList.add('f')});
+  const cnt=()=>{const left=DATA.notice.marks.length-S.found.length;$('#cnt').textContent=(DATA.notice.marks.length-left)+' / '+DATA.notice.marks.length+' found';
+    $('#rev').hidden=!(S.found.length>=7||misses>=4)};
+  $('#art').addEventListener('click',e=>{
+    const s=e.target.closest('span.t');
+    if(!s){const p=e.target.closest('#art');if(!p)return;misses++;$('#art').classList.remove('shake');void $('#art').offsetWidth;$('#art').classList.add('shake');SFX.play('wrong');cnt();return}
+    const i=+s.dataset.i,isNew=!S.found.includes(i);
+    if(isNew){S.found.push(i);s.classList.add('f');SFX.play('right');save();drawBadges()}
+    $('#det').innerHTML=`<div class="hand" style="font-size:21px">${esc(I[i].c)}</div><div class="ru" style="color:var(--red-d);font-weight:700">${esc(I[i].ru)}</div><div style="margin-top:4px">${esc(I[i].m[0].toUpperCase()+I[i].m.slice(1))}.</div><div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div>`;
+    cnt();if(S.found.length===DATA.notice.marks.length)celebrate('s2');
+  });
+  $('#rev').onclick=()=>{$('#art').querySelectorAll('span.t').forEach(s=>{s.classList.add('f');if(!S.found.includes(+s.dataset.i))S.found.push(+s.dataset.i)});save();cnt();drawBadges()};
+  cnt();
+};
+
+/* ---------- STAGE 2 · Meaning (either/or, wrong → back of queue) ---------- */
+R[2]=()=>{
+  main.innerHTML=`<section class="stage">`+head(3,'Do you really get it?','Quick either/or questions. A wrong answer sends the phrase to the back of the queue, so it comes back.')+
+  `<div class="prog"><i id="pg"></i></div><div id="q"></div></section>`;
+  const show=()=>{
+    $('#pg').style.width=(S.ccq.right.length/DATA.ccq.length*100)+'%';
+    if(!S.ccq.queue.length){$('#q').innerHTML=`<div class="card"><span class="okc">All ${DATA.ccq.length} cleared.</span> <span class="mute">Next: the words each phrase likes to go with.</span></div>`;celebrate('s3');drawBadges();return}
+    const qi=S.ccq.queue[0],q=DATA.ccq[qi],i=q.i;
+    const oo=S.ccq.optOrder&&S.ccq.optOrder[qi];const ord=oo||(S.ccq.optOrder=S.ccq.optOrder||{},S.ccq.optOrder[qi]=shuffle([0,1]));
+    $('#q').innerHTML=`<div class="card"><div style="font-size:16.5px;margin-bottom:10px">${esc(q.q)}</div><div class="opts row" style="flex-direction:column;align-items:stretch;gap:8px">
+      ${ord.map(k=>`<button type="button" class="btn ghost" data-k="${k}" style="text-align:left">${esc(k===0?q.a:q.b)}</button>`).join('')}</div><div class="fb" id="fb"></div></div>`;
+    const bs=[...main.querySelectorAll('#q .opts button')];
+    bs.forEach((b,k)=>b.onclick=()=>{
+      const kk=+b.dataset.k,ok=kk===q.right;
+      bs.forEach(x=>x.disabled=true);
+      bs.find(x=>+x.dataset.k===q.right).style.background='var(--ok-soft)';
+      if(!ok){b.style.background='var(--bad-soft)'}
+      S.ccq.queue.shift();if(ok){if(!S.ccq.right.includes(qi))S.ccq.right.push(qi)}else S.ccq.queue.push(qi);
+      SFX.play(ok?'right':'wrong');save();drawBadges();
+      $('#fb').className='fb show';
+      $('#fb').innerHTML=`${itemLine(i)} — ${esc(I[i].m)}.<div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div><p style="margin:10px 0 0"><button type="button" class="btn sm" id="nx">Next</button></p>`;
+      $('#nx').onclick=show;
+    });
+  };
+  show();
+};
+
+
+/* ---------- STAGE 3 · Partners ---------- */
+R[3]=()=>{
+  main.innerHTML=`<section class="stage">`+head(4,'Which words go together?','Part A: each frame takes three of the four options — pick the three that sound natural, then check. Part B: build the exact phrase from the tiles, small words included. One tile in each set is a trap.')+
+  `<h3 class="hand" style="font-size:22px;margin:16px 0 4px">Part A · Three of four</h3><div id="forks"></div>
+   <h3 class="hand" style="font-size:22px;margin:22px 0 4px">Part B · Build the frame</h3><div id="builds"></div></section>`;
+  const fw=$('#forks');
+  DATA.forks.forEach((f,fk)=>{
+    const solved=S.fork.solved.includes(fk);
+    fw.insertAdjacentHTML('beforeend',
+     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-fk="${fk}">

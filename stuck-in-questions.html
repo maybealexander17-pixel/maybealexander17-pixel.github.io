@@ -3,7 +3,7 @@
 <body style="font-family:sans-serif;background:#F7F1E3;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0">Loading…</body>
 <script>
 (async()=>{
-  const parts=await Promise.all(Array.from({length:18},(_,i)=>fetch('siq-p'+String(i).padStart(2,'0')+'.part',{cache:'no-store'}).then(r=>r.text()));
+  const parts=await Promise.all(Array.from({length:18},(_,i)=>fetch('siq-p'+String(i).padStart(2,'0')+'.part',{cache:'no-store'}).then(r=>r.text())));
   document.open();document.write(parts.join(''));document.close();
 })().catch(e=>{document.body.textContent='Failed to load — please refresh.'});
 </script></html>

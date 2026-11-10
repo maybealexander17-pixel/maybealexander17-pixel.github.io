@@ -1,0 +1,192 @@
+    "conducive",
+    "to",
+    "for",
+    "on"
+   ],
+   "ans": [
+    0,
+    1
+   ]
+  },
+  {
+   "i": 12,
+   "tiles": [
+    "at",
+    "the",
+    "expense",
+    "of",
+    "cost"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "i": 13,
+   "tiles": [
+    "out",
+    "of",
+    "thin",
+    "air",
+    "thick"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "i": 3,
+   "tiles": [
+    "hold",
+    "firm",
+    "to",
+    "on"
+   ],
+   "ans": [
+    0,
+    1,
+    2
+   ]
+  },
+  {
+   "i": 4,
+   "tiles": [
+    "blow",
+    "it",
+    "out",
+    "of",
+    "proportion",
+    "into"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ]
+  },
+  {
+   "i": 5,
+   "tiles": [
+    "shed",
+    "light",
+    "on",
+    "in"
+   ],
+   "ans": [
+    0,
+    1,
+    2
+   ]
+  }
+ ],
+ "upgrade": [
+  {
+   "i": 4,
+   "flat": "The local blog [[made a minor delay sound like a citywide scandal]].",
+   "gap": "The local blog ______.",
+   "re": "(blew|blown|blow)\\b.{0,40}\\bout of proportion",
+   "no": "blow up",
+   "model": "The local blog blew a minor delay out of proportion."
+  },
+  {
+   "i": 0,
+   "flat": "My grandfather [[has a real gift for]] fixing old radios.",
+   "gap": "My grandfather ______ fixing old radios.",
+   "re": "(has|have|had) a knack for",
+   "no": "gift|talent",
+   "model": "My grandfather has a knack for fixing old radios."
+  },
+  {
+   "i": 8,
+   "flat": "After the win she [[enjoyed every minute of the attention]].",
+   "gap": "After the win she ______.",
+   "re": "bask(ed|ing|s)? in",
+   "no": "enjoy",
+   "model": "After the win she basked in the attention."
+  },
+  {
+   "i": 13,
+   "flat": "He [[invented]] an excuse [[from nothing]].",
+   "gap": "He ______ an excuse.",
+   "re": "\\b(pulled|produced|got|made|created)\\b.{0,20}\\bout of thin air",
+   "no": "into thin air",
+   "model": "He pulled an excuse out of thin air."
+  },
+  {
+   "i": 6,
+   "flat": "My phone camera doesn't [[show how beautiful]] the place really is.",
+   "gap": "My phone camera doesn't ______ the place.",
+   "re": "(do|does|did|doing|done)(\\s+\\S+){0,3}\\s+justice\\b",
+   "no": "give|make",
+   "model": "My phone camera doesn't do the place justice."
+  },
+  {
+   "i": 16,
+   "flat": "Restoring the boat became [[a hobby that took over his whole life]].",
+   "gap": "Restoring the boat became ______.",
+   "re": "all[- ]consuming",
+   "no": "",
+   "model": "Restoring the boat became all-consuming."
+  },
+  {
+   "i": 11,
+   "flat": "Her sarcastic reply [[made the argument worse]].",
+   "gap": "Her sarcastic reply ______.",
+   "re": "fan(ned|ning)? the flames",
+   "no": "",
+   "model": "Her sarcastic reply fanned the flames."
+  },
+  {
+   "i": 17,
+   "flat": "We [[totally agree]] on this one.",
+   "gap": "We ______ on this one.",
+   "re": "see eye to eye",
+   "no": "agree",
+   "model": "We see eye to eye on this one."
+  },
+  {
+   "i": 19,
+   "flat": "It's [[a very close]] community — everyone knows everyone.",
+   "gap": "It's ______ community — everyone knows everyone.",
+   "re": "tight[- ]knit\\b",
+   "no": "",
+   "model": "It's a tight-knit community — everyone knows everyone."
+  },
+  {
+   "i": 2,
+   "flat": "The quiet library is [[perfect for]] focusing.",
+   "gap": "The quiet library is ______ focusing.",
+   "re": "conducive to",
+   "no": "for",
+   "model": "The quiet library is conducive to focusing."
+  },
+  {
+   "i": 14,
+   "flat": "I had [[only a vague suspicion]] of what was about to happen.",
+   "gap": "I had ______ what was about to happen.",
+   "re": "(an |no |not the slightest )?inkling of",
+   "no": "",
+   "model": "I had no inkling of what was about to happen."
+  },
+  {
+   "i": 5,
+   "flat": "The new evidence finally [[explained what had happened]].",
+   "gap": "The new evidence finally ______.",
+   "re": "shed(s|ding)? light on",
+   "no": "",
+   "model": "The new evidence finally shed light on what had happened."
+  }
+ ],
+ "translate": [
+  {
+   "i": 4,
+   "ru": "Да не раздувай из этого катастрофу — задержка всего на десять минут.",
+   "en": "Don't blow it out of proportion — it's only a ten-minute delay.",

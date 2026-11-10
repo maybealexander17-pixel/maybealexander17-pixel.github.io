@@ -1,0 +1,102 @@
+   "note": "Раздувать maps to blow something OUT of proportion. The object goes in the middle: blow it out of proportion — never “blow up it.”",
+   "re": "(don['’]t|do not) blow .{0,25}out of proportion"
+  },
+  {
+   "i": 17,
+   "ru": "Мы с братом всегда полностью сходимся во взглядах на политику.",
+   "en": "My brother and I always see eye to eye on politics.",
+   "note": "No preposition between the two eyes, and it's on/about a topic or with a person.",
+   "re": "see eye to eye"
+  },
+  {
+   "i": 0,
+   "ru": "У неё настоящий дар объяснять сложное простыми словами.",
+   "en": "She has a knack for explaining complicated things in simple words.",
+   "note": "Calque risk: “gift to explain.” In English it's a knack FOR + -ing.",
+   "re": "(has|have|had) a knack for"
+  },
+  {
+   "i": 5,
+   "ru": "Эти письма наконец пролили свет на то, что случилось в тот вечер.",
+   "en": "The letters finally shed light on what happened that evening.",
+   "note": "Пролить свет pulls you toward “pour light.” The English verb is shed, and the preposition is on.",
+   "re": "shed light on"
+  },
+  {
+   "i": 13,
+   "ru": "Откуда ты взял эти цифры? Ты их что, из воздуха достал?",
+   "en": "Where did you get those numbers? Did you pull them out of thin air?",
+   "note": "Из воздуха is out of THIN air — thin is obligatory, and inventing or producing is out of, not into.",
+   "re": "out of thin air"
+  },
+  {
+   "i": 19,
+   "ru": "Это очень сплочённый коллектив — все друг за друга горой.",
+   "en": "It's a tight-knit team — everyone stands up for each other.",
+   "note": "Сплочённый is tight-knit (keep the hyphen!) for groups. A “tight team” alone means something else.",
+   "re": "tight[- ]knit"
+  },
+  {
+   "i": 1,
+   "ru": "После провала на экзамене он хватался за соломинку, придумывая всё новые оправдания.",
+   "en": "After failing the exam, he grasped at straws, coming up with new excuses.",
+   "note": "Russian keeps it singular — соломинку. English uses the plural: grasp at straws. And it's grasp AT, not grasp FOR.",
+   "re": "grasp\\w* at straws?\\b"
+  },
+  {
+   "i": 8,
+   "ru": "Она упивалась каждой минутой внимания публики.",
+   "en": "She basked in every minute of the audience's attention.",
+   "note": "No reflexive in English — not “basked herself.” Bask in + noun: bask in the sun, bask in the attention.",
+   "re": "bask\\w* in\\b"
+  },
+  {
+   "i": 11,
+   "ru": "Его грубый ответ только подлил масла в огонь.",
+   "en": "His rude reply only fanned the flames.",
+   "note": "The oil doesn't travel: English fans THE flames — plural, with fan (fan → fanned → fanning).",
+   "re": "fan\\w* the flames"
+  },
+  {
+   "i": 12,
+   "ru": "Он сделал карьеру ценой личной жизни.",
+   "en": "He built a career at the expense of his personal life.",
+   "note": "Russian “ценой” is a bare instrumental. English needs the full frame: AT the expense OF + noun.",
+   "re": "at the expense of\\b"
+  },
+  {
+   "i": 14,
+   "ru": "У меня нет ни малейшего представления, где он сейчас живёт.",
+   "en": "I don't have the slightest inkling of where he lives now.",
+   "note": "An inkling OF, not “about” — the slightest inkling of something. No article: not “an inkling” here because of “the slightest.”",
+   "re": "inkling of\\b"
+  },
+  {
+   "i": 15,
+   "ru": "Новый начальник сразу начал задевать подчинённых жёсткой критикой.",
+   "en": "The new boss immediately started ruffling feathers with his harsh criticism.",
+   "note": "Feathers stay plural: ruffle (someone's) feathers. Also common: ruffled a few feathers.",
+   "re": "ruffl\\w* (some(one'?s|body'?s|one'?s)? ?|a few |a lot of |some )?feathers"
+  }
+ ],
+ "use": [
+  {
+   "q": "Tell about a small problem that someone — you, a friend, the internet — blew out of proportion. What fanned the flames? Did everyone see eye to eye in the end?",
+   "chunks": [
+    [
+     "blow out of proportion",
+     "blow\\w*.{0,30}out of proportion"
+    ],
+    [
+     "fan the flames",
+     "fan(ned|ning)? the flames"
+    ],
+    [
+     "see eye to eye",
+     "see eye to eye"
+    ],
+    [
+     "ruffle feathers",
+     "ruffl\\w*.{0,12}feathers"
+    ]
+   ],

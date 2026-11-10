@@ -13,11 +13,11 @@
     ],
     [
      "bask in",
-     "bask\w* in"
+     "bask\\w* in"
     ],
     [
      "ruffle feathers",
-     "ruffl\w*.{0,12}feathers"
+     "ruffl\\w*.{0,12}feathers"
     ]
    ],
    "model": "My rowing club is a tight-knit group: six people who show up at 6 a.m. and know each other's jobs by heart. What is conducive to a good atmosphere is simple — nobody hogs the credit. After a good race we bask in it for about an hour, and the only thing that ruffles feathers is when someone skips the cleanup."
@@ -35,7 +35,7 @@
     ],
     [
      "grasp at straws",
-     "grasp\w* at straws"
+     "grasp\\w* at straws"
     ],
     [
      "out of thin air",
@@ -71,7 +71,7 @@
   {
    "i": 4,
    "clue": "make something seem far more serious than it really is — the blog ______ a minor delay",
-   "re": "(blow|blew|blown)\b.{0,40}\bout of proportion",
+   "re": "(blow|blew|blown)\\b.{0,40}\\bout of proportion",
    "model": "blew a minor delay out of proportion"
   },
   {
@@ -101,13 +101,13 @@
   {
    "i": 10,
    "clue": "careful because you suspect a trick",
-   "re": "\bwary\b",
+   "re": "\\bwary\\b",
    "model": "wary"
   },
   {
    "i": 18,
    "clue": "tease someone in a friendly way",
-   "re": "\brib(bed|bing)?\b",
+   "re": "\\brib(bed|bing)?\\b",
    "model": "rib someone"
   },
   {
@@ -125,7 +125,7 @@
   {
    "i": 15,
    "clue": "mildly annoy people — the memo ______",
-   "re": "ruffl\w*.{0,12}feathers",
+   "re": "ruffl\\w*.{0,12}feathers",
    "model": "ruffled a few feathers"
   },
   {

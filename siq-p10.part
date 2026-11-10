@@ -69,4 +69,4 @@ function drawBadges(){
   if(totalLeft()===0)celebrate('all',44);
 }
 
-/* ---------- nav ----------
+/* ---------- nav ---------- */

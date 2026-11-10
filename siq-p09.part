@@ -4,7 +4,7 @@
   {
    "i": 1,
    "clue": "try weak ideas because nothing better is left",
-   "re": "grasp\w* at straws",
+   "re": "grasp\\w* at straws",
    "model": "grasp at straws"
   },
   {
@@ -34,7 +34,7 @@
   {
    "i": 3,
    "clue": "stick to a decision despite pressure — ______ the plan",
-   "re": "hold\w* firm to",
+   "re": "hold\\w* firm to",
    "model": "hold firm to"
   },
   {

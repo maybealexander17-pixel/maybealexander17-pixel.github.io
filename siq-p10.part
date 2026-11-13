@@ -1,3 +1,4 @@
+    if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+dur);const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.1,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
     src.connect(fl);fl.connect(g);g.connect(master);src.start(t);src.stop(t+dur+.05)}
   const SOUNDS={
     right:()=>{tone(1318,0,.14,'sine',.16);tone(1760,.09,.26,'sine',.14)},
@@ -64,9 +65,3 @@ function curLock(){const o=S.lock.order,ten=o.slice(S.lock.round*10,S.lock.round
 function totalLeft(){let t=0;for(let k=0;k<8;k++)t+=remaining(k);return t}
 function drawBadges(){
   document.querySelectorAll('#nav button').forEach((b,k)=>{
-    const r=remaining(k);b.querySelector('.tb').textContent=r;b.classList.toggle('done',r===0)});
-  $('#total').textContent=totalLeft();
-  if(totalLeft()===0)celebrate('all',44);
-}
-
-/* ---------- nav ---------- */

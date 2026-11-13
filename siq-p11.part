@@ -1,3 +1,9 @@
+    const r=remaining(k);b.querySelector('.tb').textContent=r;b.classList.toggle('done',r===0)});
+  $('#total').textContent=totalLeft();
+  if(totalLeft()===0)celebrate('all',44);
+}
+
+/* ---------- nav ---------- */
 const STAGES=['Cards','Notice','Meaning','Partners','Upgrade','Translate','Use it','Lock it in'];
 const main=$('#main');
 $('#nav').innerHTML=STAGES.map((t,i)=>`<button type="button" data-i="${i}">${i+1}. ${t}<span class="badge tb">–</span></button>`).join('');
@@ -54,4 +60,3 @@ R[1]=()=>{
   });
   /* simpler robust mark mapping: rebuild */
   let mi=0;
-  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{const k=DATA.notice.marks[mi++];return `<span class="t" data-i="${k}">${esc(t)}</span>`});

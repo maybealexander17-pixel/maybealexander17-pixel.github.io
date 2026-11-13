@@ -1,3 +1,13 @@
+   "re": "shed(s|ding)? light on",
+   "no": "",
+   "model": "The new evidence finally shed light on what had happened."
+  }
+ ],
+ "translate": [
+  {
+   "i": 4,
+   "ru": "Да не раздувай из этого катастрофу — задержка всего на десять минут.",
+   "en": "Don't blow it out of proportion — it's only a ten-minute delay.",
    "note": "Раздувать maps to blow something OUT of proportion. The object goes in the middle: blow it out of proportion — never “blow up it.”",
    "re": "(don['’]t|do not) blow .{0,25}out of proportion"
   },
@@ -85,18 +95,3 @@
    "chunks": [
     [
      "blow out of proportion",
-     "blow\\w*.{0,30}out of proportion"
-    ],
-    [
-     "fan the flames",
-     "fan(ned|ning)? the flames"
-    ],
-    [
-     "see eye to eye",
-     "see eye to eye"
-    ],
-    [
-     "ruffle feathers",
-     "ruffl\\w*.{0,12}feathers"
-    ]
-   ],

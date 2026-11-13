@@ -35,7 +35,7 @@ R[5]=()=>{
         showSol();
       }
     };
-  };
+  });
   const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.tr.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.translate.length*100)+'%'};
   upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
 };

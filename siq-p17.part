@@ -1,3 +1,9 @@
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok').length;p.style.width=(done/curLock().length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+  $('#rck').onclick=()=>{lk.querySelectorAll('[data-chk]:not([disabled])').forEach(b=>b.click());
+    const allOk=curLock().every(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok');
     $('#rres').className='fb show';
     $('#rres').innerHTML=allOk?`<span class="okc">Round clear.</span> <span class="mute">New round for the rest, or come back tomorrow.</span>`:`<span style="color:var(--bad);font-weight:800">Some lines are still open.</span> <span class="mute">They stay — check them above.</span>`;
     if(allOk)celebrate('s7');

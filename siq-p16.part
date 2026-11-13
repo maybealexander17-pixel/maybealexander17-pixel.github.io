@@ -1,3 +1,11 @@
+     <div class="row" style="margin-top:6px"><span class="mute small" id="wc">${words} words</span><span class="mute small" id="lit"></span></div>
+     <div class="model" id="mo" hidden></div>
+   </div>`;
+  const ta=$('#w');
+  const light=()=>{
+    const t=ta.value;S.use.txt[S.use.cur]=t;save();
+    const n=norm(t).split(' ').filter(Boolean).length;$('#wc').textContent=n+' words';
+    const used=u.chunks.map(([lab,re])=>[lab,new RegExp(re,'i').test(norm(t))]);
     document.querySelectorAll('[data-chip]').forEach(c=>{const on=used.find(([lab])=>lab===c.dataset.chip)[1];c.classList.toggle('sel',on)});
     $('#lit').textContent=used.filter(x=>x[1]).length+' / '+u.chunks.length+' phrases lit';
     if(n>=40){
@@ -44,9 +52,3 @@ R[7]=()=>{
         card.insertAdjacentHTML('beforeend',`<div class="fb" data-miss><span style="color:var(--bad);font-weight:800">Not it.</span> <span class="mute small">Model: <b>${esc(l.model)}</b></span></div>`);
         setTimeout(()=>{const m=card.querySelector('[data-miss]');if(m)m.remove()},FAST?200:2600);
       }
-    };
-  });
-  const upd=()=>{const p=$('#pg');if(!p)return;const done=curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok').length;p.style.width=(done/curLock().length*100)+'%'};
-  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
-  $('#rck').onclick=()=>{lk.querySelectorAll('[data-chk]:not([disabled])').forEach(b=>b.click());
-    const allOk=curLock().every(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok');

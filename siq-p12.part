@@ -1,3 +1,4 @@
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{const k=DATA.notice.marks[mi++];return `<span class="t" data-i="${k}">${esc(t)}</span>`});
   $('#art').querySelectorAll('.t').forEach(s=>{if(S.found.includes(+s.dataset.i))s.classList.add('f')});
   const cnt=()=>{const left=DATA.notice.marks.length-S.found.length;$('#cnt').textContent=(DATA.notice.marks.length-left)+' / '+DATA.notice.marks.length+' found';
     $('#rev').hidden=!(S.found.length>=7||misses>=4)};
@@ -43,11 +44,8 @@ R[2]=()=>{
 
 /* ---------- STAGE 3 · Partners ---------- */
 R[3]=()=>{
-  main.innerHTML=`<section class="stage">`+head(4,'Which words go together?','Part A: each frame takes three of the four options — pick the three that sound natural, then check. Part B: build the exact phrase from the tiles, small words included. One tile in each set is a trap.')+
+  main.innerHTML=`<section class="stage">`+head(4,'Which words go together?','Part A: each frame takes three of the four options — pick the three that sound natural, then check. Part B: read each context and build the missing phrase from the tiles, small words included. Every set has one extra trap tile.')+
   `<h3 class="hand" style="font-size:22px;margin:16px 0 4px">Part A · Three of four</h3><div id="forks"></div>
-   <h3 class="hand" style="font-size:22px;margin:22px 0 4px">Part B · Build the frame</h3><div id="builds"></div></section>`;
+   <h3 class="hand" style="font-size:22px;margin:22px 0 4px">Part B · Read and rebuild</h3><div id="builds"></div></section>`;
   const fw=$('#forks');
   DATA.forks.forEach((f,fk)=>{
-    const solved=S.fork.solved.includes(fk);
-    fw.insertAdjacentHTML('beforeend',
-     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-fk="${fk}">

@@ -1,3 +1,6 @@
+    const solved=S.fork.solved.includes(fk);
+    fw.insertAdjacentHTML('beforeend',
+     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-fk="${fk}">
         <div class="hand" style="font-size:20px;margin-bottom:8px">${esc(f.stem)}</div>
         <div class="row" style="gap:6px">${f.opts.map((o,ok)=>`<button type="button" class="chip${(S.fork.sel[fk]||[]).includes(ok)?' sel':''}" data-ok="${ok}" ${solved?'disabled':''}>${esc(o)}</button>`).join('')}</div>
         <div class="fb" id="ff${fk}"></div></div>`);
@@ -36,17 +39,14 @@
   const bw=$('#builds');
   DATA.build.forEach((b,bk)=>{
     const solved=S.build.solved.includes(bk);
-    if(!S.build.tiles[bk])S.build.tiles[bk]=shuffle(b.tiles.map((_,k)=>k));
+    const isAnswerOrder=o=>o&&b.ans.every((tk,j)=>o[j]===tk);
+    if(!S.build.tiles[bk]||(!solved&&isAnswerOrder(S.build.tiles[bk]))){do{S.build.tiles[bk]=shuffle(b.tiles.map((_,k)=>k))}while(isAnswerOrder(S.build.tiles[bk]))}
     const order=S.build.tiles[bk];
     bw.insertAdjacentHTML('beforeend',
      `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-bk="${bk}">
-        <div class="hand" style="font-size:20px;margin-bottom:8px">${esc(I[b.i].c)}</div>
+        <div style="font-size:17px;line-height:1.5;margin-bottom:8px">${esc(b.cue)}</div>
         <div class="slot row" data-slot style="gap:6px;min-height:44px;border-bottom:2.5px dashed var(--mute);padding-bottom:6px;margin-bottom:10px"></div>
         <div class="row" data-tray style="gap:6px">${order.map((tk,pos)=>`<button type="button" class="chip" data-tk="${tk}" data-pos="${pos}" ${solved?'disabled':''}>${esc(b.tiles[tk])}</button>`).join('')}</div>
         <div class="row" style="margin-top:8px"><button type="button" class="btn sm" data-chk ${solved?'disabled':''}>Check</button><button type="button" class="btn sm ghost" data-clr ${solved?'disabled':''}>Clear</button></div>
         <div class="fb" data-fb></div></div>`);
     const card=bw.querySelector(`[data-bk="${bk}"]`),slot=card.querySelector('[data-slot]'),fb=card.querySelector('[data-fb]');
-    const render=()=>{slot.innerHTML=(S.build.sel[bk]||[]).map((tk,pos)=>`<button type="button" class="chip sel" data-out="${pos}">${esc(b.tiles[tk])}</button>`).join('')||'<span class="mute small">tap the tiles in order</span>';
-      card.querySelectorAll('[data-tray] .chip').forEach(c=>{const tk=+c.dataset.tk;c.style.visibility=(S.build.sel[bk]||[]).includes(tk)?'hidden':'visible'})};
-    render();
-    card.querySelectorAll('[data-tray] .chip').forEach(c=>c.onclick=()=>{

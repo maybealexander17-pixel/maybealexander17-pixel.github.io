@@ -1,3 +1,7 @@
+    const render=()=>{slot.innerHTML=(S.build.sel[bk]||[]).map((tk,pos)=>`<button type="button" class="chip sel" data-out="${pos}">${esc(b.tiles[tk])}</button>`).join('')||'<span class="mute small">tap the tiles in order</span>';
+      card.querySelectorAll('[data-tray] .chip').forEach(c=>{const tk=+c.dataset.tk;c.style.visibility=(S.build.sel[bk]||[]).includes(tk)?'hidden':'visible'})};
+    render();
+    card.querySelectorAll('[data-tray] .chip').forEach(c=>c.onclick=()=>{
       const tk=+c.dataset.tk;S.build.sel[bk]=S.build.sel[bk]||[];S.build.sel[bk].push(tk);SFX.play('flip');render();save();
     });
     slot.addEventListener('click',e=>{const o=e.target.closest('[data-out]');if(!o)return;S.build.sel[bk].splice(+o.dataset.out,1);render();save()});
@@ -8,7 +12,7 @@
       if(right){
         if(!S.build.solved.includes(bk))S.build.solved.push(bk);
         card.style.background='var(--ok-soft)';card.querySelectorAll('button').forEach(x=>x.disabled=true);
-        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly right.</span> <span class="mute small">${esc(I[b.i].n)}</span>`;
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Exactly right.</span> <b>${esc(I[b.i].c)}</b> — ${esc(I[b.i].n)}`;
         SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
       }else{
         card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
@@ -45,14 +49,3 @@ R[4]=()=>{
       }else{
         card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
         S.up.state[uk]='miss';save();
-        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not there yet.</span> <span class="mute small">One more try from memory — then look: <b>${esc(u.model)}</b></span>`;
-      }
-    };
-  });
-  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.up.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.upgrade.length*100)+'%'};
-  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
-};
-
-
-/* ---------- STAGE 5 · Translate ---------- */
-R[5]=()=>{

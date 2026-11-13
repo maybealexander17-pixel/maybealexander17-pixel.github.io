@@ -1,3 +1,14 @@
+        fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not there yet.</span> <span class="mute small">One more try from memory — then look: <b>${esc(u.model)}</b></span>`;
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.up.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.upgrade.length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+};
+
+
+/* ---------- STAGE 5 · Translate ---------- */
+R[5]=()=>{
   main.innerHTML=`<section class="stage">`+head(6,'Say it in English','Say or type your version first, then compare. This is where Russian pulls you toward a calque, so read the note under each answer.')+
   `<div class="prog"><i id="pg"></i></div><div id="trs"></div></section>`;
   const tr=$('#trs');
@@ -24,7 +35,7 @@
         showSol();
       }
     };
-  });
+  };
   const upd=()=>{const p=$('#pg');if(!p)return;const done=Object.values(S.tr.state).filter(x=>x==='ok').length;p.style.width=(done/DATA.translate.length*100)+'%'};
   upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
 };
@@ -48,11 +59,3 @@ R[6]=()=>{
      <div class="row" style="margin-top:10px;gap:6px">${u.chunks.map(([lab])=>`<span class="chip" data-chip="${esc(lab)}" style="pointer-events:none">${esc(lab)}</span>`).join('')}</div>
      <div class="row" style="margin-top:12px"><button type="button" class="btn teal sm" id="tmr">⏱ 90 seconds, talk</button><span class="hand" id="tt" style="font-size:19px;color:var(--red-d)"></span></div>
      <textarea id="w" placeholder="Now write your answer here — aim for 40+ words and light up all four phrases." aria-label="your answer">${esc(S.use.txt[S.use.cur]||'')}</textarea>
-     <div class="row" style="margin-top:6px"><span class="mute small" id="wc">${words} words</span><span class="mute small" id="lit"></span></div>
-     <div class="model" id="mo" hidden></div>
-   </div>`;
-  const ta=$('#w');
-  const light=()=>{
-    const t=ta.value;S.use.txt[S.use.cur]=t;save();
-    const n=norm(t).split(' ').filter(Boolean).length;$('#wc').textContent=n+' words';
-    const used=u.chunks.map(([lab,re])=>[lab,new RegExp(re,'i').test(norm(t))]);

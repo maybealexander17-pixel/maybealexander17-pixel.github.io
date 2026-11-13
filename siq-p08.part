@@ -1,3 +1,18 @@
+     "blow\\w*.{0,30}out of proportion"
+    ],
+    [
+     "fan the flames",
+     "fan(ned|ning)? the flames"
+    ],
+    [
+     "see eye to eye",
+     "see eye to eye"
+    ],
+    [
+     "ruffle feathers",
+     "ruffl\\w*.{0,12}feathers"
+    ]
+   ],
    "model": "Our neighbor's barbecue smoke set off the building chat, and within an hour people were blowing it out of proportion — someone even mentioned lawyers. A few sarcastic replies fanned the flames and ruffled feathers on both sides. In the end we talked on the stairs and saw eye to eye: the grill moves two meters, and everyone calms down."
   },
   {
@@ -122,12 +137,3 @@
    "re": "at the expense of",
    "model": "at the expense of"
   },
-  {
-   "i": 15,
-   "clue": "mildly annoy people — the memo ______",
-   "re": "ruffl\\w*.{0,12}feathers",
-   "model": "ruffled a few feathers"
-  },
-  {
-   "i": 0,
-   "clue": "a natural skill — she ______ explaining things",

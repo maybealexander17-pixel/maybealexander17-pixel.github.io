@@ -1,3 +1,12 @@
+  {
+   "i": 15,
+   "clue": "mildly annoy people — the memo ______",
+   "re": "ruffl\\w*.{0,12}feathers",
+   "model": "ruffled a few feathers"
+  },
+  {
+   "i": 0,
+   "clue": "a natural skill — she ______ explaining things",
    "re": "(has|have|had) a knack for",
    "model": "has a knack for"
   },
@@ -88,4 +97,3 @@ const SFX=(function(){
     o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.05)}
   function noise(at,dur,vol,ft,f1,f2){const c=ctx,t=c.currentTime+at,len=Math.max(1,Math.floor(c.sampleRate*dur)),buf=c.createBuffer(1,len,c.sampleRate),d=buf.getChannelData(0);
     for(let i=0;i<len;i++)d[i]=Math.random()*2-1;const src=c.createBufferSource();src.buffer=buf;const fl=c.createBiquadFilter();fl.type=ft||'bandpass';fl.Q.value=1.2;fl.frequency.setValueAtTime(f1||1500,t);
-    if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+dur);const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.1,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);

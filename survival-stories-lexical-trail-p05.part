@@ -1,0 +1,175 @@
+   "q": "A small audience returns for every episode and passionately recommends the show. The show has…",
+   "a": "a devoted following",
+   "b": "a man of few words",
+   "right": 0
+  },
+  {
+   "i": 11,
+   "q": "She contributes excellent map-reading skills to the group. She…",
+   "a": "brings those skills to the table",
+   "b": "taps out",
+   "right": 0
+  },
+  {
+   "i": 12,
+   "q": "Although the first episodes were slow, she continued watching the series. She…",
+   "a": "stuck with it",
+   "b": "stripped it away",
+   "right": 0
+  },
+  {
+   "i": 13,
+   "q": "He read a few pages from several books instead of finishing one. He…",
+   "a": "dipped into several books",
+   "b": "grew up on them yesterday",
+   "right": 0
+  },
+  {
+   "i": 14,
+   "q": "Two neighbors combine their tools and labor to clear a driveway. They…",
+   "a": "joined forces",
+   "b": "tapped out",
+   "right": 0
+  },
+  {
+   "i": 15,
+   "q": "He listens carefully and rarely says anything. He is…",
+   "a": "a man of few words",
+   "b": "a devoted following",
+   "right": 0
+  },
+  {
+   "i": 16,
+   "q": "Remove the fancy language until only the basic claim remains. What do you do to the language?",
+   "a": "strip it away",
+   "b": "bring it into play",
+   "right": 0
+  },
+  {
+   "i": 17,
+   "q": "Which sentence expresses a formal wish?",
+   "a": "Would that it were true.",
+   "b": "In a pinch, it was true.",
+   "right": 0
+  },
+  {
+   "i": 18,
+   "q": "When the lights failed, her first-aid training became relevant and useful. It…",
+   "a": "came into play",
+   "b": "lost a step",
+   "right": 0
+  },
+  {
+   "i": 19,
+   "q": "Exhausted, he withdrew from the race before it became dangerous. He…",
+   "a": "tapped out",
+   "b": "tapered off",
+   "right": 0
+  }
+ ],
+ "forks": [
+  {
+   "i": 0,
+   "opts": [
+    "useful",
+    "good enough",
+    "a solution",
+    "a devoted"
+   ],
+   "odd": 3,
+   "why": "Useful, good enough, and a solution all fit in a pinch. “A devoted” needs a noun such as following.",
+   "stem": "___ in a pinch"
+  },
+  {
+   "i": 1,
+   "opts": [
+    "with age",
+    "or two",
+    "after an injury",
+    "to the table"
+   ],
+   "odd": 3,
+   "why": "Age, an injury, and the phrase “a step or two” fit lose a step. “To the table” belongs to a different idiom.",
+   "stem": "lose a step ___"
+  },
+  {
+   "i": 2,
+   "opts": [
+    "books",
+    "a diet of adventure stories",
+    "classic films",
+    "the table"
+   ],
+   "odd": 3,
+   "why": "You can grow up on books, films, or a diet of stories. “Grow up on the table” is not the cultural meaning.",
+   "stem": "grow up on ___"
+  },
+  {
+   "i": 3,
+   "opts": [
+    "yourself",
+    "himself",
+    "themselves",
+    "the elements"
+   ],
+   "odd": 3,
+   "why": "Fend for takes a reflexive pronoun here. “Fend for the elements” is not the idiom.",
+   "stem": "fend for ___"
+  },
+  {
+   "i": 4,
+   "opts": [
+    "describe the scene",
+    "explain the process",
+    "remember every moment",
+    "battle the weather"
+   ],
+   "odd": 3,
+   "why": "You can describe, explain, or remember something in minute detail. Weather is battled against the elements, not in minute detail.",
+   "stem": "___ in minute detail"
+  },
+  {
+   "i": 5,
+   "opts": [
+    "gradually",
+    "after a while",
+    "somewhere around noon",
+    "to the table"
+   ],
+   "odd": 3,
+   "why": "Taper off can take a gradual or time frame. “To the table” does not fit.",
+   "stem": "taper off ___"
+  },
+  {
+   "i": 6,
+   "opts": [
+    "for survival",
+    "for days",
+    "in the Arctic",
+    "in minute detail"
+   ],
+   "odd": 3,
+   "why": "Purpose, duration, and place all fit. “In minute detail” describes precision, not a battle with weather.",
+   "stem": "battle against the elements ___"
+  },
+  {
+   "i": 7,
+   "opts": [
+    "a stretch",
+    "by no stretch",
+    "quite a stretch",
+    "a devoted"
+   ],
+   "odd": 3,
+   "why": "The established frames include a stretch, by no stretch, and quite a stretch of the imagination. “A devoted” is wrong here.",
+   "stem": "___ of the imagination"
+  },
+  {
+   "i": 8,
+   "opts": [
+    "a remark",
+    "a joke",
+    "a comment",
+    "a following"
+   ],
+   "odd": 3,

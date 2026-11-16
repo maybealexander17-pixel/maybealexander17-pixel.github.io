@@ -1,4 +1,4 @@
-SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
+        SFX.play('right');save();drawBadges();if(S.fork.solved.length===DATA.forks.length&&S.build.solved.length===DATA.build.length)celebrate('s4');
       }else{
         card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');
         fb.className='fb show';fb.innerHTML=`<span style="color:var(--bad);font-weight:800">Not quite.</span> <span class="mute small">${esc(f.why)}</span> <button type="button" class="btn sm ghost">Try again</button>`;

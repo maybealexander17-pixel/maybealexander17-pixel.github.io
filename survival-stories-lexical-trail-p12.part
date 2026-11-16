@@ -1,0 +1,51 @@
+S.cards.order.forEach(i=>{
+    const f=S.cards.flip[i];
+    g.insertAdjacentHTML('beforeend',
+     `<button type="button" class="fcard${f?' flip':''}" data-i="${i}" aria-pressed="${f}">
+        <span class="face front"><span class="c">${esc(I[i].c)}</span><span class="p">${esc(I[i].pos)}</span><span class="hint">tap to flip</span></span>
+        <span class="face back"><span class="m">${esc(I[i].m)}</span><span class="ru">${esc(I[i].ru)}</span><span class="col"><b>${esc(I[i].col)}</b></span><span class="nt">${esc(I[i].n)}</span></span>
+      </button>`);
+  });
+  const upd=()=>{const done=S.cards.flip.filter(Boolean).length;$('#pg').style.width=(done/N*100)+'%';$('#cnt').textContent=done+' / '+N};
+  upd();
+  g.querySelectorAll('.fcard').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;S.cards.flip[i]=!S.cards.flip[i];b.classList.toggle('flip',S.cards.flip[i]);SFX.play('flip');save();upd();drawBadges();
+  });
+};
+
+/* ---------- STAGE 1 · Notice ---------- */
+R[1]=()=>{
+  main.innerHTML=`<section class="stage">`+head(2,'Find them in the wild','Read the piece once for the story. Then tap every phrase from our twenty hiding inside it. Tap the whole phrase, not one word.')+
+  `<div class="card" style="background:var(--soft)"><div class="hand" style="font-size:26px;font-weight:700;margin-bottom:6px">${esc(DATA.notice.head)}</div>
+   <p id="art" style="margin:0;font-size:17.5px;line-height:1.75"></p></div>
+   <div class="detail card" id="det"><span class="mute">Tap a phrase to see what it means and how it behaves.</span></div>
+   <div class="row" style="margin-top:8px"><span class="hand" id="cnt" style="font-size:18px;color:var(--red-d)"></span><button type="button" class="btn ghost sm" id="rev" hidden>Show me what I missed</button></div></section>`;
+  let misses=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{
+    const k=DATA.notice.marks[DATA.notice.text.slice(0,DATA.notice.text.indexOf(t)).split('[[').length-1];
+    return `<span class="t" data-i="${k}">${esc(t)}</span>`;
+  });
+  /* simpler robust mark mapping: rebuild */
+  let mi=0;
+  $('#art').innerHTML=esc(DATA.notice.text).replace(/\[\[(.+?)\]\]/g,(m,t)=>{const k=DATA.notice.marks[mi++];return `<span class="t" data-i="${k}">${esc(t)}</span>`});
+  $('#art').querySelectorAll('.t').forEach(s=>{if(S.found.includes(+s.dataset.i))s.classList.add('f')});
+  const cnt=()=>{const left=DATA.notice.marks.length-S.found.length;$('#cnt').textContent=(DATA.notice.marks.length-left)+' / '+DATA.notice.marks.length+' found';
+    $('#rev').hidden=!(S.found.length>=7||misses>=4)};
+  $('#art').addEventListener('click',e=>{
+    const s=e.target.closest('span.t');
+    if(!s){const p=e.target.closest('#art');if(!p)return;misses++;$('#art').classList.remove('shake');void $('#art').offsetWidth;$('#art').classList.add('shake');SFX.play('wrong');cnt();return}
+    const i=+s.dataset.i,isNew=!S.found.includes(i);
+    if(isNew){S.found.push(i);s.classList.add('f');SFX.play('right');save();drawBadges()}
+    $('#det').innerHTML=`<div class="hand" style="font-size:21px">${esc(I[i].c)}</div><div class="ru" style="color:var(--red-d);font-weight:700">${esc(I[i].ru)}</div><div style="margin-top:4px">${esc(I[i].m[0].toUpperCase()+I[i].m.slice(1))}.</div><div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div>`;
+    cnt();if(S.found.length===DATA.notice.marks.length)celebrate('s2');
+  });
+  $('#rev').onclick=()=>{$('#art').querySelectorAll('span.t').forEach(s=>{s.classList.add('f');if(!S.found.includes(+s.dataset.i))S.found.push(+s.dataset.i)});save();cnt();drawBadges()};
+  cnt();
+};
+
+/* ---------- STAGE 2 · Meaning (either/or, wrong → back of queue) ---------- */
+R[2]=()=>{
+  main.innerHTML=`<section class="stage">`+head(3,'Do you really get it?','Quick either/or questions. A wrong answer sends the phrase to the back of the queue, so it comes back.')+
+  `<div class="prog"><i id="pg"></i></div><div id="q"></div></section>`;
+  const show=()=>{
+    $('#pg').style.width=(S.ccq.right.length/DATA.ccq.length*100)+'%';

@@ -1,0 +1,56 @@
+    if(!S.ccq.queue.length){$('#q').innerHTML=`<div class="card"><span class="okc">All ${DATA.ccq.length} cleared.</span> <span class="mute">Next: the words each phrase likes to go with.</span></div>`;celebrate('s3');drawBadges();return}
+    const qi=S.ccq.queue[0],q=DATA.ccq[qi],i=q.i;
+    const oo=S.ccq.optOrder&&S.ccq.optOrder[qi];const ord=oo||(S.ccq.optOrder=S.ccq.optOrder||{},S.ccq.optOrder[qi]=shuffle([0,1]));
+    $('#q').innerHTML=`<div class="card"><div style="font-size:16.5px;margin-bottom:10px">${esc(q.q)}</div><div class="opts row" style="flex-direction:column;align-items:stretch;gap:8px">
+      ${ord.map(k=>`<button type="button" class="btn ghost" data-k="${k}" style="text-align:left">${esc(k===0?q.a:q.b)}</button>`).join('')}</div><div class="fb" id="fb"></div></div>`;
+    const bs=[...main.querySelectorAll('#q .opts button')];
+    bs.forEach((b,k)=>b.onclick=()=>{
+      const kk=+b.dataset.k,ok=kk===q.right;
+      bs.forEach(x=>x.disabled=true);
+      bs.find(x=>+x.dataset.k===q.right).style.background='var(--ok-soft)';
+      if(!ok){b.style.background='var(--bad-soft)'}
+      S.ccq.queue.shift();if(ok){if(!S.ccq.right.includes(qi))S.ccq.right.push(qi)}else S.ccq.queue.push(qi);
+      SFX.play(ok?'right':'wrong');save();drawBadges();
+      $('#fb').className='fb show';
+      $('#fb').innerHTML=`${itemLine(i)} · ${esc(I[i].m)}.<div class="mute small" style="margin-top:4px">${esc(I[i].n)}</div><p style="margin:10px 0 0"><button type="button" class="btn sm" id="nx">Next</button></p>`;
+      $('#nx').onclick=show;
+    });
+  };
+  show();
+};
+
+
+/* ---------- STAGE 3 · Partners ---------- */
+R[3]=()=>{
+  main.innerHTML=`<section class="stage">`+head(4,'Which words go together?','Part A: each frame takes three of the four options · pick the three that sound natural, then check. Part B: read each context and build the missing phrase from the tiles, small words included. Every set has one extra trap tile.')+
+  `<h3 class="hand" style="font-size:22px;margin:16px 0 4px">Part A · Three of four</h3><div id="forks"></div>
+   <h3 class="hand" style="font-size:22px;margin:22px 0 4px">Part B · Read and rebuild</h3><div id="builds"></div></section>`;
+  const fw=$('#forks');
+  DATA.forks.forEach((f,fk)=>{
+    const solved=S.fork.solved.includes(fk);
+    fw.insertAdjacentHTML('beforeend',
+     `<div class="card" style="${solved?'background:var(--ok-soft)':''}" data-fk="${fk}">
+        <div class="hand" style="font-size:20px;margin-bottom:8px">${esc(f.stem)}</div>
+        <div class="row" style="gap:6px">${f.opts.map((o,ok)=>`<button type="button" class="chip${(S.fork.sel[fk]||[]).includes(ok)?' sel':''}" data-ok="${ok}" ${solved?'disabled':''}>${esc(o)}</button>`).join('')}</div>
+        <div class="fb" id="ff${fk}"></div></div>`);
+  });
+  fw.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
+    const fk=+c.closest('.card').dataset.fk,ok=+c.dataset.ok;
+    S.fork.sel[fk]=S.fork.sel[fk]||[];
+    const j=S.fork.sel[fk].indexOf(ok);
+    if(j>=0)S.fork.sel[fk].splice(j,1);else{S.fork.sel[fk].push(ok);if(S.fork.sel[fk].length>3)S.fork.sel[fk].shift()}
+    const card=c.closest('.card');
+    card.querySelectorAll('.chip').forEach(x=>x.classList.toggle('sel',S.fork.sel[fk].includes(+x.dataset.ok)));
+    save();
+  });
+  fw.querySelectorAll('.card').forEach(card=>{
+    const fk=+card.dataset.fk,f=DATA.forks[fk];
+    if(S.fork.solved.includes(fk)){card.querySelector(`#ff${fk}`).innerHTML=`<span class="okc">Right.</span> <span class="mute small">${esc(f.why)}</span>`;return}
+    const fb=card.querySelector(`#ff${fk}`);
+    const check=()=>{
+      const sel=S.fork.sel[fk]||[];
+      if(sel.length!==3){fb.insertAdjacentHTML('beforeend',` <span class="mute">Pick exactly three.</span>`);return}
+      if(!sel.includes(f.odd)){
+        if(!S.fork.solved.includes(fk))S.fork.solved.push(fk);
+        card.style.background='var(--ok-soft)';card.querySelectorAll('.chip').forEach(x=>x.disabled=true);
+        fb.className='fb show';fb.innerHTML=`<span class="okc">Right.</span> <span class="mute small">${esc(f.why)}</span>`;

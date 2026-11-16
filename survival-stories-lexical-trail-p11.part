@@ -1,0 +1,69 @@
+DATA.lock.forEach((_,k)=>{if(S.lock.state['r1_'+k]==='ok')S.lock.state['r0_'+k]='ok'});
+
+/* ---------- helpers ---------- */
+function celebrate(key,n){if(S.celebrated.includes(key))return;S.celebrated.push(key);save();SFX.play(key==='all'?'win':'stage');rain(n||26,key==='all')}
+function rain(n,big){
+  if(RM)return;const r=document.createElement('div');r.className='rain';
+  const chars=big?['▲','✦','⌁','↟','◆','▲','✦','⌁']:['▲','✦','⌁','↟','◆'];
+  for(let i=0;i<n;i++){const el=document.createElement('i');el.textContent=chars[i%chars.length];
+    el.style.left=Math.random()*96+'vw';el.style.animationDuration=(1.6+Math.random()*1.6)+'s';el.style.animationDelay=(Math.random()*.5)+'s';
+    el.style.fontSize=(16+Math.random()*(big?22:14))+'px';r.appendChild(el)}
+  document.body.appendChild(r);setTimeout(()=>r.remove(),FAST?200:4200);
+}
+/* decorative drifting badges */
+(function(){const d=$('#drift'),c=['▲','↟','⌁','N','✦','≈','◆','△'];
+  for(let i=0;i<8;i++){const s=document.createElement('span');s.textContent=c[i];
+    s.style.left=(4+Math.random()*90)+'vw';s.style.top=(4+Math.random()*88)+'vh';
+    s.style.animationDelay=(-Math.random()*14)+'s';if(i%3===0)s.classList.add('alt');d.appendChild(s)}})();
+
+/* ---------- remaining per stage ---------- */
+function remaining(k){
+  switch(k){
+    case 0:return S.cards.flip.filter(f=>!f).length;
+    case 1:return DATA.notice.marks.length-S.found.length;
+    case 2:return S.ccq.queue.length;
+    case 3:return DATA.forks.length-S.fork.solved.length+DATA.build.length-S.build.solved.length;
+    case 4:return DATA.upgrade.length-Object.values(S.up.state).filter(v=>v==='ok').length;
+    case 5:return DATA.translate.length-Object.values(S.tr.state).filter(v=>v==='ok').length;
+    case 6:return DATA.use.length-S.use.done.length;
+    case 7:return curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]!=='ok').length;
+  }
+  return 0;
+}
+function curLock(){return S.lock.order.map((k,j)=>({k,j}))}
+function totalLeft(){let t=0;for(let k=0;k<8;k++)t+=remaining(k);return t}
+function drawBadges(){
+  document.querySelectorAll('#nav button').forEach((b,k)=>{
+    const r=remaining(k);b.querySelector('.tb').textContent=r;b.classList.toggle('done',r===0)});
+  $('#total').textContent=totalLeft();
+  if(totalLeft()===0)celebrate('all',44);
+}
+
+/* ---------- nav ---------- */
+const STAGES=['Cards','Notice','Meaning','Partners','Upgrade','Translate','Use it','Lock it in'];
+const main=$('#main');
+$('#nav').innerHTML=STAGES.map((t,i)=>`<button type="button" data-i="${i}">${i+1}. ${t}<span class="badge tb">–</span></button>`).join('');
+document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+function go(i){
+  clearInterval(window._tm);SFX.hush(false);
+  S.stage=Math.max(0,Math.min(7,i));save();
+  document.querySelectorAll('#nav button').forEach((b,k)=>b.classList.toggle('on',k===S.stage));
+  const on=$('#nav').children[S.stage];if(on&&on.scrollIntoView)on.scrollIntoView({inline:'center',block:'nearest',behavior:(FAST||RM)?'auto':'smooth'});
+  $('#prev').style.visibility=S.stage?'visible':'hidden';$('#next').style.visibility=S.stage<7?'visible':'hidden';
+  main.innerHTML='';R[S.stage]();drawBadges();
+  const top=document.querySelector('.navrail').getBoundingClientRect().top+window.pageYOffset;
+  if(window.pageYOffset>top)window.scrollTo(0,top);
+}
+$('#prev').onclick=()=>go(S.stage-1);
+$('#next').onclick=()=>go(S.stage+1);
+const head=(n,h,t)=>`<div class="shead"><span class="badge">${n}</span><div><h2>${h}</h2><p>${t}</p></div></div>`;
+const itemLine=i=>`<b>${esc(I[i].c)}</b> <span class="ru">${esc(I[i].ru)}</span>`;
+
+
+/* ---------- STAGE 0 · Cards ---------- */
+R=[];
+R[0]=()=>{
+  main.innerHTML=`<section class="stage">`+head(1,'Meet the twenty','Flip each card. Read the meaning, the Russian, and one partner it likes. Nothing is checked · just get acquainted.')+
+  `<div class="row" style="margin:6px 0 2px"><span class="prog" style="flex:1"><i id="pg"></i></span><span class="hand" id="cnt" style="color:var(--red-d)"></span></div>
+   <div id="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px"></div></section>`;
+  const g=$('#grid');

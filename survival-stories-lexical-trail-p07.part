@@ -1,0 +1,110 @@
+   "model": "She brings useful editing skills to the table."
+  },
+  {
+   "i": 12,
+   "flat": "The first chapter was slow, but I [[continued reading]] the novel.",
+   "gap": "The first chapter was slow, but I ______ the novel.",
+   "re": "stuck with|stick with",
+   "no": "stuck to",
+   "model": "The first chapter was slow, but I stuck with the novel."
+  },
+  {
+   "i": 13,
+   "flat": "I [[read small parts of]] the essay collection before bed.",
+   "gap": "I ______ the essay collection before bed.",
+   "re": "dip(ped|ping)? into",
+   "no": "dipped in(?!to)",
+   "model": "I dipped into the essay collection before bed."
+  },
+  {
+   "i": 14,
+   "flat": "The two clubs [[worked together]] to organize the fair.",
+   "gap": "The two clubs ______ to organize the fair.",
+   "re": "joined forces",
+   "no": "joined force\\b",
+   "model": "The two clubs joined forces to organize the fair."
+  }
+ ],
+ "translate": [
+  {
+   "i": 2,
+   "ru": "Я вырос на фильмах о выживании.",
+   "en": "I grew up on survival films.",
+   "note": "Grow up on + films, books, music, or food. Do not drop the preposition on.",
+   "re": "grew up on"
+  },
+  {
+   "i": 3,
+   "ru": "Детям пришлось самим о себе позаботиться.",
+   "en": "The children had to fend for themselves.",
+   "note": "English needs for plus the reflexive: fend for themselves, not “fend themselves.”",
+   "re": "fend for (themselves|ourselves|himself|herself|yourself|yourselves)"
+  },
+  {
+   "i": 4,
+   "ru": "Он описал маршрут в мельчайших деталях.",
+   "en": "He described the route in minute detail.",
+   "note": "Minute is the adjective /maɪˈnuːt/, and the fixed phrase uses singular detail.",
+   "re": "in minute detail\\b"
+  },
+  {
+   "i": 6,
+   "ru": "Нам пришлось два дня бороться с непогодой.",
+   "en": "We had to battle against the elements for two days.",
+   "note": "The elements means severe weather here. Keep the plural and the article.",
+   "re": "battle(d)? against the elements|battling against the elements"
+  },
+  {
+   "i": 7,
+   "ru": "Мысль о том, что она построила дом за неделю, трудно представить.",
+   "en": "The idea that she built a house in a week stretches the imagination.",
+   "note": "The English idiom uses stretch the imagination, not “strain the fantasy.”",
+   "re": "stretch(es|ed|ing)? the imagination"
+  },
+  {
+   "i": 8,
+   "ru": "Его шутка про мой страх задела меня за живое.",
+   "en": "His joke about my fear was close to the bone.",
+   "note": "Close to the bone fits an uncomfortably true remark. Close to home emphasizes personal impact.",
+   "re": "close to the bone"
+  },
+  {
+   "i": 9,
+   "ru": "Мы наслаждались каждой минутой тишины.",
+   "en": "We luxuriated in the silence.",
+   "note": "Luxuriate takes in before the pleasure or sensation. No reflexive pronoun is needed.",
+   "re": "luxuriat(ed|ing) in"
+  },
+  {
+   "i": 11,
+   "ru": "Она привнесла в проект ценный опыт.",
+   "en": "She brought valuable experience to the table.",
+   "note": "The frame is bring something TO the table. The contribution goes between bring and to.",
+   "re": "brought .{0,45} to the table|brings .{0,45} to the table"
+  },
+  {
+   "i": 12,
+   "ru": "Первые серии были скучными, но я продолжил смотреть.",
+   "en": "The first episodes were boring, but I stuck with the show.",
+   "note": "Stick with fits a show or activity. Stick to is more typical for plans, rules, and decisions.",
+   "re": "stuck with|stick with"
+  },
+  {
+   "i": 14,
+   "ru": "Давай объединим усилия и закончим до темноты.",
+   "en": "Let’s join forces and finish before dark.",
+   "note": "Forces is plural in this idiom, with no article: join forces.",
+   "re": "join(ed)? forces"
+  },
+  {
+   "i": 18,
+   "ru": "Когда отключили свет, пригодился мой опыт кемпинга.",
+   "en": "When the power went out, my camping experience came into play.",
+   "note": "Come into play is intransitive. Use bring something into play when someone activates the factor.",
+   "re": "came into play|comes into play"
+  },
+  {
+   "i": 19,
+   "ru": "В какой-то момент я решил сойти с дистанции.",
+   "en": "At some point I decided to tap out of the race.",
+   "note": "Use tap out of before the activity. Taper off is a different verb meaning diminish gradually.",

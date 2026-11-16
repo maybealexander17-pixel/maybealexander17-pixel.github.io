@@ -1,0 +1,84 @@
+.toast button{background:var(--yellow);color:var(--ink);border:2px solid #fff;border-radius:8px;padding:4px 10px;font:800 13px var(--body);margin-left:10px;cursor:pointer}
+.stamp{display:inline-block;font:700 13px var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--red);
+  border:2.5px solid var(--red);border-radius:8px;padding:3px 9px;transform:rotate(-3deg)}
+
+/* stage-specific */
+.fcard{position:relative;display:grid;width:100%;min-height:160px;border:2px solid var(--line);border-radius:4px;background:var(--card);
+  box-shadow:4px 4px 0 rgba(43,37,38,.16);cursor:pointer;perspective:600px;text-align:left;padding:0;transform-style:preserve-3d;transition:transform .35s}
+.fcard .face{grid-area:1/1;display:flex;flex-direction:column;gap:6px;width:100%;padding:14px 16px;backface-visibility:hidden}
+.fcard .front .c{font:700 20px/1.15 var(--display)}
+.fcard .front .p{font:700 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.fcard .front .hint{margin-top:auto;font:14px var(--hand);color:var(--mute)}
+.fcard .back{background:var(--hl);border-radius:2px;transform:rotateY(180deg)}
+.fcard .back .m{font-size:14.5px;line-height:1.4}
+.fcard .back .ru{color:var(--red-d);font-weight:800;font-size:14px}
+.fcard .back .col{font-size:14px}
+.fcard .back .nt{font:14px var(--hand);color:var(--mute)}
+.fcard.flip{transform:rotateY(180deg)}
+#art span.t{cursor:pointer;padding:0 1px;border-radius:3px}
+#art span.t.f{background:linear-gradient(180deg,transparent 8%,var(--hl) 8%,var(--hl) 92%,transparent 92%);border-bottom-color:transparent}
+.ru{direction:ltr}
+.detail{min-height:64px}
+@media (max-width:480px){
+  .shead p{font-size:14px}
+  .hero h1{font-size:clamp(30px,10vw,40px);margin-top:96px}
+}
+</style>
+</head>
+<body>
+<div class="drift" id="drift" aria-hidden="true"></div>
+<div class="wrap">
+  <header class="hero">
+    <div class="total"><span class="badge tb" id="total">–</span><small id="totlab">badges left</small></div>
+    <h1><span>Why We Watch</span><span>People Survive:</span><span>the Trail</span></h1>
+    <div class="sub">20 phrases · 8 stages</div>
+    <p class="by">Vocabulary from the <i>Critics at Large</i> survival episode in <i>The New Yorker</i>. Clear every badge to finish. Start with noticing, end by saying it yourself.</p>
+  </header>
+  <div class="navrail">
+    <nav id="nav" aria-label="Stages"></nav>
+    <div class="bar">
+      <button class="btn ghost sm" id="prev" type="button">← Back</button>
+      <button class="btn ghost sm" id="mute" type="button" style="min-width:44px;min-height:44px">🔊</button>
+      <button class="btn ghost sm" id="next" type="button">Next stage →</button>
+    </div>
+  </div>
+  <main id="main"></main>
+  <footer style="margin-top:26px;color:var(--mute);font-size:13px" class="hand"><span>Your progress saves on this device. · @maybealexander1</span><br><button type="button" class="btn ghost sm" id="reset" style="margin-top:12px">Start over</button></footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script id="data" type="application/json">
+{
+ "items": [
+  {
+   "c": "in a pinch",
+   "pos": "adverbial phrase",
+   "ru": "в крайнем случае, при необходимости",
+   "m": "in a difficult situation when a quick or temporary solution is needed",
+   "n": "American informal; the article is fixed",
+   "col": "work in a pinch"
+  },
+  {
+   "c": "lose a step",
+   "pos": "verb phrase",
+   "ru": "сдать позиции, стать менее быстрым или ловким",
+   "m": "become slightly less quick, sharp, or capable, especially with age",
+   "n": "common in sports commentary and descriptions of decline",
+   "col": "lose a step with age"
+  },
+  {
+   "c": "grow up on something",
+   "pos": "verb phrase",
+   "ru": "вырасти на чем-либо",
+   "m": "eat, watch, read, or experience something regularly during childhood",
+   "n": "on + food or cultural influences",
+   "col": "grow up on adventure stories"
+  },
+  {
+   "c": "fend for yourself",
+   "pos": "verb phrase",
+   "ru": "справляться самостоятельно",
+   "m": "take care of yourself without help from other people",
+   "n": "the reflexive changes: fend for himself, herself, ourselves",
+   "col": "left to fend for yourself"
+  },
+  {

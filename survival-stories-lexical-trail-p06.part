@@ -1,0 +1,195 @@
+   "why": "A remark, joke, or comment can be close to the bone. A following is an audience.",
+   "stem": "___ close to the bone"
+  },
+  {
+   "i": 9,
+   "opts": [
+    "in the details",
+    "in solitude",
+    "in a hot bath",
+    "in a pinch"
+   ],
+   "odd": 3,
+   "why": "Luxuriate in takes something pleasurable: details, solitude, or a hot bath. “Luxuriate in a pinch” mixes two frames.",
+   "stem": "luxuriate ___"
+  }
+ ],
+ "build": [
+  {
+   "i": 11,
+   "tiles": [
+    "bring",
+    "experience",
+    "to",
+    "the",
+    "table",
+    "on"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "cue": "She can ______, even though she has never led a team before."
+  },
+  {
+   "i": 10,
+   "tiles": [
+    "a",
+    "devoted",
+    "following",
+    "devoting"
+   ],
+   "ans": [
+    0,
+    1,
+    2
+   ],
+   "cue": "The tiny radio show has attracted ______."
+  },
+  {
+   "i": 12,
+   "tiles": [
+    "stick",
+    "with",
+    "the",
+    "plan",
+    "on"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "cue": "Let’s ______ until the weather improves."
+  },
+  {
+   "i": 13,
+   "tiles": [
+    "dip",
+    "into",
+    "the",
+    "book",
+    "in"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "cue": "You can ______ without reading every chapter."
+  },
+  {
+   "i": 14,
+   "tiles": [
+    "join",
+    "forces",
+    "with",
+    "the",
+    "neighbors",
+    "force"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "cue": "We should ______ to finish before dark."
+  },
+  {
+   "i": 19,
+   "tiles": [
+    "tap",
+    "out",
+    "of",
+    "the",
+    "race",
+    "off"
+   ],
+   "ans": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "cue": "He had to ______ when his ankle started swelling."
+  }
+ ],
+ "upgrade": [
+  {
+   "i": 0,
+   "flat": "The flashlight was not ideal, but it [[worked well enough for an emergency]].",
+   "gap": "The flashlight was not ideal, but it ______.",
+   "re": "work(ed)? (well enough )?in a pinch",
+   "no": "in a pinch situation",
+   "model": "The flashlight was not ideal, but it worked in a pinch."
+  },
+  {
+   "i": 1,
+   "flat": "I used to solve these puzzles faster; I am [[becoming slower with age]].",
+   "gap": "I used to solve these puzzles faster; I ______.",
+   "re": "(have|has|had) lost a step|am losing a step",
+   "no": "lost my step",
+   "model": "I used to solve these puzzles faster; I have lost a step."
+  },
+  {
+   "i": 2,
+   "flat": "My brother [[spent his childhood watching]] old westerns.",
+   "gap": "My brother ______ old westerns.",
+   "re": "grew up on",
+   "no": "grew on",
+   "model": "My brother grew up on old westerns."
+  },
+  {
+   "i": 4,
+   "flat": "The technician [[described every tiny part of]] the repair.",
+   "gap": "The technician described the repair ______.",
+   "re": "in minute detail",
+   "no": "in minute details",
+   "model": "The technician described the repair in minute detail."
+  },
+  {
+   "i": 6,
+   "flat": "The hikers [[struggled against severe weather]] for two days.",
+   "gap": "The hikers ______ for two days.",
+   "re": "battle(d)? against the elements|battling against the elements",
+   "no": "battle the element\\b",
+   "model": "The hikers battled against the elements for two days."
+  },
+  {
+   "i": 8,
+   "flat": "His comment about my singing was [[uncomfortably personal and true]].",
+   "gap": "His comment about my singing was ______.",
+   "re": "close to the bone",
+   "no": "close to home",
+   "model": "His comment about my singing was close to the bone."
+  },
+  {
+   "i": 9,
+   "flat": "We [[enjoyed every moment of]] the quiet morning.",
+   "gap": "We ______ the quiet morning.",
+   "re": "luxuriat(ed|ing) in",
+   "no": "luxuriated with",
+   "model": "We luxuriated in the quiet morning."
+  },
+  {
+   "i": 10,
+   "flat": "The little show has [[a group of very loyal fans]].",
+   "gap": "The little show has ______.",
+   "re": "a devoted following",
+   "no": "devoted followers",
+   "model": "The little show has a devoted following."
+  },
+  {
+   "i": 11,
+   "flat": "She [[contributes useful editing skills to the team]].",
+   "gap": "She ______.",
+   "re": "bring(s|ing)? .{0,45} to the table|brought .{0,45} to the table",
+   "no": "bring(s)? .{0,45} on the table",

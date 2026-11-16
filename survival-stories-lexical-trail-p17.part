@@ -1,0 +1,51 @@
+  main.innerHTML=`<section class="stage">`+head(8,'Lock it in','Best done a day or two after the other stages, without looking back. All twenty clues are below. Retrieval after a gap is what makes vocabulary stick.')+
+  `<div class="prog"><i id="pg"></i></div><div id="lk"></div>
+   <div class="row" style="margin-top:12px"><button type="button" class="btn" id="rck">Check all</button><button type="button" class="btn ghost" id="rnew">Shuffle and retry</button></div><div class="fb" id="rres"></div></section>`;
+  const lk=$('#lk');
+  curLock().forEach(({k,j})=>{
+    const l=DATA.lock[k],st=S.lock.state['r'+S.lock.round+'_'+k];
+    lk.insertAdjacentHTML('beforeend',
+     `<div class="card" data-k="${k}" style="margin:8px 0;padding:12px 14px;${st==='ok'?'background:var(--ok-soft)':''}">
+        <div style="font-size:15.5px;margin-bottom:6px">${esc(l.clue)}</div>
+        <div class="row"><input type="text" data-in value="${esc(S.lock.val[k]||'')}" placeholder="type the phrase" ${st==='ok'?'disabled':''} aria-label="answer">
+        <button type="button" class="btn sm" data-chk ${st==='ok'?'disabled':''}>Check</button></div></div>`);
+    const card=lk.querySelector(`[data-k="${k}"]`),inp=card.querySelector('[data-in]');
+    const ok=v=>new RegExp(l.re,'i').test(norm(v));
+    if(st==='ok'){card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`)}
+    card.querySelector('[data-chk]').onclick=()=>{
+      const v=inp.value;S.lock.val[k]=v;
+      if(ok(v)){S.lock.state['r'+S.lock.round+'_'+k]='ok';inp.disabled=true;card.querySelector('[data-chk]').disabled=true;
+        card.style.background='var(--ok-soft)';card.insertAdjacentHTML('beforeend',`<div class="fb"><span class="okc">✓ ${esc(l.model)}</span></div>`);
+        SFX.play('right');save();drawBadges();
+      }else{
+        card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');save();
+        card.insertAdjacentHTML('beforeend',`<div class="fb" data-miss><span style="color:var(--bad);font-weight:800">Not it.</span> <span class="mute small">Model: <b>${esc(l.model)}</b></span></div>`);
+        setTimeout(()=>{const m=card.querySelector('[data-miss]');if(m)m.remove()},FAST?200:2600);
+      }
+    };
+  });
+  const upd=()=>{const p=$('#pg');if(!p)return;const done=curLock().filter(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok').length;p.style.width=(done/curLock().length*100)+'%'};
+  upd();const _d=drawBadges;drawBadges=function(){_d();upd()};
+  $('#rck').onclick=()=>{lk.querySelectorAll('[data-chk]:not([disabled])').forEach(b=>b.click());
+    const allOk=curLock().every(l=>S.lock.state['r'+S.lock.round+'_'+l.k]==='ok');
+    $('#rres').className='fb show';
+    $('#rres').innerHTML=allOk?`<span class="okc">All twenty clear.</span> <span class="mute">Shuffle and retry now, or come back tomorrow.</span>`:`<span style="color:var(--bad);font-weight:800">Some lines are still open.</span> <span class="mute">They stay · check them above.</span>`;
+    if(allOk)celebrate('s7');
+  };
+  $('#rnew').onclick=()=>{if(confirm('Clear only your Lock it in answers and shuffle all twenty?')){S.lock.round=0;S.lock.state={};S.lock.val={};S.lock.order=shuffle(DATA.lock.map((_,k)=>k));save();R[7]();drawBadges()}};
+};
+
+/* ---------- boot ---------- */
+if(loadState()){
+  const t=$('#toast');t.hidden=false;
+  t.innerHTML=`Welcome back. Your progress is saved. <button type="button" id="wipe">Start over</button>`;
+  setTimeout(()=>{t.hidden=true},FAST?200:5000);
+  let armed=false;
+  $('#wipe').onclick=()=>{if(!armed){armed=true;$('#wipe').textContent='Tap again to clear everything';setTimeout(()=>{armed=false;$('#wipe').textContent='Start over'},4000);return}
+    wipeState();location.reload()};
+}
+go(Math.min(S.stage||0,7));
+
+</script>
+</body>
+</html>

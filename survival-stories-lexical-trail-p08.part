@@ -1,0 +1,112 @@
+   "re": "tap(ped)? out of"
+  }
+ ],
+ "use": [
+  {
+   "q": "Some people think young adults should fend for themselves as early as possible. When does that build confidence, and when does it become abandonment?",
+   "chunks": [
+    [
+     "fend for yourself",
+     "fend for (myself|yourself|himself|herself|ourselves|themselves)"
+    ],
+    [
+     "bring something to the table",
+     "bring(s|ing)? .{0,45} to the table|brought .{0,45} to the table"
+    ],
+    [
+     "come into play",
+     "come(s)? into play|came into play"
+    ],
+    [
+     "join forces",
+     "join(ed)? forces"
+    ]
+   ],
+   "model": "I think independence helps only when support is still available. At eighteen, I could fend for myself in daily life, but my parents’ patience still came into play whenever money ran short. Everyone brings something different to the table, so families often do better when they join forces instead of treating self-reliance as a test of love."
+  },
+  {
+   "q": "Describe an activity you can luxuriate in even though it looks boring to other people. What small details make it enjoyable, and how long have you stuck with it?",
+   "chunks": [
+    [
+     "luxuriate in something",
+     "luxuriat(e|es|ed|ing) in"
+    ],
+    [
+     "in minute detail",
+     "in minute detail\\b"
+    ],
+    [
+     "dip into something",
+     "dip(s|ped|ping)? into"
+    ],
+    [
+     "stick with something",
+     "stick(s)? with|stuck with"
+    ]
+   ],
+   "model": "I luxuriate in long Sunday breakfasts, especially when nobody is rushing me. I notice the coffee, the toast, and the changing light in minute detail. Between cups, I dip into an essay collection rather than tackling a whole book. Friends find the ritual uneventful, but I have stuck with it for years because it makes the week feel spacious."
+  },
+  {
+   "q": "What did you grow up on, and does it still have a devoted following? Has your own enthusiasm ever tapered off?",
+   "chunks": [
+    [
+     "grow up on something",
+     "grew up on|grow up on"
+    ],
+    [
+     "a devoted following",
+     "a devoted following"
+    ],
+    [
+     "taper off",
+     "taper(ed|ing)? off"
+    ],
+    [
+     "stretch the imagination",
+     "stretch(es|ed|ing)? the imagination"
+    ]
+   ],
+   "model": "I grew up on adventure cartoons, and one of them still has a devoted following online. My enthusiasm tapered off when the newer seasons became too noisy. It would stretch the imagination to call every old episode brilliant, but the best ones respected children’s curiosity. I still return to those occasionally, while the weaker episodes remain untouched."
+  },
+  {
+   "q": "Tell about a plan that had to work in a pinch. Did anyone tap out, and what did you decide to strip away?",
+   "chunks": [
+    [
+     "in a pinch",
+     "in a pinch"
+    ],
+    [
+     "tap out",
+     "tap(ped)? out"
+    ],
+    [
+     "battle against the elements",
+     "battle(d)? against the elements|battling against the elements"
+    ],
+    [
+     "strip something away",
+     "strip(ped|ping)?( .{0,30})? away"
+    ]
+   ],
+   "model": "On a camping trip, a torn tent forced us to improvise in a pinch. One exhausted friend tapped out and booked a nearby room, which was sensible. The rest of us stripped away the complicated itinerary and stayed close to shelter. We spent one wet night battling against the elements, then drove home with a much humbler idea of adventure."
+  },
+  {
+   "q": "Do you trust a reserved person more when their remarks are close to the bone? Talk about someone who has lost a step but still understands people sharply.",
+   "chunks": [
+    [
+     "a man of few words",
+     "a man of few words"
+    ],
+    [
+     "close to the bone",
+     "close to the bone"
+    ],
+    [
+     "lose a step",
+     "(has|have|had) lost a step|lost a step|lose a step"
+    ],
+    [
+     "would that it were",
+     "would that it were"
+    ]
+   ],

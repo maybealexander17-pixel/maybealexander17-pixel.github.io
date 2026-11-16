@@ -1,4 +1,4 @@
-S.cards.order.forEach(i=>{
+  S.cards.order.forEach(i=>{
     const f=S.cards.flip[i];
     g.insertAdjacentHTML('beforeend',
      `<button type="button" class="fcard${f?' flip':''}" data-i="${i}" aria-pressed="${f}">

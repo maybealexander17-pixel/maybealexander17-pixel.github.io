@@ -1,0 +1,105 @@
+   "ru": "сдаться, прекратить участие",
+   "m": "withdraw from an activity because you cannot continue",
+   "n": "American informal; tap out of + the activity",
+   "col": "tap out of the competition"
+  }
+ ],
+ "notice": {
+  "head": "Community Radio, by Lantern Light",
+  "text": "When an ice storm cut power to Lakeview on a Friday evening, the staff at community station KLVW faced an unusual weekend. Three volunteers had to [[battle against the elements]] just to reach the studio. The station manager, Martin, is [[a man of few words]], but his quiet planning steadied everyone. A retired nurse named Louise [[brought valuable experience to the table]], while a camping stove and two lanterns proved useful [[in a pinch]]. The hardware store and the bakery [[joined forces]] to supply batteries, coffee, and sandwiches. Many listeners had [[grown up on]] KLVW, and they began calling before the first microphone was even switched on.\nWithout computers, the team [[stripped away]] the usual music and polished segments. Martin described the backup transmitter [[in minute detail]], although it would [[stretch the imagination]] to call the setup sophisticated. He joked that he had [[lost a step]] when he fumbled with the old analog mixer, then found the right switch on his second try. The station had [[a devoted following]], but nobody expected the flood of calls. Between updates, Louise usually [[dipped into]] a novel; that night she read every message instead. The volunteers [[stuck with]] a simple schedule: weather, road conditions, then calls.\nAll those emergency drills suddenly [[came into play]]. During a rare quiet moment, one volunteer [[luxuriated in]] a cup of hot coffee. As the wind [[tapered off]], a caller described eating alone in a cold apartment, and her understated account felt [[close to the bone]]. Martin said, “[[Would that it were]] enough to tell everyone to stay positive.” Nobody wanted to [[tap out]], but the night shift finally persuaded him to sleep. By Sunday, the broadcast had become less about surviving without electricity than about who could not safely [[fend for themselves]], and which neighbors were willing to help.",
+  "marks": [
+   6,
+   15,
+   11,
+   0,
+   14,
+   2,
+   16,
+   4,
+   7,
+   1,
+   10,
+   13,
+   12,
+   18,
+   9,
+   5,
+   8,
+   17,
+   19,
+   3
+  ]
+ },
+ "ccq": [
+  {
+   "i": 0,
+   "q": "Your usual bike pump breaks, and you borrow a tiny emergency one. It was useful…",
+   "a": "in a pinch",
+   "b": "in minute detail",
+   "right": 0
+  },
+  {
+   "i": 1,
+   "q": "A former chess champion now misses tactics she used to spot instantly. She…",
+   "a": "has lost a step",
+   "b": "has grown up on them",
+   "right": 0
+  },
+  {
+   "i": 2,
+   "q": "Which person grew up on mystery novels?",
+   "a": "She read them constantly as a child.",
+   "b": "She read one for the first time last week.",
+   "right": 0
+  },
+  {
+   "i": 3,
+   "q": "With no adults or outside help available, the teenagers had to…",
+   "a": "fend for themselves",
+   "b": "luxuriate in the situation",
+   "right": 0
+  },
+  {
+   "i": 4,
+   "q": "Which description is in minute detail?",
+   "a": "Every screw, cable, and measurement is included.",
+   "b": "It gives the broad idea in two sentences.",
+   "right": 0
+  },
+  {
+   "i": 5,
+   "q": "The rain gradually becomes lighter and less frequent. It…",
+   "a": "tapers off",
+   "b": "taps out",
+   "right": 0
+  },
+  {
+   "i": 6,
+   "q": "Which scene shows someone battling against the elements?",
+   "a": "Hiking through freezing rain and strong winds",
+   "b": "Arguing with a coworker about a deadline",
+   "right": 0
+  },
+  {
+   "i": 7,
+   "q": "The claim that he built an entire house in one afternoon…",
+   "a": "stretches the imagination",
+   "b": "is close to the bone",
+   "right": 0
+  },
+  {
+   "i": 8,
+   "q": "A joke about your private fear makes you uncomfortable because it feels too true. It is…",
+   "a": "close to the bone",
+   "b": "in a pinch",
+   "right": 0
+  },
+  {
+   "i": 9,
+   "q": "She sank into a hot bath and enjoyed every unhurried minute. She…",
+   "a": "luxuriated in it",
+   "b": "tapered off",
+   "right": 0
+  },
+  {
+   "i": 10,

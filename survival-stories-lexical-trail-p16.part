@@ -1,4 +1,4 @@
-SFX.play('right');save();drawBadges();showSol();
+        SFX.play('right');save();drawBadges();showSol();
         if(Object.values(S.tr.state).filter(x=>x==='ok').length===DATA.translate.length)celebrate('s6');
       }else{
         card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake');SFX.play('wrong');S.tr.state[tk]='miss';save();

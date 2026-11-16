@@ -1,0 +1,141 @@
+   "model": "My grandfather is a man of few words, so his blunt observations carry weight, even when they feel close to the bone. He has lost a step physically, but he still reads people with unsettling accuracy. Would that it were possible to disagree with him as easily as I disagree with strangers. Usually, his silence turns out to be wiser than my arguments."
+  }
+ ],
+ "lock": [
+  {
+   "i": 0,
+   "clue": "adequate in an emergency: the old stove worked ______",
+   "model": "in a pinch",
+   "re": "in a pinch"
+  },
+  {
+   "i": 1,
+   "clue": "less sharp than before: she has ______",
+   "model": "lost a step",
+   "re": "lost a step"
+  },
+  {
+   "i": 2,
+   "clue": "experienced regularly as a child: he ______ adventure comics",
+   "model": "grew up on",
+   "re": "grew up on"
+  },
+  {
+   "i": 3,
+   "clue": "without help: the twins had to ______",
+   "model": "fend for themselves",
+   "re": "fend for themselves"
+  },
+  {
+   "i": 4,
+   "clue": "with every tiny feature included: the route was described ______",
+   "model": "in minute detail",
+   "re": "in minute detail\\b"
+  },
+  {
+   "i": 5,
+   "clue": "gradually become weaker: the applause ______",
+   "model": "tapered off",
+   "re": "tapered off"
+  },
+  {
+   "i": 6,
+   "clue": "struggle against severe weather: they had to ______",
+   "model": "battle against the elements",
+   "re": "battle against the elements"
+  },
+  {
+   "i": 7,
+   "clue": "difficult to believe: the claim really ______",
+   "model": "stretches the imagination",
+   "re": "stretches the imagination"
+  },
+  {
+   "i": 8,
+   "clue": "uncomfortably personal and true: his joke was ______",
+   "model": "close to the bone",
+   "re": "close to the bone"
+  },
+  {
+   "i": 9,
+   "clue": "enjoy slowly and fully: we ______ the silence",
+   "model": "luxuriated in",
+   "re": "luxuriated in"
+  },
+  {
+   "i": 10,
+   "clue": "a loyal group of fans: the podcast has ______",
+   "model": "a devoted following",
+   "re": "a devoted following"
+  },
+  {
+   "i": 11,
+   "clue": "contribute something useful: she ______",
+   "model": "brings experience to the table",
+   "re": "brings .{0,45} to the table"
+  },
+  {
+   "i": 12,
+   "clue": "continue instead of abandoning: I ______ the show",
+   "model": "stuck with",
+   "re": "stuck with"
+  },
+  {
+   "i": 13,
+   "clue": "read small parts: I ______ the essays",
+   "model": "dipped into",
+   "re": "dipped into"
+  },
+  {
+   "i": 14,
+   "clue": "work together: the two clubs ______",
+   "model": "joined forces",
+   "re": "joined forces"
+  },
+  {
+   "i": 15,
+   "clue": "speaks very little: my uncle is ______",
+   "model": "a man of few words",
+   "re": "a man of few words"
+  },
+  {
+   "i": 16,
+   "clue": "remove a layer: ______ the jargon",
+   "model": "strip away",
+   "re": "strip away"
+  },
+  {
+   "i": 17,
+   "clue": "a formal wish: ______ so simple",
+   "model": "Would that it were",
+   "re": "would that it were"
+  },
+  {
+   "i": 18,
+   "clue": "become useful: her training ______",
+   "model": "came into play",
+   "re": "came into play"
+  },
+  {
+   "i": 19,
+   "clue": "withdraw because you cannot continue: he ______ the race",
+   "model": "tapped out of",
+   "re": "tapped out of"
+  }
+ ]
+}
+</script>
+<script>
+
+/* ================= ENGINE ================= */
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const I=DATA.items, N=I.length;
+const FAST=/[?&]fast=1/.test(location.search);
+if(FAST)document.documentElement.classList.add('fast');
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function norm(s){return String(s).toLowerCase().replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[^a-z0-9\s'-]/g,' ').replace(/\s+/g,' ').trim()}
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function hash(s){let h=0;for(let i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))|0}return(h>>>0).toString(36)}
+const SAVE_KEY='vp:survival-stories-lexical-trail:'+hash(JSON.stringify([DATA.notice,DATA.ccq,DATA.forks,DATA.build,DATA.upgrade,DATA.translate,DATA.use,DATA.lock]));

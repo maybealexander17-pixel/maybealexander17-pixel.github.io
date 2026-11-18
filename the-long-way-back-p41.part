@@ -1,0 +1,65 @@
+.source-links{display:grid;gap:10px;align-content:start}
+.source-links a{font-size:.85rem;text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:9px;display:flex;justify-content:space-between;gap:15px}
+.source-links a:after{content:'↗';color:var(--amber)}
+.footer{padding:20px 0 28px;color:#708994;font-size:.72rem;letter-spacing:.06em;display:flex;justify-content:space-between;gap:20px;border-top:1px solid rgba(42,70,84,.55)}
+
+/* dialog and toast */
+dialog{max-width:480px;width:calc(100% - 32px);background:var(--navy);color:var(--ice);border:1px solid var(--line);padding:28px;box-shadow:0 30px 100px #000}
+dialog::backdrop{background:rgba(2,9,14,.78);backdrop-filter:blur(4px)}
+dialog h2{font:700 2rem/1 var(--display);text-transform:uppercase;margin:0 0 13px}
+dialog p{color:var(--muted);font-size:.92rem}
+.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ice);color:var(--night);padding:10px 16px;z-index:60;font-size:.85rem;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:900px){
+  .flash-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .story-grid{gap:32px}
+  .checkpoint{width:104px}
+  .checkpoint .node-name{font-size:.9rem}
+  .options{grid-template-columns:1fr}
+}
+@media(max-width:800px){
+  .shell{width:min(100% - 30px,1180px)}
+  .topbar-inner{min-height:60px;gap:10px}
+  .brand-text{font-size:.94rem}
+  .brand-mark{width:26px;height:26px}
+  .header-progress{gap:8px}
+  .progress-track{width:64px}
+  .save-state{display:none}
+  .icon-btn{padding:7px 9px;font-size:.74rem}
+  .hero{min-height:620px}
+  .hero-content{padding:90px 0 65px}
+  .hero h1{font-size:clamp(4rem,22vw,6.5rem);max-width:450px}
+  .hero-shade{background:linear-gradient(90deg,rgba(4,13,21,.88),rgba(4,13,21,.25)),linear-gradient(0deg,#071521 0%,transparent 60%)}
+  .hero-index{display:none}
+  .route-section{padding:55px 0 40px}
+  .section-head{display:block}
+  .route-summary{text-align:left;margin-top:15px}
+  .route-summary strong{display:inline;margin-right:7px}
+  .map-desktop{display:none}
+  .map-mobile{display:block;position:relative;border:1px solid var(--line);background:var(--navy);padding:24px 18px 24px 23px;overflow:hidden}
+  .map-mobile:before{content:'';position:absolute;left:40px;top:53px;bottom:54px;width:1px;background:repeating-linear-gradient(to bottom,#4a6570 0 4px,transparent 4px 10px)}
+  .mobile-stop{position:relative;display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:13px;width:100%;border:0;background:transparent;color:var(--ice);padding:16px 0;text-align:left;cursor:pointer;z-index:1}
+  .mobile-stop .node{width:35px;height:35px;border-radius:50%;display:grid;place-items:center;background:#102635;border:1px solid #66808d;font:700 1rem/1 var(--display)}
+  .mobile-stop .mobile-name{font:700 1.2rem/1 var(--display);letter-spacing:.035em;text-transform:uppercase}
+  .mobile-stop .node-state{font-size:.67rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .mobile-stop.complete .node{background:var(--amber);border-color:var(--amber);color:var(--night)}
+  .mobile-stop.complete .node-state{color:var(--amber2)}
+  .mobile-stop.current .node{border-color:var(--frost);box-shadow:0 0 0 4px rgba(153,215,220,.09)}
+  .route-foot{display:block}
+  .route-foot span{display:block;margin-top:5px}
+  .stage-mast{grid-template-columns:70px minmax(0,1fr);gap:18px;padding-top:28px}
+  .stage-number{font-size:4rem}
+  .stage-title{font-size:clamp(2.8rem,14vw,4.3rem)}
+  .story-grid{grid-template-columns:1fr;gap:20px;padding-top:25px}
+  .story-copy{font-size:1.04rem}
+  .history-note{border-left:0;border-top:1px solid var(--amber);padding:18px 0 0}
+  .task-zone{padding:22px 18px}
+  .phrase-chip{min-height:44px}
+  .gap-slot{min-height:40px}
+  .move-btn{width:42px;height:42px}
+  .btn.small-btn{min-height:42px}
+  .task-head{gap:12px}
+  .task-count{font-size:1.6rem}
+  .discussion-intro{grid-template-columns:1fr;gap:22px}

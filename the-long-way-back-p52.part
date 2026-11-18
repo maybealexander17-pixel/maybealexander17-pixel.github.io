@@ -42,7 +42,7 @@ function renderStage2(){
 function gapTaskCount(){return S.s3.checked?`${GAPS.filter((g,i)=>S.s3.slots[i]===g.answer).length} / 8`:`${Object.keys(S.s3.slots).length} / 8`}
 function renderStage3(){
   const used=Object.values(S.s3.slots);
-  const bank=BANK_ORDER.map(i=>BANK[i]).map(p=>`<button class="phrase-chip ${activeGapPhrase===p.id?'active':''}" type="button" data-phrase="${p.id}" ${used.includes(p.id)?'disabled':''}>${esc(p.text)}</button>`).join('');
+  const bank=getBankOrder().map(i=>BANK[i]).map(p=>`<button class="phrase-chip ${activeGapPhrase===p.id?'active':''}" type="button" data-phrase="${p.id}" ${used.includes(p.id)?'disabled':''}>${esc(p.text)}</button>`).join('');
   const rows=GAPS.map((g,i)=>{
     const val=S.s3.slots[i],text=BANK.find(p=>p.id===val)?.text||'';
     const cls=S.s3.checked?(val===g.answer?'right':'wrong'):activeGapSlot===i?'active':'';

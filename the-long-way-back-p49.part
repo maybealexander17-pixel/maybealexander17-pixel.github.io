@@ -1,0 +1,26 @@
+const LOG_MODEL='Glass’s return is often told as a contest between one man and nature, but that version strips away the network that made his journey possible. Before the attack, he brought his experience to the table as a member of an expedition. After he was abandoned, he had to fend for himself, and practical knowledge came into play in a pinch. Still, by no stretch of the imagination did he create the conditions of his survival alone. He stuck with the journey, battled against the elements, and finally reached a fort built and occupied by other people. His endurance matters, but so does the world he returned to.';
+const PROMPTS=[
+  {title:'Comfort and catastrophe',text:'Why do people in a hyper-developed society luxuriate in stories about having everything familiar stripped away?',language:'luxuriate in sth · strip sth away · a devoted following',angles:['Is the appeal escapism, rehearsal, or both?','Do climate crisis and AI anxieties make catastrophe feel closer?','What is comfortable about watching discomfort?']},
+  {title:'The myth of self-reliance',text:'Vinson Cunningham argues that most lives involve other people, and surviving together is harder to dramatize. Does Glass’s legend support or challenge that?',language:'fend for yourself · join forces · come into play',angles:['Consider the expedition before and after the attack.','What disappears when we focus only on the solitary hero?','Could cooperation make a gripping survival story?']},
+  {title:'Survival as a show',text:'What changes when survival becomes a reality-TV competition, as in Survivor or Alone?',language:'grow up on sth · stick with sth · tap out',angles:['A contestant can tap out. What choices does a real crisis remove?','How do cameras and editing shape our idea of isolation?','Why do audiences stick with these shows for years?']},
+  {title:'Belief and discomfort',text:'Which survival scene stretches your imagination too far, and what makes another one feel close to the bone?',language:'stretch the imagination · close to the bone · in minute detail',angles:['Physical recovery, loneliness, luck, or access to resources?','Does detailed description make a scene more convincing?','Can an implausible story still reveal a personal truth?']},
+  {title:'The useful survivor',text:'What do you bring to the table in a crisis? Is independence still the ideal if other people bring different skills?',language:'bring sth to the table · join forces · in a pinch',angles:['Think of a real group, not an imaginary lone hero.','Which skills become useful in a pinch?','Whose less visible work keeps a group alive?']},
+  {title:'After survival',text:'Would that it were enough simply to stay alive. What comes after survival: revenge, forgiveness, return, or connection?',language:'would that it were · lose a step · a man of few words',angles:['Does survival require a neat emotional ending?','How might a person return changed or diminished?','What does Glass’s later life add to the legend?']}
+];
+const TARGET_PATTERNS=[
+  ['bring sth to the table',/\bbring(?:ing|s|t)?\b[^.!?]{0,45}\bto the table\b|\bbrought\b[^.!?]{0,45}\bto the table\b/i],
+  ['fend for yourself',/\bfend(?:ing|s)? for (?:myself|yourself|himself|herself|themselves|ourselves)\b/i],
+  ['stretch the imagination',/\b(?:stretch(?:es|ing)?|stretched|stretch of) (?:the |my |your |his |her |our |their |reader.?s )?imagination\b|\bby no stretch of the imagination\b/i],
+  ['a man of few words',/\ba man of (?:action and )?few words\b/i],
+  ['lose a step',/\b(?:lose|loses|losing|lost) a step\b/i],
+  ['luxuriate in sth',/\bluxuriat(?:e|es|ed|ing) in\b/i],
+  ['strip sth away',/\bstrip(?:s|ped|ping)?\b[^.!?]{0,35}\baway\b/i],
+  ['taper off',/\btaper(?:s|ed|ing)? off\b/i],
+  ['dip into sth',/\bdip(?:s|ped|ping)? into\b/i],
+  ['tap out',/\btap(?:s|ped|ping)? out\b/i],
+  ['close to the bone',/\bclose to the bone\b/i],
+  ['come into play',/\b(?:come|comes|came|coming) into play\b/i],
+  ['in a pinch',/\bin a pinch\b/i],
+  ['join forces',/\bjoin(?:s|ed|ing)? forces\b/i],
+  ['in minute detail',/\bin minute detail\b/i],
+  ['a devoted following',/\ba (?:small but )?devoted following\b/i],

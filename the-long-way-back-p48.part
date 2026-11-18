@@ -1,0 +1,39 @@
+  {text:'When the weather changes, navigation skills begin to matter. What happens to those skills?',options:['They come into play.','They tap out.','They taper off.'],answer:0,explain:'Skills, factors, and practical considerations come into play when they become relevant or begin to affect a situation.'}
+];
+const BANK=[
+  {id:'strip',text:'strip away'},{id:'taper',text:'tapered off'},{id:'dip',text:'dip into'},{id:'fend',text:'fend for himself'},
+  {id:'would',text:'Would that it were'},{id:'grew',text:'grew up on'},{id:'battle',text:'battle against the elements'},{id:'pinch',text:'in a pinch'},
+  {id:'lux',text:'luxuriated in'},{id:'few',text:'a man of few words'}
+];
+const BANK_ORDER=[6,2,9,0,7,4,1,8,3,5];
+const GAPS=[
+  {before:'The crisis seemed to ',after:' the comforts and certainties of ordinary life.',answer:'strip'},
+  {before:'The snowfall finally ',after:' toward morning.',answer:'taper'},
+  {before:'Later readers could ',after:' the printed accounts without reading every version.',answer:'dip'},
+  {before:'With no rescue in sight, he had to ',after:'.',answer:'fend'},
+  {before:'',after:' so simple: walk southeast and do not stop.',answer:'would'},
+  {before:'Many of us ',after:' adventure stories long before we questioned their myths.',answer:'grew'},
+  {before:'His journey became a desperate ',after:'.',answer:'battle'},
+  {before:'A small reserve of food could still save him ',after:'.',answer:'pinch'}
+];
+const PRECISION_Q=[
+  {text:'He remembered every bend in the river ___.',options:['in minute details','in minute detail','in a pinch'],answer:1,explain:'Use the singular fixed form in minute detail. Here minute is pronounced /maɪˈnuːt/.'},
+  {text:'Over two centuries, Glass’s story has attracted ___.',options:['a devoted following','a man of few words','close to the bone'],answer:0,explain:'A devoted following is a loyal group of fans or supporters. Following is a singular count noun here.'},
+  {text:'The illusions of total independence were stripped ___.',options:['off','out','away'],answer:2,explain:'Strip away means remove. The verb is separable: strip away the illusion or strip the illusion away.'},
+  {text:'After the men left, Glass had to fend for ___.',options:['themselves','himself','itself'],answer:1,explain:'The reflexive pronoun must match Glass: fend for himself.'},
+  {text:'The two groups joined forces ___ cross the river.',options:['with','for','to'],answer:2,explain:'Use join forces to do something. Use join forces with somebody for the partner.'},
+  {text:'Exhaustion forced him to tap out ___ the march.',options:['of','from','with'],answer:0,explain:'Tap out is intransitive. Name the activity with tap out of something.'}
+];
+const REWRITES=[
+  {original:'The claim that one determined person needs nobody else is hard to accept.',target:'stretch the imagination',model:'The claim that one determined person needs nobody else stretches the imagination.'},
+  {original:'The description of hunger felt uncomfortably personal to me.',target:'close to the bone',model:'The description of hunger came close to the bone for me.'},
+  {original:'I wish it were enough to reach the fort and leave the experience behind.',target:'would that it were',model:'Would that it were enough to reach the fort and leave the experience behind.'}
+];
+const SEQUENCE=[
+  'Near the Grand River, the attack leaves Glass gravely injured and strips away the security of traveling with a party.',
+  'Two men stay behind while the main expedition moves on.',
+  'Alone and without his equipment, he is left to fend for himself.',
+  'He begins moving toward Fort Kiowa, battling against the elements and using whatever skills come into play.',
+  'Crawling and walking become parts of the same long effort. He sticks with the journey.',
+  'In autumn, he reaches Fort Kiowa, and the survival story begins its journey into legend.'
+];

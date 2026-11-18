@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Long Way Back</title></head>
+<body style="font-family:sans-serif;background:#F7F1E3;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0">Loading…</body>
+<script>
+(async()=>{
+  const parts=await Promise.all(Array.from({length:58},(_,i)=>fetch('the-long-way-back-p'+String(i).padStart(2,'0')+'.part',{cache:'no-store'}).then(r=>r.text())));
+  document.open();document.write(parts.join(''));document.close();
+})().catch(e=>{document.body.textContent='Failed to load — please refresh.'});
+</script></html>

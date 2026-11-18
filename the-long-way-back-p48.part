@@ -5,7 +5,15 @@ const BANK=[
   {id:'would',text:'Would that it were'},{id:'grew',text:'grew up on'},{id:'battle',text:'battle against the elements'},{id:'pinch',text:'in a pinch'},
   {id:'lux',text:'luxuriated in'},{id:'few',text:'a man of few words'}
 ];
-const BANK_ORDER=[6,2,9,0,7,4,1,8,3,5];
+function makeBankOrder(){
+  const order=Array.from({length:BANK.length},(_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}
+  return order;
+}
+function getBankOrder(){
+  if(!Array.isArray(S.s3.bankOrder)||S.s3.bankOrder.length!==BANK.length)S.s3.bankOrder=makeBankOrder();
+  return S.s3.bankOrder;
+}
 const GAPS=[
   {before:'The crisis seemed to ',after:' the comforts and certainties of ordinary life.',answer:'strip'},
   {before:'The snowfall finally ',after:' toward morning.',answer:'taper'},
@@ -35,5 +43,3 @@ const SEQUENCE=[
   'Alone and without his equipment, he is left to fend for himself.',
   'He begins moving toward Fort Kiowa, battling against the elements and using whatever skills come into play.',
   'Crawling and walking become parts of the same long effort. He sticks with the journey.',
-  'In autumn, he reaches Fort Kiowa, and the survival story begins its journey into legend.'
-];

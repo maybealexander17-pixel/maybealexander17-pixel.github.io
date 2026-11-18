@@ -1,3 +1,5 @@
+  'In autumn, he reaches Fort Kiowa, and the survival story begins its journey into legend.'
+];
 const LOG_MODEL='Glass’s return is often told as a contest between one man and nature, but that version strips away the network that made his journey possible. Before the attack, he brought his experience to the table as a member of an expedition. After he was abandoned, he had to fend for himself, and practical knowledge came into play in a pinch. Still, by no stretch of the imagination did he create the conditions of his survival alone. He stuck with the journey, battled against the elements, and finally reached a fort built and occupied by other people. His endurance matters, but so does the world he returned to.';
 const PROMPTS=[
   {title:'Comfort and catastrophe',text:'Why do people in a hyper-developed society luxuriate in stories about having everything familiar stripped away?',language:'luxuriate in sth · strip sth away · a devoted following',angles:['Is the appeal escapism, rehearsal, or both?','Do climate crisis and AI anxieties make catastrophe feel closer?','What is comfortable about watching discomfort?']},
@@ -23,4 +25,3 @@ const TARGET_PATTERNS=[
   ['in a pinch',/\bin a pinch\b/i],
   ['join forces',/\bjoin(?:s|ed|ing)? forces\b/i],
   ['in minute detail',/\bin minute detail\b/i],
-  ['a devoted following',/\ba (?:small but )?devoted following\b/i],

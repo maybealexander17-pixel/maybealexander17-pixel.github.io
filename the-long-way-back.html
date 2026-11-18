@@ -4,6 +4,7 @@
 <script>
 (async()=>{
   const parts=await Promise.all(Array.from({length:58},(_,i)=>fetch('the-long-way-back-p'+String(i).padStart(2,'0')+'.part',{cache:'no-store'}).then(r=>r.text())));
-  document.open();document.write(parts.join(''));document.close();
+  const html=parts.join('').replace(/\\\n/g,'');
+  document.open();document.write(html);document.close();
 })().catch(e=>{document.body.textContent='Failed to load — please refresh.'});
 </script></html>

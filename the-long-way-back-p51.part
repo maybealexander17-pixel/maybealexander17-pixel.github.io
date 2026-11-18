@@ -1,0 +1,53 @@
+    <div><button class="btn ghost small-btn" id="prevStage" type="button" ${i===0?'disabled':''}>← Previous</button><button class="btn ghost small-btn" id="resetStage" type="button">Restart checkpoint</button></div>
+    <span class="completion-note ${done?'done':''}" id="completionNote">${done?'Checkpoint complete. You can keep exploring or move on.':completionHint(i)}</span>
+    ${next?`<button class="btn ${done?'':'secondary'}" id="nextStage" type="button">${done?'Continue':'Next'}: ${esc(next.title)} <span class="btn-arrow" aria-hidden="true">→</span></button>`:`<button class="btn secondary" id="returnRoute" type="button">Review the trail</button>`}
+  </div>`;
+}
+function completionHint(i){
+  return [
+    'Open all six field cards to complete this checkpoint.',
+    'Respond to all six situations. Wrong answers still come with an explanation.',
+    'Place every phrase, then check the trail or reveal the answers.',
+    'Complete the precision check and review all three rewrites.',
+    'Order the route, write your account, and compare it with the model.',
+    'Prepare a prompt and complete the three reflection checks.'
+  ][i];
+}
+function stageShell(i,task){
+  const s=STAGES[i];
+  return `<article class="stage" aria-labelledby="stageHeading">
+    <header class="stage-mast"><div class="stage-number" aria-hidden="true">0${i+1}</div><div><div class="eyebrow">[ Checkpoint 0${i+1} · ${esc(s.skill)} ]</div><h2 class="stage-title display" id="stageHeading" tabindex="-1">${esc(s.title)}</h2><p class="stage-deck">${esc(s.deck)}</p></div></header>
+    <div class="story-grid"><div class="story-copy">${s.story}</div><aside class="history-note">${s.note}</aside></div>
+    <div class="task-zone">${task}</div>${stageFooter(i)}
+  </article>`;
+}
+function taskHead(kicker,title,description,count,id='taskCount'){
+  return `<div class="task-head"><div><div class="eyebrow">${esc(kicker)}</div><h3>${esc(title)}</h3><p>${esc(description)}</p></div><span class="task-count" id="${id}">${count}</span></div>`;
+}
+function refreshFooter(i){
+  const note=$('#completionNote');if(!note)return;
+  const done=stageDone(i);note.classList.toggle('done',done);note.textContent=done?'Checkpoint complete. You can keep exploring or move on.':completionHint(i);
+  const next=$('#nextStage');if(next){next.classList.toggle('secondary',!done);next.innerHTML=`${done?'Continue':'Next'}: ${esc(STAGES[i+1].title)} <span class="btn-arrow" aria-hidden="true">→</span>`}
+  updateMap();
+}
+function bindFooter(i){
+  const prev=$('#prevStage'),next=$('#nextStage'),reset=$('#resetStage'),route=$('#returnRoute');
+  if(prev)prev.onclick=()=>go(i-1);
+  if(next)next.onclick=()=>go(i+1);
+  if(reset)reset.onclick=()=>openReset(i);
+  if(route)route.onclick=()=>{$('#route').scrollIntoView({behavior:motionOK()?'smooth':'auto'})};
+}
+function motionOK(){return !matchMedia('(prefers-reduced-motion: reduce)').matches}
+function go(i,scroll=true){
+  S.current=Math.max(0,Math.min(5,i));S.started=true;activeGapPhrase=null;activeGapSlot=null;save();renderStage();updateMap();
+  if(scroll){$('#journey').scrollIntoView({behavior:motionOK()?'smooth':'auto',block:'start'});setTimeout(()=>$('#stageHeading')?.focus({preventScroll:true}),motionOK()?350:0)}
+}
+function renderStage(){
+  const root=$('#stageRoot'),i=S.current;
+  root.innerHTML=[renderStage1,renderStage2,renderStage3,renderStage4,renderStage5,renderStage6][i]();
+  bindFooter(i);
+}
+
+/* Checkpoint 1 */
+function renderStage1(){
+  const cards=FLASH.map((c,i)=>{const flipped=S.s1.flipped.includes(i);return `<button class="flip-card ${flipped?'flipped':''}" type="button" data-card="${i}" aria-pressed="${flipped}" aria-label="${flipped?'Close':'Open'} field card: ${esc(c.term)}"><span class="flip-inner"><span class="flip-face flip-front"><span class="card-no">Field card 0${i+1}</span><span class="flip-term">${esc(c.term)}</span><span class="flip-cue">Tap or press Enter to reveal the trail note</span></span><span class="flip-face flip-back"><span class="card-no">Meaning</span><span class="flip-definition">${esc(c.definition)}</span><span class="flip-example"><strong>Try this pattern:</strong><br>${esc(c.example)}</span></span></span></button>`}).join('');

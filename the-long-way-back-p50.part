@@ -1,0 +1,71 @@
+  ['would that it were',/\bwould that it were\b/i],
+  ['grow up on sth',/\b(?:grow|grows|grew|growing) up on\b/i],
+  ['stick with sth',/\b(?:stick|sticks|stuck|sticking) with\b/i],
+  ['battle against the elements',/\bbattl(?:e|es|ed|ing) against the elements\b/i]
+];
+</script>
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const SAVE_KEY='the-long-way-back:standalone:v1';
+const fresh=()=>({
+  current:0,started:false,
+  s1:{flipped:[],seen:[]},
+  s2:{answers:{}},
+  s3:{slots:{},checked:false,revealed:false},
+  s4:{choices:{},checked:false,revealed:false,open:REWRITES.map(()=>({text:'',show:false,reviewed:false}))},
+  s5:{order:[3,0,4,1,5,2],checked:false,solved:false,revealed:false,log:'',showModel:false,reviewed:false},
+  s6:{prepared:[],angles:[],notes:'',checks:[false,false,false],done:false}
+});
+function loadState(){
+  const base=fresh();
+  try{
+    const raw=JSON.parse(localStorage.getItem(SAVE_KEY));
+    if(!raw||typeof raw!=='object')return base;
+    const merged={...base,...raw};
+    for(const k of ['s1','s2','s3','s4','s5','s6'])merged[k]={...base[k],...(raw[k]||{})};
+    if(!Array.isArray(merged.s5.order)||merged.s5.order.length!==6)merged.s5.order=base.s5.order;
+    if(!Array.isArray(merged.s4.open)||merged.s4.open.length!==3)merged.s4.open=base.s4.open;
+    if(!Array.isArray(merged.s6.checks)||merged.s6.checks.length!==3)merged.s6.checks=base.s6.checks;
+    merged.current=Math.max(0,Math.min(5,Number(merged.current)||0));
+    return merged;
+  }catch(e){return base}
+}
+let S=loadState(),toastTimer=null,resetScope='all',activeGapPhrase=null,activeGapSlot=null;
+function save(){
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));$('#saveState').textContent='Saved on this device'}
+  catch(e){$('#saveState').textContent='Browser storage unavailable'}
+}
+function notify(message){const t=$('#toast');t.textContent=message;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2400)}
+const allCorrect=(items,answers)=>items.every((q,i)=>Number(answers[i])===q.answer);
+const sequenceCorrect=()=>S.s5.order.every((v,i)=>v===i);
+function stageDone(i){
+  switch(i){
+    case 0:return S.s1.seen.length===FLASH.length;
+    case 1:return Object.keys(S.s2.answers).length===CONTEXT_Q.length;
+    case 2:return S.s3.revealed||(S.s3.checked&&GAPS.every((g,i)=>S.s3.slots[i]===g.answer));
+    case 3:return (S.s4.revealed||(S.s4.checked&&allCorrect(PRECISION_Q,S.s4.choices)))&&S.s4.open.every(o=>o.reviewed);
+    case 4:return (S.s5.solved||S.s5.revealed)&&S.s5.log.trim().length>0&&S.s5.reviewed;
+    case 5:return S.s6.done;
+  }
+}
+function updateMap(){
+  const count=STAGES.filter((_,i)=>stageDone(i)).length;
+  $('#headerCount').textContent=`${count} / 6`;
+  $('#headerFill').style.width=`${count/6*100}%`;
+  $('#headerProgress').setAttribute('aria-valuenow',count);
+  $('#routeCount').textContent=`${count} of 6 checkpoints complete`;
+  $('#routeRemaining').textContent=count===6?'Fort Kiowa reached. The trail remains open for review.':`${6-count} remain${6-count===1?'s':''} between you and Fort Kiowa`;
+  $$('[data-stage]').forEach(b=>{
+    const i=Number(b.dataset.stage),done=stageDone(i),current=S.current===i;
+    b.classList.toggle('complete',done);b.classList.toggle('current',current);
+    if(current)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');
+    const state=$('.node-state',b);if(state)state.textContent=done?'Complete':current?'Current':'Open';
+    b.setAttribute('aria-label',`Checkpoint ${i+1}: ${STAGES[i].title}. ${done?'Complete':current?'Current':'Open'}.`);
+  });
+  $$('.trail-lit').forEach(p=>p.setAttribute('opacity',stageDone(Number(p.dataset.seg))?'1':'0'));
+  $('#beginBtn').innerHTML=`${S.started||count?'Continue the journey':'Begin the journey'} <span class="btn-arrow" aria-hidden="true">→</span>`;
+}
+function stageFooter(i){
+  const done=stageDone(i),next=STAGES[i+1];
+  return `<div class="stage-footer">

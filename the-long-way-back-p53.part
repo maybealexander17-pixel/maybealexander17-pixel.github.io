@@ -1,0 +1,41 @@
+    return `<div class="gap-row"><span class="gap-letter">${String.fromCharCode(65+i)}</span><p class="gap-sentence">${esc(g.before)}<button class="gap-slot ${cls}" type="button" data-slot="${i}" aria-label="Blank ${String.fromCharCode(65+i)}. ${text?`Current phrase: ${esc(text)}`:'Empty'}">${esc(text)}</button>${esc(g.after)}</p></div>`;
+  }).join('');
+  let feedback='';
+  if(S.s3.checked){
+    const right=GAPS.filter((g,i)=>S.s3.slots[i]===g.answer).length;
+    feedback=S.s3.revealed?`<div class="task-feedback">The answers are now in place. Read each full sentence aloud and notice which words changed form.</div>`:right===8?`<div class="task-feedback good">Every phrase fits. Notice “grew up on” and “tapered off”: retrieval includes using the right grammatical form.</div>`:`<div class="task-feedback bad">${right} of 8 are correct. The red blanks need another phrase. You can revise them or reveal the answers.</div>`;
+  }
+  queueMicrotask(()=>{
+    $$('[data-phrase]').forEach(b=>b.onclick=()=>{
+      activeGapPhrase=activeGapPhrase===b.dataset.phrase?null:b.dataset.phrase;
+      if(activeGapPhrase&&activeGapSlot!==null){assignGap(activeGapSlot,activeGapPhrase)}else{renderStage();$(`[data-phrase="${b.dataset.phrase}"]`)?.focus()}
+    });
+    $$('[data-slot]').forEach(b=>b.onclick=()=>{
+      const i=Number(b.dataset.slot);
+      if(activeGapPhrase){assignGap(i,activeGapPhrase);return}
+      if(S.s3.slots[i]){delete S.s3.slots[i];S.s3.checked=false;activeGapSlot=null;save();renderStage();$(`[data-slot="${i}"]`)?.focus();updateMap();return}
+      activeGapSlot=activeGapSlot===i?null:i;renderStage();$(`[data-slot="${i}"]`)?.focus();
+    });
+    $('#checkGaps').onclick=()=>{S.s3.checked=true;save();renderStage();$('#checkGaps')?.focus();updateMap();if(stageDone(2))notify('Checkpoint 3 complete. Retrieval is holding.')};
+    $('#showGaps').onclick=()=>{GAPS.forEach((g,i)=>S.s3.slots[i]=g.answer);S.s3.checked=true;S.s3.revealed=true;save();renderStage();$('#showGaps')?.focus();updateMap();notify('Answers revealed. The checkpoint remains open for study.')};
+  });
+  return stageShell(2,taskHead('Trail craft 03','Supply what was lost','Tap a phrase, then a blank. Tap a filled blank to return its phrase. Some verbs change form to fit the sentence.',gapTaskCount())+`<div class="phrase-bank" aria-label="Phrase bank">${bank}</div><div class="gap-list">${rows}</div>${feedback}<div class="task-actions"><button class="btn" id="checkGaps" type="button">Check answers</button><button class="btn secondary" id="showGaps" type="button">Show answers</button><span class="inline-status">Blue outlines show the phrase or blank you selected.</span></div>`);
+}
+function assignGap(slot,phrase){
+  for(const k of Object.keys(S.s3.slots))if(S.s3.slots[k]===phrase)delete S.s3.slots[k];
+  S.s3.slots[slot]=phrase;S.s3.checked=false;activeGapPhrase=null;activeGapSlot=null;save();renderStage();$(`[data-slot="${slot}"]`)?.focus();updateMap();
+}
+</script>
+<script>
+/* Checkpoint 4 */
+function precisionCount(){return S.s4.checked?PRECISION_Q.filter((q,i)=>Number(S.s4.choices[i])===q.answer).length:Object.keys(S.s4.choices).length}
+function renderStage4(){
+  const precision=PRECISION_Q.map((q,i)=>{
+    const html=questionHTML(q,i,S.s4.choices,S.s4.checked,'p');
+    if(!S.s4.checked&&S.s4.choices[i]!==undefined){
+      return html.replaceAll(`data-p="${i}" data-option="${S.s4.choices[i]}"`,`data-p="${i}" data-option="${S.s4.choices[i]}"`);
+    }
+    return html;
+  }).join('');
+  const rewrites=REWRITES.map((r,i)=>{
+    const o=S.s4.open[i];

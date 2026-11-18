@@ -1,0 +1,48 @@
+  queueMicrotask(()=>{
+    $$('[data-card]').forEach(b=>b.onclick=()=>{
+      const i=Number(b.dataset.card),found=S.s1.flipped.includes(i);
+      S.s1.flipped=found?S.s1.flipped.filter(x=>x!==i):[...S.s1.flipped,i];
+      if(!found&&!S.s1.seen.includes(i))S.s1.seen.push(i);
+      b.classList.toggle('flipped',!found);b.setAttribute('aria-pressed',String(!found));b.setAttribute('aria-label',`${!found?'Close':'Open'} field card: ${FLASH[i].term}`);
+      $('#s1Count').textContent=`${S.s1.seen.length} / 6`;
+      const cardFeedback=$('#s1Feedback');if(cardFeedback){cardFeedback.hidden=!stageDone(0);cardFeedback.classList.toggle('good',stageDone(0))}
+      save();refreshFooter(0);
+      if(stageDone(0)&&found===false)notify('Checkpoint 1 complete. The trail is lit.');
+    });
+  });
+  return stageShell(0,taskHead('Trail craft 01','Read the field cards','Turn over every card. Notice the meaning and one natural pattern before you use the phrase.',`${S.s1.seen.length} / 6`,'s1Count')+`<div class="flash-grid">${cards}</div><div class="task-feedback ${stageDone(0)?'good':''}" id="s1Feedback" ${stageDone(0)?'':'hidden'}>All six cards are open in your field notes. Flip them back whenever you want another look.</div>`);
+}
+
+/* Checkpoint 2 */
+function questionHTML(q,i,answers,checked=true,prefix='q'){
+  const answered=answers[i]!==undefined,selected=Number(answers[i]);
+  const opts=q.options.map((o,k)=>{
+    let cls=answered&&checked?(k===q.answer?'correct':k===selected?'incorrect':''):k===selected?'selected':'';
+    return `<button class="option ${cls}" type="button" data-${prefix}="${i}" data-option="${k}" ${answered&&checked?'disabled':''}>${esc(o)}</button>`;
+  }).join('');
+  const show=answered&&checked;
+  return `<div class="question"><div class="q-top"><span class="q-no">0${i+1}</span><p class="q-text">${esc(q.text)}</p></div><div class="options">${opts}</div><div class="q-explanation" id="${prefix}Explain${i}" ${show?'':'hidden'}>${show?`<strong>${selected===q.answer?'That fits.':'The best answer is “'+esc(q.options[q.answer])+'”'}</strong> ${esc(q.explain)}`:''}</div></div>`;
+}
+function renderStage2(){
+  const answered=Object.keys(S.s2.answers).length;
+  queueMicrotask(()=>{
+    $$('[data-q]').forEach(b=>b.onclick=()=>{
+      const i=Number(b.dataset.q);if(S.s2.answers[i]!==undefined)return;
+      S.s2.answers[i]=Number(b.dataset.option);save();renderStage();
+      $(`[data-q="${i}"][data-option="${S.s2.answers[i]}"]`)?.focus();
+      updateMap();if(stageDone(1))notify('Checkpoint 2 complete. Context has done its work.');
+    });
+  });
+  const score=CONTEXT_Q.filter((q,i)=>Number(S.s2.answers[i])===q.answer).length;
+  const feedback=answered===6?`<div class="task-feedback ${score===6?'good':''}">You responded to all six situations. First-pass score: ${score} / 6. Review the explanations, then restart the checkpoint if you want a clean attempt.</div>`:'';
+  return stageShell(1,taskHead('Trail craft 02','Read the situation','Choose the expression that fits. Feedback appears immediately, and a wrong choice does not block your journey.',`${answered} / 6`)+`<div class="question-list">${CONTEXT_Q.map((q,i)=>questionHTML(q,i,S.s2.answers,true,'q')).join('')}</div>${feedback}`);
+}
+
+/* Checkpoint 3 */
+function gapTaskCount(){return S.s3.checked?`${GAPS.filter((g,i)=>S.s3.slots[i]===g.answer).length} / 8`:`${Object.keys(S.s3.slots).length} / 8`}
+function renderStage3(){
+  const used=Object.values(S.s3.slots);
+  const bank=BANK_ORDER.map(i=>BANK[i]).map(p=>`<button class="phrase-chip ${activeGapPhrase===p.id?'active':''}" type="button" data-phrase="${p.id}" ${used.includes(p.id)?'disabled':''}>${esc(p.text)}</button>`).join('');
+  const rows=GAPS.map((g,i)=>{
+    const val=S.s3.slots[i],text=BANK.find(p=>p.id===val)?.text||'';
+    const cls=S.s3.checked?(val===g.answer?'right':'wrong'):activeGapSlot===i?'active':'';

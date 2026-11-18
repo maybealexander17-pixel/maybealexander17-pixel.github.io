@@ -1,0 +1,30 @@
+    return `<div class="rewrite"><p class="rewrite-original">${esc(r.original)}<br><strong>Rewrite it with: ${esc(r.target)}</strong></p><label class="field-label" for="rewrite${i}">Your version</label><textarea id="rewrite${i}" data-rewrite="${i}" placeholder="Write a complete sentence...">${esc(o.text)}</textarea><div class="task-actions"><button class="btn secondary small-btn" type="button" data-model="${i}">${o.show?'Hide model':'Show model & self-check'}</button>${o.reviewed?'<span class="inline-status" style="color:var(--good)">Reviewed</span>':''}</div>${o.show?`<div class="model-box"><span class="model-label">One possible version</span><strong>${esc(r.model)}</strong><label class="self-check"><input type="checkbox" data-review="${i}" ${o.reviewed?'checked':''} ${o.text.trim()?'':'disabled'}><span>I used the target expression and preserved the original meaning. I compared my version with the model.</span></label></div>`:''}</div>`;
+  }).join('');
+  const total=precisionCount()+S.s4.open.filter(o=>o.reviewed).length;
+  let feedback='';
+  if(S.s4.checked){
+    const right=PRECISION_Q.filter((q,i)=>Number(S.s4.choices[i])===q.answer).length;
+    feedback=S.s4.revealed?`<div class="task-feedback">Precision answers revealed. Read the explanations for the fixed forms and dependent prepositions.</div>`:right===6?`<div class="task-feedback good">All six forms are precise. The small words are doing important work.</div>`:`<div class="task-feedback bad">${right} of 6 are precise. Revise the red choices, or reveal the answers and study the explanations.</div>`;
+  }
+  queueMicrotask(()=>{
+    $$('[data-p]').forEach(b=>b.onclick=()=>{
+      const i=Number(b.dataset.p);S.s4.choices[i]=Number(b.dataset.option);S.s4.checked=false;save();renderStage();$(`[data-p="${i}"][data-option="${b.dataset.option}"]`)?.focus();updateMap();
+    });
+    $('#checkPrecision').onclick=()=>{S.s4.checked=true;save();renderStage();$('#checkPrecision')?.focus();updateMap()};
+    $('#showPrecision').onclick=()=>{PRECISION_Q.forEach((q,i)=>S.s4.choices[i]=q.answer);S.s4.checked=true;S.s4.revealed=true;save();renderStage();$('#showPrecision')?.focus();updateMap()};
+    $$('[data-rewrite]').forEach(t=>t.oninput=()=>{
+      const i=Number(t.dataset.rewrite);S.s4.open[i].text=t.value;S.s4.open[i].reviewed=false;
+      const check=$(`[data-review="${i}"]`);if(check){check.checked=false;check.disabled=!t.value.trim()}
+      $('#taskCount').textContent=`${precisionCount()+S.s4.open.filter(o=>o.reviewed).length} / 9`;
+      save();refreshFooter(3);
+    });
+    $$('[data-model]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.model);S.s4.open[i].show=!S.s4.open[i].show;save();renderStage();$(`[data-model="${i}"]`)?.focus()});
+    $$('[data-review]').forEach(c=>c.onchange=()=>{const i=Number(c.dataset.review);S.s4.open[i].reviewed=c.checked;save();renderStage();$(`[data-review="${i}"]`)?.focus();updateMap()});
+  });
+  return stageShell(3,taskHead('Trail craft 04','Precision under pressure','First choose the exact form. Then reformulate three ideas in your own words. Open responses are reviewed against models, not machine-graded.',`${total} / 9`)+`<div class="subtask"><h4>A · Fix the form</h4><p>Select an answer in every row, then check. Red choices can be changed.</p><div class="question-list">${precision}</div>${feedback}<div class="task-actions"><button class="btn" id="checkPrecision" type="button">Check precision</button><button class="btn secondary" id="showPrecision" type="button">Show answers</button></div></div><div class="subtask"><h4>B · Say it another way</h4><p>Keep the original meaning. Your wording can differ from the model.</p><div class="rewrite-list">${rewrites}</div></div>`);
+}
+
+/* Checkpoint 5 */
+function detectedTargets(text){return TARGET_PATTERNS.filter(([,re])=>re.test(text)).map(([name])=>name)}
+function logMeterHTML(){
+  const text=S.s5.log.trim(),words=text?text.split(/\s+/).length:0,targets=detectedTargets(text);

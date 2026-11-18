@@ -1,0 +1,22 @@
+  return `<div class="word-meter"><span id="wordCount" class="${words>=70&&words<=110?'on':''}">${words} words · aim for 70 to 100</span><span id="phraseCount" class="${targets.length>=4?'on':''}">${targets.length} target expressions · aim for at least 4</span></div><div class="target-detect" id="targetDetect">${targets.length?`<strong>Detected:</strong> ${targets.map(esc).join(', ')}`:'The counters are guidance, not a grade. Natural usage matters more than phrase count.'}</div>`;
+}
+function renderStage5(){
+  const items=S.s5.order.map((fragment,pos)=>{
+    const wrong=S.s5.checked&&!S.s5.solved&&fragment!==pos;
+    return `<li class="${wrong?'misplaced':''}"><span class="sequence-text">${esc(SEQUENCE[fragment])}</span><div class="move-buttons"><button class="move-btn" type="button" data-move="${pos}" data-dir="-1" ${pos===0?'disabled':''} aria-label="Move fragment ${pos+1} up">↑</button><button class="move-btn" type="button" data-move="${pos}" data-dir="1" ${pos===5?'disabled':''} aria-label="Move fragment ${pos+1} down">↓</button></div></li>`;
+  }).join('');
+  let sequenceFeedback='';
+  if(S.s5.revealed)sequenceFeedback='<div class="task-feedback">The broad traditional sequence is now visible. This is not a claim about every day of Glass’s exact route.</div>';
+  else if(S.s5.checked)sequenceFeedback=S.s5.solved?'<div class="task-feedback good">The sequence holds together: attack, abandonment, movement, arrival, and afterlife as legend.</div>':'<div class="task-feedback bad">Some fragments are out of sequence. Red borders mark positions that still need work.</div>';
+  queueMicrotask(()=>{
+    $$('[data-move]').forEach(b=>b.onclick=()=>{
+      const pos=Number(b.dataset.move),dir=Number(b.dataset.dir),other=pos+dir;
+      [S.s5.order[pos],S.s5.order[other]]=[S.s5.order[other],S.s5.order[pos]];S.s5.checked=false;S.s5.solved=false;save();renderStage();$(`[data-move="${other}"][data-dir="${dir}"]`)?.focus();updateMap();
+    });
+    $('#checkSequence').onclick=()=>{S.s5.checked=true;S.s5.solved=sequenceCorrect();save();renderStage();$('#checkSequence')?.focus();updateMap()};
+    $('#showSequence').onclick=()=>{S.s5.order=[0,1,2,3,4,5];S.s5.revealed=true;S.s5.checked=true;S.s5.solved=true;save();renderStage();$('#showSequence')?.focus();updateMap()};
+    $('#logInput').oninput=e=>{S.s5.log=e.target.value;S.s5.reviewed=false;const check=$('#logReviewed');if(check){check.checked=false;check.disabled=!e.target.value.trim()}const html=logMeterHTML();const temp=document.createElement('div');temp.innerHTML=html;$('#wordCount').replaceWith($('#wordCount',temp));$('#phraseCount').replaceWith($('#phraseCount',temp));$('#targetDetect').replaceWith($('#targetDetect',temp));save();refreshFooter(4)};
+    $('#showLogModel').onclick=()=>{S.s5.showModel=!S.s5.showModel;save();renderStage();$('#showLogModel')?.focus()};
+    const review=$('#logReviewed');if(review)review.onchange=()=>{S.s5.reviewed=review.checked;save();refreshFooter(4)};
+  });
+  const model=S.s5.showModel?`<div class="model-box"><span class="model-label">One possible expedition log</span>${esc(LOG_MODEL)}<label class="self-check"><input id="logReviewed" type="checkbox" ${S.s5.reviewed?'checked':''} ${S.s5.log.trim()?'':'disabled'}><span>I wrote my own account, compared it with the model, and checked that each expression kept its actual meaning.</span></label></div>`:'';

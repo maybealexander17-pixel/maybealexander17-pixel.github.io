@@ -1,0 +1,39 @@
+        <button class="mobile-stop" data-stage="4" type="button"><span class="node">05</span><span class="mobile-name">The Long Way Back</span><span class="node-state">Open</span></button>
+        <button class="mobile-stop" data-stage="5" type="button"><span class="node">06</span><span class="mobile-name">Fort Kiowa</span><span class="node-state">Open</span></button>
+      </div>
+      <div class="route-foot"><span>Choose any checkpoint. There are no locks.</span><span>Completed stages stay open for review.</span></div>
+    </div>
+  </section>
+
+  <section class="journey shell" id="journey" aria-label="Current checkpoint"><div id="stageRoot"></div></section>
+
+  <section class="sources" aria-labelledby="sourcesTitle">
+    <div class="shell sources-grid">
+      <div>
+        <div class="eyebrow">[ Field notes ]</div><h2 id="sourcesTitle" class="display">History, legend, reconstruction</h2>
+        <p>Glass left a letter from the 1823 expedition, but no day-by-day account of his survival journey. Later printed versions differ. This experience marks the broad historical record separately from reconstructed scenes and does not use the film’s invented family or revenge narrative as evidence.</p>
+        <p>The route is an interpretive learning device, not a precise geographic claim. Indigenous nations appear as peoples with their own communities and political interests, never as a faceless wilderness hazard.</p>
+      </div>
+      <div class="source-links">
+        <a href="https://www.nps.gov/fous/learn/historyculture/hugh-glass.htm" target="_blank" rel="noopener">National Park Service: Hugh Glass</a>
+        <a href="https://news.sd.gov/news?id=news_kb_article_view&sysparm_article=KB0019776" target="_blank" rel="noopener">South Dakota State Historical Society: Legend of Hugh Glass</a>
+        <a href="https://www.britannica.com/biography/Hugh-Glass" target="_blank" rel="noopener">Encyclopaedia Britannica: Hugh Glass</a>
+        <a href="https://www.newyorker.com/podcast/critics-at-large/what-survival-stories-tell-us" target="_blank" rel="noopener">Critics at Large: What Survival Stories Tell Us</a>
+      </div>
+    </div>
+    <div class="shell footer"><span>THE LONG WAY BACK · AN ORIGINAL INTERACTIVE LEARNING EXPERIENCE</span><span>Vocabulary from the Critics at Large survival-stories materials</span></div>
+  </section>
+</main>
+
+<dialog id="resetDialog" aria-labelledby="resetTitle">
+  <h2 id="resetTitle">Reset this journey?</h2>
+  <p id="resetText">This will erase your answers, notes, and checkpoint progress on this device.</p>
+  <div class="dialog-actions"><button class="btn secondary" id="cancelReset" type="button">Keep my progress</button><button class="btn" id="confirmReset" type="button">Reset</button></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<noscript><div style="padding:30px;background:#d8edef;color:#071521">This interactive story needs JavaScript. Enable it in your browser to travel through the checkpoints.</div></noscript>
+<script>
+'use strict';
+const STAGES=[
+  {title:'The Expedition',skill:'Recognition & noticing',deck:'Meet the language of contribution, cooperation, and self-reliance before the trail breaks.',
+   story:`<p>In the spring of 1823, Hugh Glass joined a fur-trading expedition backed by William Henry Ashley. The Missouri River was the highway, but the country around it was neither empty nor without history. The expedition moved through the homelands of Indigenous nations whose communities, trade networks, and political decisions shaped what could happen next.</p><p>In June, Arikara warriors attacked Ashley’s party near present-day Mobridge. Glass survived. A letter he wrote afterward to the family of John S. Gardner, who was killed, still survives. The expedition regrouped and continued under Andrew Henry. For now, survival was a collective undertaking: every person brought something to the table.</p>`,

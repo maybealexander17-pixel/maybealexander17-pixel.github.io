@@ -1,3 +1,4 @@
+  ['a devoted following',/\ba (?:small but )?devoted following\b/i],
   ['would that it were',/\bwould that it were\b/i],
   ['grow up on sth',/\b(?:grow|grows|grew|growing) up on\b/i],
   ['stick with sth',/\b(?:stick|sticks|stuck|sticking) with\b/i],
@@ -12,7 +13,7 @@ const fresh=()=>({
   current:0,started:false,
   s1:{flipped:[],seen:[]},
   s2:{answers:{}},
-  s3:{slots:{},checked:false,revealed:false},
+  s3:{bankOrder:null,slots:{},checked:false,revealed:false},
   s4:{choices:{},checked:false,revealed:false,open:REWRITES.map(()=>({text:'',show:false,reviewed:false}))},
   s5:{order:[3,0,4,1,5,2],checked:false,solved:false,revealed:false,log:'',showModel:false,reviewed:false},
   s6:{prepared:[],angles:[],notes:'',checks:[false,false,false],done:false}

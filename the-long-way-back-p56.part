@@ -1,0 +1,20 @@
+  return stageShell(4,taskHead('Trail craft 05','Carry the story yourself','Reconstruct the broad journey, then write a coherent expedition log. The sequence uses buttons rather than drag-and-drop.',`${S.s5.solved?'Route set':'Route open'}`)+`<div class="subtask"><h4>A · Reconstruct the route</h4><p>Use the arrows to move the fragments into a coherent narrative order.</p><ol class="sequence">${items}</ol>${sequenceFeedback}<div class="task-actions"><button class="btn" id="checkSequence" type="button">Check order</button><button class="btn secondary" id="showSequence" type="button">Show route</button></div></div><div class="subtask"><h4>B · Write the expedition log</h4><p>Write 70 to 100 words. Use at least four target expressions and include both an event and an interpretation. The counters offer guidance, not a correctness score.</p><label class="field-label" for="logInput">Your account</label><textarea id="logInput" style="min-height:180px" placeholder="Tell the journey in your own words...">${esc(S.s5.log)}</textarea>${logMeterHTML()}<div class="task-actions"><button class="btn secondary" id="showLogModel" type="button">${S.s5.showModel?'Hide model account':'Show model account'}</button></div>${model}</div>`);
+}
+
+/* Checkpoint 6 */
+function renderStage6(){
+  const cards=PROMPTS.map((p,i)=>{
+    const prepared=S.s6.prepared.includes(i),angles=S.s6.angles.includes(i);
+    return `<div class="prompt-card ${prepared?'prepared':''}"><div class="prompt-top"><span>Prompt 0${i+1}</span><span>${prepared?'Prepared':'Open'}</span></div><h4>${esc(p.title)}</h4><p>${esc(p.text)}</p><div class="prompt-language"><strong>Language to use:</strong><br>${esc(p.language)}</div><div class="prompt-actions"><button class="btn secondary small-btn" type="button" data-angles="${i}">${angles?'Hide angles':'Discussion angles'}</button><button class="btn ${prepared?'secondary':''} small-btn" type="button" data-prepared="${i}">${prepared?'Prepared ✓':'Mark as prepared'}</button></div>${angles?`<div class="angles"><strong>Angles to explore, not an answer key:</strong><ul>${p.angles.map(a=>`<li>${esc(a)}</li>`).join('')}</ul></div>`:''}</div>`;
+  }).join('');
+  const labels=['I used at least two target expressions naturally.','I addressed individualism and cooperation, not only the plot.','I distinguished historical evidence from legend and reconstruction.'];
+  const ready=S.s6.prepared.length>0&&S.s6.checks.every(Boolean);
+  const banner=S.s6.done?`<div class="completion-banner" id="completionBanner" tabindex="-1"><div class="eyebrow">[ Fort Kiowa · Journey complete ]</div><h3>You made it back.</h3><p>You followed the story from expedition to arrival and carried its vocabulary into your own account and reflection. The question remains open: what does it really mean to survive?</p><button class="btn secondary" id="bannerRoute" type="button">Review the illuminated trail</button></div>`:'';
+  queueMicrotask(()=>{
+    $$('[data-angles]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.angles);S.s6.angles=S.s6.angles.includes(i)?S.s6.angles.filter(x=>x!==i):[...S.s6.angles,i];save();renderStage();$(`[data-angles="${i}"]`)?.focus()});
+    $$('[data-prepared]').forEach(b=>b.onclick=()=>{const i=Number(b.dataset.prepared);S.s6.prepared=S.s6.prepared.includes(i)?S.s6.prepared.filter(x=>x!==i):[...S.s6.prepared,i];S.s6.done=false;save();renderStage();$(`[data-prepared="${i}"]`)?.focus();updateMap()});
+    $('#finalNotes').oninput=e=>{S.s6.notes=e.target.value;save()};
+    $$('[data-final-check]').forEach(c=>c.onchange=()=>{const i=Number(c.dataset.finalCheck);S.s6.checks[i]=c.checked;S.s6.done=false;save();renderStage();$(`[data-final-check="${i}"]`)?.focus();updateMap()});
+    $('#completeJourney').onclick=()=>{if(!ready)return;S.s6.done=true;save();renderStage();updateMap();notify('Fort Kiowa reached. Journey complete.');setTimeout(()=>{$('#completionBanner')?.scrollIntoView({behavior:motionOK()?'smooth':'auto',block:'center'});$('#completionBanner')?.focus({preventScroll:true})},100)};
+    const br=$('#bannerRoute');if(br)br.onclick=()=>$('#route').scrollIntoView({behavior:motionOK()?'smooth':'auto'});
+  });

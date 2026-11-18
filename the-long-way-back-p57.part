@@ -1,0 +1,33 @@
+  return stageShell(5,taskHead('Final reflection','What does it really mean to survive?','Choose one or more prompts for extended speaking. Prepare notes, explore the angles, then assess your own response.',`${S.s6.prepared.length} / 6`)+`<div class="discussion-intro"><div><h4 class="display">Beyond the lone survivor</h4><p>The Critics at Large episode connects survival stories to life in a hyper-developed society, to climate and AI anxieties, and to the appeal of reality competitions. It also questions the genre’s devotion to rugged individualism.</p></div><div class="quote">Vinson Cunningham’s challenge, paraphrased: most of us do not live without other people. Surviving together is simply harder to dramatize than surviving alone.<cite>Critics at Large · The New Yorker</cite></div></div><div class="prompt-grid">${cards}</div><div class="subtask"><h4>Your response notes</h4><p>Use these notes for a two-minute response or a longer club discussion. They are saved on this device.</p><label class="field-label" for="finalNotes">Speaking notes</label><textarea id="finalNotes" style="min-height:130px" placeholder="Choose a prompt and collect your ideas...">${esc(S.s6.notes)}</textarea><div class="final-checks">${labels.map((l,i)=>`<label class="self-check"><input type="checkbox" data-final-check="${i}" ${S.s6.checks[i]?'checked':''}><span>${esc(l)}</span></label>`).join('')}</div><div class="task-actions"><button class="btn" id="completeJourney" type="button" ${ready?'':'disabled'}>Complete the journey</button><span class="inline-status">Prepare at least one prompt and complete all three checks.</span></div></div>${banner}`);
+}
+
+/* navigation, reset, persistence */
+function openReset(scope){
+  resetScope=scope;
+  const all=scope==='all';
+  $('#resetTitle').textContent=all?'Reset this journey?':'Restart this checkpoint?';
+  $('#resetText').textContent=all?'This will erase your answers, notes, and checkpoint progress on this device.':'This will clear only the current checkpoint. Your other answers and notes will stay intact.';
+  $('#confirmReset').textContent=all?'Reset journey':'Restart checkpoint';
+  $('#resetDialog').showModal();
+}
+$('#resetAll').onclick=()=>openReset('all');
+$('#cancelReset').onclick=()=>$('#resetDialog').close();
+$('#resetDialog').addEventListener('click',e=>{if(e.target===$('#resetDialog'))$('#resetDialog').close()});
+$('#confirmReset').onclick=()=>{
+  if(resetScope==='all'){
+    S=fresh();try{localStorage.removeItem(SAVE_KEY)}catch(e){}
+    $('#resetDialog').close();save();renderStage();updateMap();$('#route').scrollIntoView({behavior:motionOK()?'smooth':'auto'});notify('Journey reset. All six checkpoints are open.');
+  }else{
+    const i=Number(resetScope),base=fresh();S[`s${i+1}`]=base[`s${i+1}`];S.current=i;S.started=true;
+    activeGapPhrase=null;activeGapSlot=null;$('#resetDialog').close();save();renderStage();updateMap();notify(`${STAGES[i].title} restarted.`);
+  }
+};
+$$('[data-stage]').forEach(b=>b.onclick=()=>go(Number(b.dataset.stage)));
+$('#beginBtn').onclick=()=>go(S.current);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&$('#resetDialog').open)$('#resetDialog').close();
+});
+renderStage();updateMap();
+</script>
+</body>
+</html>

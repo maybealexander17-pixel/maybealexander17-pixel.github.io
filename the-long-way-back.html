@@ -4,7 +4,7 @@
 <script>
 (async()=>{
   const parts=await Promise.all(Array.from({length:58},(_,i)=>fetch('the-long-way-back-p'+String(i).padStart(2,'0')+'.part',{cache:'no-store'}).then(r=>r.text())));
-  const html=parts.join('').replace(/\\\n/g,'');
+  const html=parts.join('').replace(/data:font\/woff2;base64,[^"]+/g,s=>s.replace(/\\/g,''));
   document.open();document.write(html);document.close();
 })().catch(e=>{document.body.textContent='Failed to load — please refresh.'});
 </script></html>

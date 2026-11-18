@@ -1,0 +1,47 @@
+      <path d="M510 478 755 339 918 437 1125 280 1370 470 1500 391 1630 510V635H420Z" fill="#173746" opacity=".9"/>
+      <path d="M0 531 205 405 330 490 470 401 640 530 780 455 935 565V700H0Z" fill="#102c3a"/>
+      <path d="M-30 570 185 487 350 560 520 485 705 590 875 520 1070 610 1260 520 1630 610V780H-30Z" fill="#0c2633"/>
+      <path d="M1010 570C912 620 1000 650 890 690S725 756 820 850h345c-118-93-78-127-8-166s84-72 20-114Z" fill="url(#river)" opacity=".86"/>
+      <path d="M1072 596c-62 53-45 72-108 104" fill="none" stroke="#a1c5cb" stroke-opacity=".32" stroke-width="3"/>
+      <g color="#0a202c" opacity=".95">
+        <use href="#pine" transform="translate(1030 435) scale(1.35)"/><use href="#pine" transform="translate(1100 465) scale(1.05)"/><use href="#pine" transform="translate(1160 445) scale(1.3)"/><use href="#pine" transform="translate(1240 470) scale(.95)"/><use href="#pine" transform="translate(1310 435) scale(1.5)"/><use href="#pine" transform="translate(1420 450) scale(1.25)"/><use href="#pine" transform="translate(1500 420) scale(1.65)"/>
+      </g>
+      <g color="#071a24">
+        <use href="#pine" transform="translate(900 555) scale(1.9)"/><use href="#pine" transform="translate(970 590) scale(1.45)"/><use href="#pine" transform="translate(1210 570) scale(1.8)"/><use href="#pine" transform="translate(1320 550) scale(2.15)"/><use href="#pine" transform="translate(1450 575) scale(1.9)"/><use href="#pine" transform="translate(1560 540) scale(2.4)"/>
+      </g>
+      <path d="M0 750c220-65 380-55 580 5s310 70 490 15 350-52 550-10v110H0Z" fill="#071821"/>
+      <ellipse cx="1330" cy="738" rx="105" ry="52" fill="url(#fireGlow)" filter="url(#soft)"/>
+      <g transform="translate(1328 714)">
+        <path d="m-22 26 45-13M-20 12l41 17" stroke="#594337" stroke-width="5" stroke-linecap="round"/>
+        <path d="M0 17C-18 4-4-8 1-26c5 14 20 20 9 39Z" fill="#d06e45"/>
+        <path d="M1 16C-7 6 0-1 3-11c7 10 9 18 3 27Z" fill="#f1bd78"/>
+      </g>
+      <g transform="translate(1260 660)" fill="#06131b">
+        <circle cx="0" cy="0" r="7"/><path d="M-5 7h11l5 34 17 35-8 3-20-31-4 31h-9l2-42-15 25-7-5 20-34Z"/>
+      </g>
+    </svg>
+    <div class="hero-shade"></div><div class="grain"></div>
+    <div class="shell hero-content">
+      <div class="hero-kicker eyebrow">A lexical expedition in six checkpoints</div>
+      <h1 id="heroTitle" class="display">The Long<br>Way Back</h1>
+      <p class="hero-sub">An American frontier survival story. 1823. Follow Hugh Glass from the Missouri expedition to Fort Kiowa, and learn the language of survival along the way.</p>
+      <div class="hero-actions">
+        <button class="btn" id="beginBtn" type="button">Begin the journey <span class="btn-arrow" aria-hidden="true">→</span></button>
+        <span class="hero-note">Your progress stays in this browser. Completed checkpoints remain open for review.</span>
+      </div>
+    </div>
+    <span class="hero-index">1823 · Upper Missouri · An interactive story</span>
+  </section>
+
+  <section class="route-section" id="route" aria-labelledby="routeTitle">
+    <div class="shell">
+      <div class="section-head">
+        <div><div class="eyebrow">[ Your expedition ]</div><h2 id="routeTitle" class="display">The wilderness trail</h2></div>
+        <div class="route-summary"><strong id="routeCount">0 of 6 checkpoints complete</strong><span id="routeRemaining">6 remain between you and Fort Kiowa</span></div>
+      </div>
+      <div class="map-shell map-desktop" id="nav">
+        <svg class="map-bg" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">
+          <rect width="1000" height="430" fill="#0b1e2d"/>
+          <g fill="none" stroke="#294653" stroke-width="1" opacity=".55">
+            <path d="M-50 80C90 10 130 150 270 78S480 40 580 92 770 154 1050 52"/><path d="M-40 105C80 48 155 174 286 103S470 65 578 117 810 176 1040 82"/><path d="M-30 132C100 75 160 204 300 130S475 95 590 143 830 200 1040 108"/>
+            <path d="M-60 365C120 285 200 420 355 350s260-80 375-5 210 30 330-28"/><path d="M-40 391C120 320 220 446 370 378s255-70 367-7 215 25 320-24"/>

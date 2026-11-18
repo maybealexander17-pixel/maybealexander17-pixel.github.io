@@ -1,0 +1,69 @@
+  .prompt-grid{grid-template-columns:1fr}
+  .sources-grid{grid-template-columns:1fr;gap:28px}
+  .footer{display:block}
+  .footer span{display:block;margin-top:6px}
+}
+@media(max-width:460px){
+  .brand-text{max-width:118px;line-height:1.05;white-space:normal}
+  .progress-track{display:none}
+  .hero-actions{align-items:flex-start;flex-direction:column;gap:12px}
+  .hero-note{max-width:100%}
+  .flash-grid{grid-template-columns:1fr}
+  .flip-card,.flip-inner{min-height:225px}
+  .options{margin-left:0}
+  .q-explanation{margin-left:0}
+  .gap-row{grid-template-columns:22px minmax(0,1fr)}
+  .gap-slot{min-width:120px}
+  .sequence li{grid-template-columns:25px minmax(0,1fr);padding:11px}
+  .move-buttons{grid-column:2;justify-self:end}
+  .stage-footer{align-items:flex-start;flex-direction:column}
+  .stage-footer .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+@media print{
+  .topbar,.hero,.route-section,.stage-footer,.task-actions,.sources,.footer{display:none!important}
+  body{background:#fff;color:#111}
+  .shell{width:100%}
+  .story-grid,.stage-mast{display:block}
+  .task-zone{box-shadow:none;background:#fff;color:#111;border:0;padding:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#journey">Skip to current checkpoint</a>
+<header class="topbar">
+  <div class="shell topbar-inner">
+    <a class="brand" href="#top" aria-label="The Long Way Back, back to beginning">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span class="brand-text">The Long Way Back</span>
+    </a>
+    <div class="header-progress">
+      <span class="small" id="headerCount">0 / 6</span>
+      <div class="progress-track" role="progressbar" aria-label="Journey progress" aria-valuemin="0" aria-valuemax="6" aria-valuenow="0" id="headerProgress"><div class="progress-fill" id="headerFill"></div></div>
+      <span class="save-state" id="saveState">Saved on this device</span>
+      <button class="icon-btn" id="resetAll" type="button">Reset journey</button>
+    </div>
+  </div>
+</header>
+<main id="top">
+  <section class="hero" aria-labelledby="heroTitle">
+    <svg class="hero-art" viewBox="0 0 1600 850" preserveAspectRatio="xMidYMid slice" role="img" aria-label="An original illustrated frontier landscape with snowy mountains, forest, and a river at night">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#071522"/><stop offset=".58" stop-color="#16394b"/><stop offset="1" stop-color="#315360"/></linearGradient>
+        <linearGradient id="river" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6c9ba8"/><stop offset=".5" stop-color="#1b4151"/><stop offset="1" stop-color="#0a2432"/></linearGradient>
+        <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b8d4d8"/><stop offset="1" stop-color="#5c8391"/></linearGradient>
+        <radialGradient id="fireGlow"><stop stop-color="#e7a366" stop-opacity=".55"/><stop offset="1" stop-color="#e7a366" stop-opacity="0"/></radialGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="15"/></filter>
+        <g id="pine"><path d="M0 0 18 41 9 38 25 69 13 65 31 99 7 92 7 118h-14V92l-24 7 18-34-12 4 16-31-9 3Z" fill="currentColor"/></g>
+      </defs>
+      <rect width="1600" height="850" fill="url(#sky)"/>
+      <g fill="#c9e3e5" opacity=".55">
+        <circle cx="1040" cy="93" r="1.4"/><circle cx="1150" cy="154" r="1"/><circle cx="1350" cy="82" r="1.2"/><circle cx="1460" cy="183" r="1.5"/><circle cx="910" cy="185" r="1"/><circle cx="1240" cy="40" r=".9"/><circle cx="720" cy="108" r="1"/><circle cx="1540" cy="60" r=".8"/><circle cx="830" cy="42" r=".8"/>
+      </g>
+      <circle cx="1290" cy="150" r="51" fill="#d9e8e6" opacity=".76"/>
+      <circle cx="1272" cy="137" r="50" fill="#163142" opacity=".35"/>
+      <path d="M480 485 770 226 870 330 1040 170 1320 430 1480 290 1640 470V610H420Z" fill="#24495a"/>
+      <path d="m770 226-92 82 64-27 28 18 39-26 61 57Zm270-56-112 107 76-38 36 18 48-30 72 64Zm440 120-87 83 58-25 29 12 39-23 61 53Z" fill="url(#snow)" opacity=".84"/>

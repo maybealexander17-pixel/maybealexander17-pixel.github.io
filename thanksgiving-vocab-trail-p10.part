@@ -1,0 +1,28 @@
+ {i:17,clue:'weaken a group by splitting it: ______',model:'divide and conquer',re:'divide and conquer'},
+ {i:18,clue:'get a temporary pause to think: we ______',model:'gained some breathing space',re:'gained some breathing space'},
+ {i:19,clue:'in a leading position: local chefs ______ the festival’s development',model:'were at the forefront of',re:'were at the forefront of'}
+]
+};
+
+const PHOTO_PART_COUNT=24;
+(async()=>{try{const ps=await Promise.all([...Array(PHOTO_PART_COUNT)].map(async(_,i)=>{const r=await fetch(`thanksgiving-vocab-trail-photo-p${String(i).padStart(2,'0')}.part`,{cache:'no-store'});if(!r.ok)throw new Error('photo');return r.text()}));const b=atob(ps.join('')),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);document.documentElement.style.setProperty('--photo-url',`url("${URL.createObjectURL(new Blob([u],{type:'image/jpeg'}))}")`)}catch(e){}})();
+/* ENGINE */
+const I=DATA.items,N=I.length,FAST=new URLSearchParams(location.search).has('fast'),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s).toLowerCase().replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[^a-z0-9\s'-]/g,' ').replace(/\s+/g,' ').trim();
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function hash(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return(h>>>0).toString(36)}
+const SAVE_KEY='vp:thanksgiving-lexical-trail:'+hash(JSON.stringify(DATA));
+function loadState(){try{return JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){return null}}
+const fresh=()=>({stage:0,cards:{flip:Array(N).fill(false),order:shuffle([...Array(N).keys()])},found:[],noticeMisses:0,cluesShown:false,
+ ccq:{queue:shuffle(DATA.ccq.map((_,k)=>k)),right:[],optOrder:{}},
+ fork:{sel:{},solved:[],order:Object.fromEntries(DATA.forks.map((f,k)=>{let o;do{o=shuffle(f.opts.map((_,j)=>j))}while(o.every((v,j)=>v===j));return[k,o]}))},
+ build:{sel:{},solved:[],tiles:{}},up:{val:{},state:{},order:shuffle(DATA.upgrade.map((_,k)=>k))},tr:{val:{},state:{},order:shuffle(DATA.translate.map((_,k)=>k))},
+ use:{order:shuffle(DATA.use.map((_,k)=>k)),txt:{},done:[],cur:0},lock:{order:shuffle(DATA.lock.map((_,k)=>k)),val:{},state:{}},celebrated:[]});
+const restored=!!loadState();let S=loadState()||fresh();S=Object.assign(fresh(),S);S.cards=Object.assign(fresh().cards,S.cards||{});S.fork=Object.assign(fresh().fork,S.fork||{});S.fork.order=Object.assign(fresh().fork.order,S.fork.order||{});S.tr=S.tr||{};S.tr.order=S.tr.order||DATA.translate.map((_,k)=>k);S.celebrated=S.celebrated||[];
+let saveT=null,resetting=false,storageOK=true;
+function noteStorage(){const n=$('#saveNote');if(n)n.textContent=storageOK?'Your progress saves on this device. · @maybealexander1':'Device storage is unavailable. Keep this tab open to retain progress. · @maybealexander1'}
+function save(){if(resetting)return;clearTimeout(saveT);saveT=setTimeout(()=>{if(resetting)return;try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));storageOK=true}catch(e){storageOK=false}noteStorage()},300)}
+function flushSave(){if(resetting)return;clearTimeout(saveT);try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));storageOK=true}catch(e){storageOK=false}noteStorage()}
+window.addEventListener('pagehide',flushSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)flushSave()});

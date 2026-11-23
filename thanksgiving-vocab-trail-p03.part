@@ -1,0 +1,27 @@
+.tiles{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0;min-height:38px}.tile{display:inline-flex;align-items:center;min-height:38px;padding:7px 11px;border:1px solid var(--blue);background:var(--paper);color:var(--blue);font:700 .84rem/1.2 var(--body);user-select:none}.tile:hover{background:var(--pale)}.tile.used{opacity:.25;pointer-events:none}#out0,#out1,#out2,#out3,#out4,#out5{background:var(--soft);padding:7px;border-bottom:1px solid var(--blue)}
+.in{display:block;width:100%;border:1px solid var(--blue);border-radius:0;padding:12px 13px;margin:12px 0;font:1rem/1.45 var(--body);background:color-mix(in oklch,var(--paper) 92%,white);color:var(--ink)}textarea.in{min-height:190px;resize:vertical;font-family:var(--serif);line-height:1.65}.flat,.ru{font:1.08rem/1.6 var(--serif);margin:4px 0 12px}.flat .u{text-decoration:underline;text-decoration-color:var(--gold);text-decoration-thickness:3px;text-underline-offset:3px}.note{margin-top:7px;padding:8px 10px;background:var(--good-bg);color:var(--muted);font-size:.85rem}.usep{font:600 1.25rem/1.5 var(--serif);padding:16px 0;border-top:1px solid var(--gold);margin-top:16px}.targets{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}.tg{padding:7px 10px;border:1px solid var(--pale);color:var(--muted);font-size:.8rem;background:color-mix(in oklch,var(--paper) 88%,transparent)}.tg.on{border-color:var(--good);color:var(--good);background:var(--good-bg)}
+.fast{scroll-behavior:auto}.fast *{animation-duration:0s!important;transition-duration:0s!important}@media(prefers-reduced-motion:reduce){*{animation-duration:0s!important;transition-duration:0s!important;scroll-behavior:auto!important}}
+@media(max-width:760px){.wrap{width:calc(100% - 24px)}.issue{display:none}.hero{padding-top:24px}.hero .kicker{padding-top:52px}.hero h1{font-size:clamp(2.55rem,14vw,4.2rem);margin-top:4px}.total{top:20px}.hero .by{font-size:.85rem}#nav{grid-template-columns:repeat(8,92px)}.stage{padding-top:22px}.shead{gap:9px}.shead h2{font-size:1.85rem}.shead p{font-size:.9rem}#grid{grid-template-columns:1fr}.fcard{min-height:165px}.card{padding:15px 14px}.photo-bg{opacity:.065}.twocol{grid-template-columns:1fr;gap:8px}footer{align-items:flex-start;flex-direction:column;gap:5px}.bar .btn{padding-inline:12px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to exercises</a><div class="photo-bg" aria-hidden="true"></div>
+<div class="wrap">
+<header>
+  <div class="topline"><div class="club">American Culture Speaking Club</div><div class="issue">The Active Twenty · Vocabulary Trail</div></div>
+  <div class="hero">
+    <div class="total"><span class="badge tb" id="total">–</span><small>tasks left</small></div>
+    <div class="kicker">Vocabulary practice · Lexical Trail</div><p class="pretitle">The Invention of</p><h1>Thanksgiving</h1>
+    <p class="sub">20 phrases · 8 stages</p><p class="by">Philip Deloria · The New Yorker · November 25, 2019<br>Start by noticing, finish by retrieving and using the language yourself.</p>
+  </div>
+  <div class="navrail"><nav id="nav" aria-label="Exercise stages"></nav><div class="bar"><button class="btn ghost sm" id="prev" type="button">← Back</button><button class="btn ghost sm" id="mute" type="button">Sound on</button><button class="btn ghost sm" id="next" type="button">Next stage →</button></div></div>
+</header>
+<main id="main" tabindex="-1"></main>
+<footer><span id="saveNote">Your progress saves on this device. · @maybealexander1</span><button type="button" class="reset" id="reset">Start over</button></footer>
+</div>
+<div class="toast" id="toast" hidden></div><div class="rain" id="rain" aria-hidden="true"></div>
+<script>
+const DATA={
+items:[
+ {c:'in full swing',pos:'adverbial phrase',ru:'в полном разгаре',m:'at the busiest or most intense point, with every part already underway',n:'No article. Especially common for events, work, and activity.',col:'plans in full swing'},
+ {c:'pass sth off as',pos:'verb phrase',ru:'выдать что-либо за что-то',m:'present something dishonestly as something else',n:'Separable: pass the story off as fact. Keep off as together.',col:'pass a fake off as genuine'},

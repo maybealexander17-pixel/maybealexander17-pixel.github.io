@@ -1,0 +1,30 @@
+ {i:14,q:'The chair sends a gatecrasher packing. What happens?',a:'The gatecrasher is made to leave.',b:'The gatecrasher is invited to speak.',right:0},
+ {i:15,q:'What must organizers do when they contend with a shortage?',a:'Deal with that difficulty.',b:'Pretend the shortage is an advantage.',right:0},
+ {i:16,q:'Two committees fight it out over the budget. When does the dispute end?',a:'After they argue or compete until it is settled.',b:'Before either side expresses an opinion.',right:0},
+ {i:17,q:'Which strategy is divide and conquer?',a:'Turn members of a group against one another to weaken it.',b:'Bring every member together around a shared goal.',right:0},
+ {i:18,q:'What does a committee gain with some breathing space?',a:'A temporary pause or extra room to think.',b:'A larger permanent office.',right:0},
+ {i:19,q:'Who is at the forefront of a development?',a:'The people in a leading, visible position.',b:'The people who hear about it last.',right:0}
+],
+forks:[
+ {i:0,stem:'___ in full swing',opts:['the event was','plans are','the preparations were','on the table'],odd:3,why:'An event, plans, or preparations can be in full swing. On the table belongs to a different idiom.'},
+ {i:1,stem:'pass the story ___',opts:['off as fact','off as history','off as a discovery','out as fact'],odd:3,why:'The frame is pass something off as something. Out does not fit.'},
+ {i:2,stem:'cap the evening ___',opts:['off with dessert','off with a song','off with fireworks','out with dessert'],odd:3,why:'Cap an event off with its final detail. Out is the wrong particle.'},
+ {i:3,stem:'pull the family ___',opts:['through the crisis','through the winter','through a difficult year','over the crisis'],odd:3,why:'Pull somebody through names helping them survive or recover. Over does not fit.'},
+ {i:4,stem:'let events ___',opts:['take their natural course','run their natural course','develop naturally','take their natural'],odd:3,why:'The first three express unimpeded development. Take their natural is incomplete.'},
+ {i:5,stem:'the germ ___',opts:['of an idea','of a tradition','of a plan','into an idea'],odd:3,why:'The germ of names the small beginning. Into suggests a result, not an origin.'},
+ {i:6,stem:'blossom ___',opts:['into a tradition','into a movement','into an annual event','over a tradition'],odd:3,why:'Blossom into introduces the developed result. Over is not the frame.'},
+ {i:7,stem:'a throwaway ___',opts:['gesture','remark','comment','breathing'],odd:3,why:'Gesture, remark, and comment fit throwaway. Breathing belongs with breathing space.'},
+ {i:8,stem:'fret ___',opts:['over the details','over the seating','over the budget','on the details'],odd:3,why:'Fret over introduces the object of repeated worry. On is not the target frame.'},
+ {i:10,stem:'align neatly ___',opts:['with the schedule','with local custom','with the season','over the schedule'],odd:3,why:'Align neatly with names a close match. Over is the wrong preposition.'}
+],
+build:[
+ {i:9,tiles:['blessed','with','fertile','soil','by'],ans:[0,1,2,3],cue:'Our region is ______.'},
+ {i:13,tiles:['averted','their','eyes','from','at'],ans:[0,1,2,3],cue:'Many readers ______ the upsetting details.'},
+ {i:14,tiles:['sent','the','gatecrasher','packing','packed'],ans:[0,1,2,3],cue:'The council ______ after the interruption.'},
+ {i:15,tiles:['contend','with','at'],ans:[0,1],cue:'We had to ______ a shortage of volunteers.'},
+ {i:16,tiles:['fought','it','out','themselves'],ans:[0,1,2],cue:'The two committees ______ over the budget.'},
+ {i:17,tiles:['divide','and','conquer','conqueror'],ans:[0,1,2],cue:'The manager used a ______ strategy.'}
+],
+upgrade:[
+ {i:0,flat:'By seven, the street market was [[extremely busy and fully active]].',gap:'By seven, the street market was ______.',re:'in full swing',no:'in the full swing',model:'By seven, the street market was in full swing.'},
+ {i:1,flat:'The museum tried to [[present the replica dishonestly as an original]].',gap:'The museum tried to ______.',re:'pass .{0,45} off as',no:'pass .{0,45} out as',model:'The museum tried to pass the replica off as an original.'},

@@ -6,16 +6,16 @@
  {i:19,q:'Who is at the forefront of a development?',a:'The people in a leading, visible position.',b:'The people who hear about it last.',right:0}
 ],
 forks:[
- {i:0,stem:'___ in full swing',opts:['the event was','plans are','the preparations were','on the table'],odd:3,why:'An event, plans, or preparations can be in full swing. On the table belongs to a different idiom.'},
- {i:1,stem:'pass the story ___',opts:['off as fact','off as history','off as a discovery','out as fact'],odd:3,why:'The frame is pass something off as something. Out does not fit.'},
- {i:2,stem:'cap the evening ___',opts:['off with dessert','off with a song','off with fireworks','out with dessert'],odd:3,why:'Cap an event off with its final detail. Out is the wrong particle.'},
- {i:3,stem:'pull the family ___',opts:['through the crisis','through the winter','through a difficult year','over the crisis'],odd:3,why:'Pull somebody through names helping them survive or recover. Over does not fit.'},
- {i:4,stem:'let events ___',opts:['take their natural course','run their natural course','develop naturally','take their natural'],odd:3,why:'The first three express unimpeded development. Take their natural is incomplete.'},
- {i:5,stem:'the germ ___',opts:['of an idea','of a tradition','of a plan','into an idea'],odd:3,why:'The germ of names the small beginning. Into suggests a result, not an origin.'},
- {i:6,stem:'blossom ___',opts:['into a tradition','into a movement','into an annual event','over a tradition'],odd:3,why:'Blossom into introduces the developed result. Over is not the frame.'},
- {i:7,stem:'a throwaway ___',opts:['gesture','remark','comment','breathing'],odd:3,why:'Gesture, remark, and comment fit throwaway. Breathing belongs with breathing space.'},
- {i:8,stem:'fret ___',opts:['over the details','over the seating','over the budget','on the details'],odd:3,why:'Fret over introduces the object of repeated worry. On is not the target frame.'},
- {i:10,stem:'align neatly ___',opts:['with the schedule','with local custom','with the season','over the schedule'],odd:3,why:'Align neatly with names a close match. Over is the wrong preposition.'}
+ {i:0,stem:'By seven, the street market ___.',opts:['was in full swing','was at its height','was in high gear','was on the table'],odd:3,why:'In full swing, at its height, and in high gear describe peak activity. On the table means up for discussion.'},
+ {i:1,stem:'They passed the story ___.',opts:['off as fact','off as history','off as a recent discovery','down the generations'],odd:3,why:'The target is pass something off as something, to misrepresent it. Pass down means hand it to the next generation.'},
+ {i:2,stem:'To cap the evening ___.',opts:['off with dessert','off with a song','off with fireworks','out with a bang'],odd:3,why:'Cap an event off with its finishing touch. Out with a bang belongs to go out with a bang.'},
+ {i:3,stem:'The neighbors pulled the family ___.',opts:['through the crisis','through the winter','through a difficult year','apart'],odd:3,why:'Pull somebody through means help them survive a hard period. Pull apart means break up, a family included.'},
+ {i:4,stem:'After the disruption, we let events ___.',opts:['take their natural course','run their natural course','develop naturally','take over'],odd:3,why:'Take their course, run their course, and develop naturally mean proceed without interference. Take over means seize control.'},
+ {i:5,stem:'It all began as ___.',opts:['the germ of an idea','a rough sketch of a plan','the barest outline of a scheme','the finished product'],odd:3,why:'The germ of an idea, a rough sketch, and the barest outline describe something just beginning. The finished product is not a beginning.'},
+ {i:6,stem:'The small market soon blossomed ___.',opts:['into a tradition','into a movement','into an annual event','from a modest start'],odd:3,why:'Blossom into names what something becomes. Blossom from names where it started.'},
+ {i:7,stem:'a throwaway ___',opts:['gesture','remark','comment','cup'],odd:3,why:'A throwaway gesture, remark, or comment is delivered casually, without real commitment. A throwaway cup is simply disposable.'},
+ {i:8,stem:'___ over the details',opts:['fret','agonize','brood','dwell'],odd:3,why:'Fret over, agonize over, and brood over mean to worry. Dwell takes on, not over.'},
+ {i:10,stem:'The new dates ___ neatly with the harvest season.',opts:['fit','align','square','clash'],odd:3,why:'Fit, align, and square with mean match. Clash with means the opposite.'}
 ],
 build:[
  {i:9,tiles:['blessed','with','fertile','soil','by'],ans:[0,1,2,3],cue:'Our region is ______.'},

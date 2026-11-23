@@ -1,0 +1,21 @@
+ head:'Harvest Weekend, by Lantern Light',
+ text:`By noon, the town’s first Harvest Weekend was [[full|in full swing]]. The festival had not simply [[natural|taken its natural course]]: months of careful planning lay behind the apparent ease. Its name began as [[throwaway|a throwaway gesture]] by the mayor toward the old parking lot. Nobody then imagined that the small market would [[blossom|blossom into]] a weekend of talks, meals, and seed swaps.
+The [[germ|germ of the festival]] was a note on the library board. Local chefs [[forefront|were at the forefront of]] its development, but gardeners and drivers kept it running. An extra planning week [[breathing|gained some breathing space]] for the committee, and the schedule [[align|aligned neatly with]] the Saturday bus service. The organizers tried not to [[downplay|downplay the first year’s problems]]: muddy paths, missing signs, and a run on paper cups.
+Simple signs would not [[divert|divert attention from]] the growers. Still, Mara [[fret|fretted over]] the seating plan all afternoon. The town [[blessed|was blessed with]] a long growing season, although the organizers had to [[contend|contend with]] a shortage of volunteers. Two committees [[fight|fought it out]] over the budget, while one manager resisted any attempt to [[divide|divide and conquer]] the teams.
+An exhibit about the town’s harder winters invited visitors not to [[avert|avert their eyes from]] uncomfortable details. When a gatecrasher disrupted the talk, the chair [[send|sent him packing]]. Neighbors later [[pull|pulled a stranded family through]] the weekend’s sudden storm. Nobody tried to [[pass|pass the routine update off as]] a miracle. The committee simply [[cap|capped the weekend off with]] a lantern parade and thanked everyone by name.`
+},
+ccq:[
+ {i:0,q:'Which event is in full swing?',a:'Every stall is open and the crowd is at its largest.',b:'The organizers have only just booked the room.',right:0},
+ {i:1,q:'A shop presents a cheap copy as an original painting. What does it try to do?',a:'Pass the copy off as an original.',b:'Cap the copy off with an original.',right:0},
+ {i:2,q:'Which action caps the evening off with music?',a:'A final song closes the event.',b:'Music plays while guests begin arriving.',right:0},
+ {i:3,q:'Which support pulls a family through a crisis?',a:'Neighbors help until the family recovers.',b:'Neighbors describe the crisis in detail.',right:0},
+ {i:4,q:'What happens when events take their natural course?',a:'They develop without interference.',b:'Someone redirects them at every step.',right:0},
+ {i:5,q:'Which is the germ of a festival?',a:'The small original idea from which it grows.',b:'The final celebration that ends it.',right:0},
+ {i:6,q:'A tiny meal blossoms into a tradition. What happens?',a:'It develops into something larger and established.',b:'It quickly becomes less popular.',right:0},
+ {i:7,q:'Which action is a throwaway gesture?',a:'A casual wave made without much thought.',b:'A carefully rehearsed ceremonial bow.',right:0},
+ {i:8,q:'What does Mara do when she frets over the seating?',a:'She worries about it repeatedly.',b:'She calmly delegates every decision.',right:0},
+ {i:9,q:'A town is blessed with fertile soil. What does that mean?',a:'It is fortunate to have that advantage.',b:'It has lost its only useful resource.',right:0},
+ {i:10,q:'The schedule aligns neatly with the bus service. What is the result?',a:'The two fit each other conveniently.',b:'The schedule deliberately conflicts with the buses.',right:0},
+ {i:11,q:'Bright banners divert attention from the growers. What do visitors do?',a:'They focus less on the growers.',b:'They listen more closely to the growers.',right:0},
+ {i:12,q:'A report downplays the first year’s problems. What does it suggest?',a:'The problems were less serious than they really were.',b:'The problems deserve more attention than anything else.',right:0},
+ {i:13,q:'Why do readers avert their eyes from a disturbing photograph?',a:'They look away from it.',b:'They examine every part of it.',right:0},

@@ -5,7 +5,7 @@
 };
 
 const PHOTO_PART_COUNT=24;
-(async()=>{try{const ps=await Promise.all([...Array(PHOTO_PART_COUNT)].map(async(_,i)=>{const r=await fetch(`thanksgiving-vocab-trail-photo-p${String(i).padStart(2,'0')}.part`,{cache:'no-store'});if(!r.ok)throw new Error('photo');return r.text()}));const b=atob(ps.join('')),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);document.documentElement.style.setProperty('--photo-url',`url("${URL.createObjectURL(new Blob([u],{type:'image/jpeg'}))}")`)}catch(e){}})();
+(async()=>{try{const ps=await Promise.all([...Array(PHOTO_PART_COUNT)].map(async(_,i)=>{const r=await fetch(`thanksgiving-vocab-trail-photo-p${String(i).padStart(2,'0')}.part`,{cache:'no-store'});if(!r.ok)throw new Error('photo');return r.text()}));const b=atob(ps.join('').replace(/[^A-Za-z0-9+/=]/g,'')),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);document.documentElement.style.setProperty('--photo-url',`url("${URL.createObjectURL(new Blob([u],{type:'image/jpeg'}))}")`)}catch(e){}})();
 /* ENGINE */
 const I=DATA.items,N=I.length,FAST=new URLSearchParams(location.search).has('fast'),RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
